@@ -16,7 +16,7 @@ class _MainScreenState extends State<MainScreen> {
     final screens = [
       const HomeScreen(),
       const MapScreen(),
-      const SettingsScreen()
+      const SettingsScreen(),
     ];
 
     return Scaffold(

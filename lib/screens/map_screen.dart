@@ -13,6 +13,7 @@ class MapScreen extends StatelessWidget {
           Background(),
           HeaderWave(),
           HeaderWave2(),
+          MapPage()
         ],
       ),
     );
