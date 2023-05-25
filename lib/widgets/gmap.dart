@@ -23,27 +23,22 @@ class MapScreen extends StatefulWidget {
   const MapScreen({super.key});
 
   @override
-  // ignore: library_private_types_in_public_api
   _MapScreenState createState() => _MapScreenState();
 }
 
 class _MapScreenState extends State<MapScreen> {
   late GoogleMapController mapController;
+  final _initialCameraPosition = const CameraPosition(
+    target: LatLng(-36.82192, -73.01320),
+    zoom: 18,
+  );
 
-  final LatLng initialPosition =
-      const LatLng(37.7749, -122.4194); // San Francisco
-
+  final LatLng initialPosition = const LatLng(-36.82192, -73.01320); //UBB
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: GoogleMap(
-        initialCameraPosition: CameraPosition(
-          target: initialPosition,
-          zoom: 12.0,
-        ),
-        onMapCreated: (GoogleMapController controller) {
-          mapController = controller;
-        },
+        initialCameraPosition: _initialCameraPosition,
       ),
     );
   }
