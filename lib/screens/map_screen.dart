@@ -1,23 +1,45 @@
 import 'package:flutter/material.dart';
-import 'package:ubb/screens/screens.dart';
-import '../widgets/widgets.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:ubb/blocs/bloc.dart';
 
-class MapScreen extends StatelessWidget {
+class MapScreen extends StatefulWidget {
   const MapScreen({super.key});
 
   @override
+  State<MapScreen> createState() => _MapScreenState();
+}
+
+class _MapScreenState extends State<MapScreen> {
+  late LocationBloc locationBloc;
+
+  @override
+  void initState() {
+    super.initState();
+
+    locationBloc = BlocProvider.of<LocationBloc>(context);
+    // locationBloc.getCurrentPosition();
+    locationBloc.startFollowingUser();
+  }
+
+  @override
+  void dispose() {
+    locationBloc.stopFollowingUser();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Stack(
-        children: const [
-          //Background
-          Background(),
-          HeaderWave(),
-          HeaderWave2(),
-          GpsAccessScreen(),
-          Text('MapScreen')
-        ],
-      ),
-    );
+    return Scaffold(body: BlocBuilder<LocationBloc, LocationState>(
+      builder: (context, state) {
+        if (state.lastKnowLocation == null) {
+          return const Center(child: Text('Espere porfavor...'));
+        }
+
+        return Center(
+          child: Text(
+              '${state.lastKnowLocation!.latitude},${state.lastKnowLocation!.longitude}'),
+        );
+      },
+    ));
   }
 }

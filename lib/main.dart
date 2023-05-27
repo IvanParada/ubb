@@ -25,7 +25,7 @@ class MainApp extends StatelessWidget {
       home: const MainScreen(),
       routes: {
         'home_screen': (_) => const HomeScreen(),
-        'map_screen': (_) => const MapScreen(),
+        'map_screen': (_) => const LoadingScreen(),
         'settings_screen': (_) => const SettingsScreen(),
       },
     );
