@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ubb/screens/screens.dart';
 import '../widgets/widgets.dart';
 
 class MapScreen extends StatelessWidget {
@@ -13,7 +14,7 @@ class MapScreen extends StatelessWidget {
           Background(),
           HeaderWave(),
           HeaderWave2(),
-          MapPage()
+          GpsAccessScreen()
         ],
       ),
     );

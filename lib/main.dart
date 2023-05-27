@@ -1,9 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:ubb/blocs/bloc.dart';
 import 'package:ubb/screens/screens.dart';
 
 void main() {
-  runApp(const MainApp());
+  runApp(MultiBlocProvider(
+    providers: [
+      BlocProvider(
+        create: (context) => GpsBloc(),
+      ),
+    ],
+    child: const MainApp(),
+  ));
 }
 
 class MainApp extends StatelessWidget {

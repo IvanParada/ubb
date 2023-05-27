@@ -23,6 +23,7 @@ class MapScreen extends StatefulWidget {
   const MapScreen({super.key});
 
   @override
+  // ignore: library_private_types_in_public_api
   _MapScreenState createState() => _MapScreenState();
 }
 
@@ -38,7 +39,12 @@ class _MapScreenState extends State<MapScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: GoogleMap(
+        myLocationButtonEnabled: true,
+        onMapCreated: (controller) {},
         initialCameraPosition: _initialCameraPosition,
+        scrollGesturesEnabled: true,
+        mapType: MapType.hybrid,
+        compassEnabled: true,
       ),
     );
   }
