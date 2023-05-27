@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ubb/blocs/bloc.dart';
+import 'package:ubb/views/views.dart';
 
 class MapScreen extends StatefulWidget {
   const MapScreen({super.key});
@@ -29,17 +30,17 @@ class _MapScreenState extends State<MapScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: BlocBuilder<LocationBloc, LocationState>(
-      builder: (context, state) {
-        if (state.lastKnowLocation == null) {
-          return const Center(child: Text('Espere porfavor...'));
-        }
+    return Scaffold(body:
+        BlocBuilder<LocationBloc, LocationState>(builder: (context, state) {
+      if (state.lastKnowLocation == null) {
+        return const Center(child: Text('Espere porfavor...'));
+      }
 
-        return Center(
-          child: Text(
-              '${state.lastKnowLocation!.latitude},${state.lastKnowLocation!.longitude}'),
-        );
-      },
-    ));
+      return Stack(
+        children: const [
+          MapView(),
+        ],
+      );
+    }));
   }
 }
