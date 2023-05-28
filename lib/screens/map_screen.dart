@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:ubb/blocs/bloc.dart';
 import 'package:ubb/screens/screens.dart';
 import 'package:ubb/views/views.dart';
@@ -34,15 +35,26 @@ class _MapScreenState extends State<MapScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: BlocBuilder<LocationBloc, LocationState>(
-        builder: (context, state) {
-          if (state.lastKnowLocation == null) {
+        builder: (context, locationState) {
+          if (locationState.lastKnowLocation == null) {
             return const AnimatedScreen();
           }
 
-          return Stack(
-            children: const [
-              MapView(),
-            ],
+          return BlocBuilder<MapBloc, MapState>(
+            builder: (context, mapState) {
+              Map<String, Polyline> polylines = Map.from(mapState.polylines);
+              if (!mapState.showMyRoute) {
+                polylines.removeWhere((key, value) => key == 'myRoute');
+              }
+
+              return Stack(
+                children: [
+                  MapView(
+                    polylines: polylines.values.toSet(),
+                  ),
+                ],
+              );
+            },
           );
         },
       ),
@@ -52,6 +64,7 @@ class _MapScreenState extends State<MapScreen> {
         children: const [
           BtnFollowUser(),
           BtnCurrentLocation(),
+          BtnToggleUserRoute(),
         ],
       ),
     );
