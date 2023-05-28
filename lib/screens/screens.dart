@@ -1,3 +1,4 @@
+export 'package:ubb/screens/animated_screen.dart';
 export 'package:ubb/screens/gps_acces_screen.dart';
 export 'package:ubb/screens/home_screen.dart';
 export 'package:ubb/screens/loading_screen.dart';
