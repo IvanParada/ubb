@@ -24,8 +24,7 @@ class MapView extends StatelessWidget {
       width: size.width,
       height: size.height,
       child: Listener(
-        onPointerMove: (PointerMoveEvent) =>
-            mapBloc.add(OnStopFollowingUserEvent()),
+        onPointerMove: (_) => mapBloc.add(OnStopFollowingUserEvent()),
         child: GoogleMap(
           initialCameraPosition: initialCameraPosition,
           compassEnabled: false,
@@ -35,6 +34,7 @@ class MapView extends StatelessWidget {
           polylines: polylines,
           onMapCreated: (controller) =>
               mapBloc.add(OnMapInitializedEvent(controller)),
+          onCameraMove: (position) => mapBloc.mapCenter = position.target,
         ),
       ),
     );

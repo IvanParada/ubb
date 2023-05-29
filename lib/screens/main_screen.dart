@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:ubb/screens/screens.dart';
 
@@ -33,51 +34,62 @@ class _MainScreenState extends State<MainScreen> {
           });
         },
         elevation: 0,
-        items: const [
+        items: [
           BottomNavigationBarItem(
-              icon: Icon(
-                Icons.home_outlined,
-                shadows: [
-                  Shadow(
-                    blurRadius: 5,
-                    color: Color.fromARGB(255, 8, 86, 100),
-                    offset: Offset(2, 5),
-                  )
-                ],
+              icon: FadeInLeft(
+                child: const Icon(
+                  Icons.home_outlined,
+                  shadows: [
+                    Shadow(
+                      blurRadius: 5,
+                      color: Color.fromARGB(255, 8, 86, 100),
+                      offset: Offset(2, 5),
+                    )
+                  ],
+                ),
               ),
-              activeIcon: Icon(
-                Icons.home,
+              activeIcon: BounceInDown(
+                child: const Icon(
+                  Icons.home,
+                ),
               ),
               label: 'Home',
-              backgroundColor: Color(0xff1796AB)),
+              tooltip: 'Home',
+              backgroundColor: const Color(0xff1796AB)),
           BottomNavigationBarItem(
-              icon: Icon(
-                Icons.map_outlined,
-                shadows: [
-                  Shadow(
-                    blurRadius: 5,
-                    color: Color.fromARGB(255, 8, 86, 100),
-                    offset: Offset(2, 5),
-                  ),
-                ],
+              icon: FadeInUp(
+                child: const Icon(
+                  Icons.map_outlined,
+                  shadows: [
+                    Shadow(
+                      blurRadius: 5,
+                      color: Color.fromARGB(255, 8, 86, 100),
+                      offset: Offset(2, 5),
+                    ),
+                  ],
+                ),
               ),
-              activeIcon: Icon(Icons.map),
-              label: 'Maps',
-              backgroundColor: Color(0xff1796AB)),
+              activeIcon: BounceInDown(child: const Icon(Icons.map)),
+              label: 'Mapa',
+              tooltip: 'Mapa',
+              backgroundColor: const Color(0xff1796AB)),
           BottomNavigationBarItem(
-              icon: Icon(
-                Icons.settings_outlined,
-                shadows: [
-                  Shadow(
-                    blurRadius: 5,
-                    color: Color.fromARGB(255, 8, 86, 100),
-                    offset: Offset(2, 5),
-                  )
-                ],
+              icon: FadeInRight(
+                child: const Icon(
+                  Icons.settings_outlined,
+                  shadows: [
+                    Shadow(
+                      blurRadius: 5,
+                      color: Color.fromARGB(255, 8, 86, 100),
+                      offset: Offset(2, 5),
+                    )
+                  ],
+                ),
               ),
-              activeIcon: Icon(Icons.settings),
-              label: 'Settings',
-              backgroundColor: Color(0xff1796AB)),
+              activeIcon: BounceInDown(child: const Icon(Icons.settings)),
+              label: 'Ajustes',
+              tooltip: 'Ajustes',
+              backgroundColor: const Color(0xff1796AB)),
         ],
       ),
     );

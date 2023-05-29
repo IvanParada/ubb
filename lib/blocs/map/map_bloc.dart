@@ -11,8 +11,8 @@ part 'map_state.dart';
 
 class MapBloc extends Bloc<MapEvent, MapState> {
   final LocationBloc locationBloc;
-
   GoogleMapController? _mapController;
+  LatLng? mapCenter;
 
   MapBloc({
     required this.locationBloc,

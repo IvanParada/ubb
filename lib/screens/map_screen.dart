@@ -49,9 +49,9 @@ class _MapScreenState extends State<MapScreen> {
 
               return Stack(
                 children: [
-                  MapView(
-                    polylines: polylines.values.toSet(),
-                  ),
+                  MapView(polylines: polylines.values.toSet()),
+                  const SearchBar(),
+                  const ManualMarker()
                 ],
               );
             },
