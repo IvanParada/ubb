@@ -3,6 +3,8 @@ import 'package:animate_do/animate_do.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
 
+import '../helpers/helpers.dart';
+
 class ManualMarker extends StatelessWidget {
   const ManualMarker({super.key});
 
@@ -66,10 +68,15 @@ class _ManualMarkerBody extends StatelessWidget {
 
                   final end = mapBloc.mapCenter;
                   if (end == null) return;
+                  showLoadingMessage(context);
 
                   final destination =
                       await searchBloc.getCoorsStartToEnd(start, end);
-                  mapBloc.drawRoutePolyline(destination);
+                  await mapBloc.drawRoutePolyline(destination);
+
+                  searchBloc.add(OnDeactivateManualMarkerEvent());
+                  // ignore: use_build_context_synchronously
+                  Navigator.pop(context);
                 },
                 child: const Text(
                   'Confirmar destino',
