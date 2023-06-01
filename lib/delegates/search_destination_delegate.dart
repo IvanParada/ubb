@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:ubb/blocs/bloc.dart';
 import 'package:ubb/models/models.dart';
 
 class SearchDestinationDelegate extends SearchDelegate<SearchResult> {
@@ -23,7 +25,27 @@ class SearchDestinationDelegate extends SearchDelegate<SearchResult> {
 
   @override
   Widget buildResults(BuildContext context) {
-    return const Text('buildResults');
+    final searchBloc = BlocProvider.of<SearchBloc>(context);
+    final proximity =
+        BlocProvider.of<LocationBloc>(context).state.lastKnowLocation!;
+    searchBloc.getPlacesByQuery(proximity, query);
+
+    return BlocBuilder<SearchBloc, SearchState>(
+      builder: ((context, state) {
+        final places = state.places;
+
+        return ListView.separated(
+          itemCount: places.length,
+          itemBuilder: (context, index) {
+            final place = places[index];
+            return ListTile(
+              title: Text(place.text),
+            );
+          },
+          separatorBuilder: (context, index) => const Divider(),
+        );
+      }),
+    );
   }
 
   @override
