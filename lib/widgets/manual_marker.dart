@@ -35,54 +35,52 @@ class _ManualMarkerBody extends StatelessWidget {
       height: size.height,
       child: Stack(
         children: [
-          const Positioned(top: 70, left: 20, child: _BtnBack()),
+          const Positioned(top: 110, left: 20, child: _BtnBack()),
 
           Center(
             child: Transform.translate(
               offset: const Offset(0, -22),
               child: BounceInDown(
                   from: 100,
-                  child: const Icon(Icons.location_on_rounded, size: 60)),
+                  child: const Icon(Icons.location_on_rounded, size: 50)),
             ),
           ),
 
-          // Boton de confirmar
+          // Boton de confirmardestino
           Positioned(
-              bottom: 70,
-              left: 40,
-              child: FadeInUp(
-                duration: const Duration(milliseconds: 300),
-                child: MaterialButton(
-                  minWidth: size.width - 120,
-                  color: Colors.black,
-                  elevation: 0,
-                  height: 50,
-                  shape: const StadiumBorder(),
-                  onPressed: () async {
-                    // Todo: loading
+            bottom: 70,
+            left: 40,
+            child: FadeInUp(
+              duration: const Duration(milliseconds: 300),
+              child: MaterialButton(
+                minWidth: size.width - 120,
+                color: const Color.fromARGB(255, 8, 86, 100),
+                elevation: 0,
+                height: 50,
+                shape: const StadiumBorder(),
+                onPressed: () async {
+                  final start = locationBloc.state.lastKnowLocation;
+                  if (start == null) return;
 
-                    final start = locationBloc.state.lastKnowLocation;
-                    if (start == null) return;
+                  final end = mapBloc.mapCenter;
+                  if (end == null) return;
 
-                    final end = mapBloc.mapCenter;
-                    if (end == null) return;
+                  showLoadingMessage(context);
 
-                    showLoadingMessage(context);
+                  final destination =
+                      await searchBloc.getCoorsStartToEnd(start, end);
+                  await mapBloc.drawRoutePolyline(destination);
 
-                    final destination =
-                        await searchBloc.getCoorsStartToEnd(start, end);
-                    await mapBloc.drawRoutePolyline(destination);
+                  searchBloc.add(OnDeactivateManualMarkerEvent());
 
-                    searchBloc.add(OnDeactivateManualMarkerEvent());
-
-                    // ignore: use_build_context_synchronously
-                    Navigator.pop(context);
-                  },
-                  child: const Text('Confimar destino',
-                      style: TextStyle(
-                          color: Colors.white, fontWeight: FontWeight.w300)),
-                ),
-              )),
+                  Navigator.pop(context);
+                },
+                child: const Text('Confimar destino',
+                    style: TextStyle(
+                        color: Colors.white, fontWeight: FontWeight.w400)),
+              ),
+            ),
+          ),
         ],
       ),
     );
@@ -100,9 +98,12 @@ class _BtnBack extends StatelessWidget {
       duration: const Duration(milliseconds: 300),
       child: CircleAvatar(
         maxRadius: 30,
-        backgroundColor: Colors.white,
+        backgroundColor: const Color.fromARGB(255, 8, 86, 100),
         child: IconButton(
-          icon: const Icon(Icons.arrow_back_ios_new, color: Colors.black),
+          icon: const Icon(
+            Icons.arrow_back_ios_new,
+            color: Colors.white,
+          ),
           onPressed: () {
             BlocProvider.of<SearchBloc>(context)
                 .add(OnDeactivateManualMarkerEvent());
