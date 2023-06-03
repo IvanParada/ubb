@@ -25,8 +25,8 @@ class MapBloc extends Bloc<MapEvent, MapState> {
     on<UpdateUserPolylineEvent>(_onPolylineNewPoint);
     on<OnToggleUserRoute>(
         (event, emit) => emit(state.copyWith(showMyRoute: !state.showMyRoute)));
-    on<DisplayPolylineEvent>(
-        (event, emit) => emit(state.copyWith(polylines: event.polylines)));
+    on<DisplayPolylineEvent>((event, emit) => emit(
+        state.copyWith(polylines: event.polylines, markers: event.markers)));
     locationBloc.stream.listen((locationState) {
       if (locationState.lastKnowLocation != null) {
         add(UpdateUserPolylineEvent(locationState.myLocationHistory));
@@ -77,10 +77,24 @@ class MapBloc extends Bloc<MapEvent, MapState> {
       endCap: Cap.roundCap,
     );
 
+    final startMarker = Marker(
+      markerId: const MarkerId('start'),
+      position: destination.points.first,
+    );
+
+    final endMarker = Marker(
+      markerId: const MarkerId('end'),
+      position: destination.points.last,
+    );
+
     final currentPolylines = Map<String, Polyline>.from(state.polylines);
     currentPolylines['route'] = myRoute;
 
-    add(DisplayPolylineEvent(currentPolylines));
+    final currentMarker = Map<String, Marker>.from(state.markers);
+    currentMarker['start'] = startMarker;
+    currentMarker['end'] = endMarker;
+
+    add(DisplayPolylineEvent(currentPolylines, currentMarker));
   }
 
   void moveCamera(LatLng newLocation) {

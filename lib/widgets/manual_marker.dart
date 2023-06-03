@@ -73,6 +73,7 @@ class _ManualMarkerBody extends StatelessWidget {
 
                   searchBloc.add(OnDeactivateManualMarkerEvent());
 
+                  // ignore: use_build_context_synchronously
                   Navigator.pop(context);
                 },
                 child: const Text('Confimar destino',
