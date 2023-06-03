@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:ubb/blocs/bloc.dart';
 import 'package:ubb/models/models.dart';
 
@@ -36,13 +37,29 @@ class SearchDestinationDelegate extends SearchDelegate<SearchResult> {
 
         return ListView.separated(
           itemCount: places.length,
-          itemBuilder: (context, index) {
-            final place = places[index];
+          itemBuilder: (context, i) {
+            final place = places[i];
             return ListTile(
-              title: Text(place.text),
-            );
+                title: Text(place.text),
+                subtitle: Text(place.placeName),
+                leading: const Icon(
+                  Icons.place_outlined,
+                  color: Colors.black,
+                ),
+                onTap: () {
+                  final result = SearchResult(
+                      cancel: false,
+                      manual: false,
+                      position: LatLng(place.center[1], place.center[0]),
+                      name: place.text,
+                      description: place.placeName);
+
+                  searchBloc.add(AddToHistoryEvent(place));
+
+                  close(context, result);
+                });
           },
-          separatorBuilder: (context, index) => const Divider(),
+          separatorBuilder: (context, i) => const Divider(),
         );
       }),
     );
@@ -50,6 +67,7 @@ class SearchDestinationDelegate extends SearchDelegate<SearchResult> {
 
   @override
   Widget buildSuggestions(BuildContext context) {
+    final history = BlocProvider.of<SearchBloc>(context).state.history;
     return ListView(
       children: [
         ListTile(
@@ -65,7 +83,25 @@ class SearchDestinationDelegate extends SearchDelegate<SearchResult> {
             final result = SearchResult(cancel: false, manual: true);
             close(context, result);
           },
-        )
+        ),
+        ...history.map((place) => ListTile(
+              title: Text(place.text),
+              subtitle: Text(place.placeNameEs),
+              leading: const Icon(
+                Icons.history,
+                color: Colors.black,
+              ),
+              onTap: () {
+                final result = SearchResult(
+                    cancel: false,
+                    manual: false,
+                    position: LatLng(place.center[1], place.center[0]),
+                    name: place.text,
+                    description: place.placeName);
+
+                close(context, result);
+              },
+            ))
       ],
     );
   }

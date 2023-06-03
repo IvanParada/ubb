@@ -1,12 +1,12 @@
-import '../blocs/bloc.dart';
+import 'package:flutter/material.dart';
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter/material.dart';
 
-import '../helpers/helpers.dart';
+import 'package:ubb/blocs/bloc.dart';
+import 'package:ubb/helpers/helpers.dart';
 
 class ManualMarker extends StatelessWidget {
-  const ManualMarker({super.key});
+  const ManualMarker({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +21,7 @@ class ManualMarker extends StatelessWidget {
 }
 
 class _ManualMarkerBody extends StatelessWidget {
-  const _ManualMarkerBody();
+  const _ManualMarkerBody({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -35,59 +35,54 @@ class _ManualMarkerBody extends StatelessWidget {
       height: size.height,
       child: Stack(
         children: [
-          const Positioned(
-            top: 110,
-            left: 20,
-            child: _BtnBack(),
-          ),
+          const Positioned(top: 70, left: 20, child: _BtnBack()),
+
           Center(
             child: Transform.translate(
-              offset: const Offset(0, -20),
+              offset: const Offset(0, -22),
               child: BounceInDown(
-                from: 100,
-                child: const Icon(
-                  Icons.location_on_rounded,
-                  size: 50,
-                ),
-              ),
+                  from: 100,
+                  child: const Icon(Icons.location_on_rounded, size: 60)),
             ),
           ),
+
+          // Boton de confirmar
           Positioned(
-            bottom: 70,
-            left: 40,
-            child: SlideInUp(
-              child: MaterialButton(
-                minWidth: size.width - 120,
-                color: const Color.fromARGB(255, 8, 86, 100),
-                elevation: 0,
-                height: 50,
-                shape: const StadiumBorder(),
-                onPressed: () async {
-                  final start = locationBloc.state.lastKnowLocation;
-                  if (start == null) return;
+              bottom: 70,
+              left: 40,
+              child: FadeInUp(
+                duration: const Duration(milliseconds: 300),
+                child: MaterialButton(
+                  minWidth: size.width - 120,
+                  color: Colors.black,
+                  elevation: 0,
+                  height: 50,
+                  shape: const StadiumBorder(),
+                  onPressed: () async {
+                    // Todo: loading
 
-                  final end = mapBloc.mapCenter;
-                  if (end == null) return;
-                  showLoadingMessage(context);
+                    final start = locationBloc.state.lastKnowLocation;
+                    if (start == null) return;
 
-                  final destination =
-                      await searchBloc.getCoorsStartToEnd(start, end);
-                  await mapBloc.drawRoutePolyline(destination);
+                    final end = mapBloc.mapCenter;
+                    if (end == null) return;
 
-                  searchBloc.add(OnDeactivateManualMarkerEvent());
-                  // ignore: use_build_context_synchronously
-                  Navigator.pop(context);
-                },
-                child: const Text(
-                  'Confirmar destino',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.w400,
-                  ),
+                    showLoadingMessage(context);
+
+                    final destination =
+                        await searchBloc.getCoorsStartToEnd(start, end);
+                    await mapBloc.drawRoutePolyline(destination);
+
+                    searchBloc.add(OnDeactivateManualMarkerEvent());
+
+                    // ignore: use_build_context_synchronously
+                    Navigator.pop(context);
+                  },
+                  child: const Text('Confimar destino',
+                      style: TextStyle(
+                          color: Colors.white, fontWeight: FontWeight.w300)),
                 ),
-              ),
-            ),
-          )
+              )),
         ],
       ),
     );
@@ -95,7 +90,9 @@ class _ManualMarkerBody extends StatelessWidget {
 }
 
 class _BtnBack extends StatelessWidget {
-  const _BtnBack();
+  const _BtnBack({
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -103,12 +100,9 @@ class _BtnBack extends StatelessWidget {
       duration: const Duration(milliseconds: 300),
       child: CircleAvatar(
         maxRadius: 30,
-        backgroundColor: const Color.fromARGB(255, 8, 86, 100),
+        backgroundColor: Colors.white,
         child: IconButton(
-          icon: const Icon(
-            Icons.arrow_back_ios_new,
-            color: Colors.white,
-          ),
+          icon: const Icon(Icons.arrow_back_ios_new, color: Colors.black),
           onPressed: () {
             BlocProvider.of<SearchBloc>(context)
                 .add(OnDeactivateManualMarkerEvent());

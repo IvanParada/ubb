@@ -21,7 +21,7 @@ class TrafficService {
   Future<TrafficResponse> getCoorsStartToEnd(LatLng start, LatLng end) async {
     final coorsString =
         '${start.longitude},${start.latitude};${end.longitude},${end.latitude}';
-    final url = '$_baseTrafficUrl/driving/$coorsString';
+    final url = '$_baseTrafficUrl/walking/$coorsString';
 
     final resp = await _dioTraffic.get(url);
 
