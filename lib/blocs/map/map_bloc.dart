@@ -70,21 +70,34 @@ class MapBloc extends Bloc<MapEvent, MapState> {
   Future drawRoutePolyline(RouteDestination destination) async {
     final myRoute = Polyline(
       polylineId: const PolylineId('route'),
-      color: Colors.black,
+      color: Colors.purple.shade900,
       width: 5,
       points: destination.points,
       startCap: Cap.roundCap,
       endCap: Cap.roundCap,
     );
 
+    double distance = (destination.distance * 100).floorToDouble();
+    distance /= 100;
+
+    double tripDuration = (destination.duration / 60).floorToDouble();
+
     final startMarker = Marker(
       markerId: const MarkerId('start'),
       position: destination.points.first,
+      infoWindow: InfoWindow(
+        title: 'Inicio',
+        snippet: 'Distancia: $distance metros, Duración: $tripDuration minutos',
+      ),
     );
 
     final endMarker = Marker(
       markerId: const MarkerId('end'),
       position: destination.points.last,
+      infoWindow: InfoWindow(
+        title: destination.endPlace.text,
+        snippet: destination.endPlace.placeName,
+      ),
     );
 
     final currentPolylines = Map<String, Polyline>.from(state.polylines);
@@ -95,6 +108,9 @@ class MapBloc extends Bloc<MapEvent, MapState> {
     currentMarker['end'] = endMarker;
 
     add(DisplayPolylineEvent(currentPolylines, currentMarker));
+
+    await Future.delayed(const Duration(milliseconds: 300));
+    _mapController?.showMarkerInfoWindow(const MarkerId('end'));
   }
 
   void moveCamera(LatLng newLocation) {
