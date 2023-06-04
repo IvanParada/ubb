@@ -3,6 +3,7 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:ubb/blocs/bloc.dart';
+import 'package:ubb/helpers/helpers.dart';
 import 'package:ubb/models/models.dart';
 import 'package:ubb/themes/themes.dart';
 import 'package:flutter/material.dart';
@@ -70,7 +71,7 @@ class MapBloc extends Bloc<MapEvent, MapState> {
   Future drawRoutePolyline(RouteDestination destination) async {
     final myRoute = Polyline(
       polylineId: const PolylineId('route'),
-      color: Colors.purple.shade900,
+      color: const Color(0xff8a004b),
       width: 5,
       points: destination.points,
       startCap: Cap.roundCap,
@@ -82,9 +83,16 @@ class MapBloc extends Bloc<MapEvent, MapState> {
 
     double tripDuration = (destination.duration / 60).floorToDouble();
 
+    final startMarkerPin = await getNetworkImageMarker(
+        'http://icon-park.com/imagefiles/location_map_pin_purple10.png');
+    final endMarkerPin = await getNetworkImageMarker(
+        'http://icon-park.com/imagefiles/location_map_pin_purple10.png');
+
     final startMarker = Marker(
       markerId: const MarkerId('start'),
       position: destination.points.first,
+      icon: startMarkerPin,
+      // anchor: const Offset(0, 0),
       infoWindow: InfoWindow(
         title: 'Inicio',
         snippet: 'Distancia: $distance metros, Duración: $tripDuration minutos',
@@ -94,6 +102,7 @@ class MapBloc extends Bloc<MapEvent, MapState> {
     final endMarker = Marker(
       markerId: const MarkerId('end'),
       position: destination.points.last,
+      icon: endMarkerPin,
       infoWindow: InfoWindow(
         title: destination.endPlace.text,
         snippet: destination.endPlace.placeName,

@@ -67,7 +67,7 @@ class _MapScreenState extends State<MapScreen> {
         children: const [
           BtnFollowUser(),
           BtnCurrentLocation(),
-          BtnToggleUserRoute(),
+          // BtnToggleUserRoute(),
         ],
       ),
     );

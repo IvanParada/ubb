@@ -42,7 +42,17 @@ class _ManualMarkerBody extends StatelessWidget {
               offset: const Offset(0, -22),
               child: BounceInDown(
                   from: 100,
-                  child: const Icon(Icons.location_on_rounded, size: 50)),
+                  child: const Icon(
+                    Icons.location_on_rounded,
+                    size: 60,
+                    color: Color.fromARGB(255, 8, 86, 100),
+                    shadows: [
+                      Shadow(
+                          color: Colors.black,
+                          offset: Offset(2, 1),
+                          blurRadius: 4),
+                    ],
+                  )),
             ),
           ),
 
