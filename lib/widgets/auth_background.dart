@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -43,11 +44,13 @@ class _HeaderIcon extends StatelessWidget {
       child: Container(
         width: double.infinity,
         margin: EdgeInsets.only(top: 30, left: (size.width* 0.5 )-45),  
-        child: const FaIcon(
-          FontAwesomeIcons.userGraduate,
-          color:Colors.white,
-          size: 100,
-          ),
+        child: FadeInDown(
+          child: const FaIcon(
+            FontAwesomeIcons.userGraduate,
+            color:Colors.white,
+            size: 100,
+            ),
+        ),
       ),
     );
   }

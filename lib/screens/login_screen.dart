@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
@@ -39,7 +40,7 @@ class LoginScreen extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 50),
-              const Text('Crear una nueva cuenta', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),),
+              FadeInUp(child: const Text('Crear una nueva cuenta', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),)),
               const SizedBox(height: 50),
             ],
           ),
@@ -61,77 +62,79 @@ class _LoginForm extends StatelessWidget {
     return Form(
       key: loginForm.formKey,
       autovalidateMode: AutovalidateMode.onUserInteraction,
-      child: Column(
-        children: [
-          TextFormField(
-            autocorrect: false,
-            keyboardType: TextInputType.emailAddress,
-            decoration: InputDecorations.authInputDecoration(
-              hintText: 'nombre.apellido0000@alumnos.ubiobio.cl',
-              labelText: 'Correo electronico',
-              prefixIcon: FontAwesomeIcons.at
+      child: FadeIn(
+        child: Column(
+          children: [
+            TextFormField(
+              autocorrect: false,
+              keyboardType: TextInputType.emailAddress,
+              decoration: InputDecorations.authInputDecoration(
+                hintText: 'nombre.apellido0000@alumnos.ubiobio.cl',
+                labelText: 'Correo electronico',
+                prefixIcon: FontAwesomeIcons.at
+              ),
+              onChanged: (value) => loginForm.email = value,
+              validator: ( value ){
+                String pattern = r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@alumnos\.ubiobio\.cl$';
+                RegExp regExp  = RegExp(pattern);
+      
+                return regExp.hasMatch(value ?? '')
+                  ? null
+                  :'El correo no es válido';
+              },
             ),
-            onChanged: (value) => loginForm.email = value,
-            validator: ( value ){
-              String pattern = r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@alumnos\.ubiobio\.cl$';
-              RegExp regExp  = RegExp(pattern);
-
-              return regExp.hasMatch(value ?? '')
+            const SizedBox(height: 30),
+            TextFormField(
+              autocorrect: false,
+              obscureText: true,
+              keyboardType: TextInputType.visiblePassword,
+              decoration: InputDecorations.authInputDecoration(
+                hintText: '*****',
+                labelText: 'Contraseña',
+                prefixIcon: FontAwesomeIcons.lock
+              ),
+              onChanged: (value) => loginForm.password = value,
+      
+              validator: ( value ){
+      
+                return (value != null && value.length >= 6)
                 ? null
-                :'El correo no es válido';
-            },
-          ),
-          const SizedBox(height: 30),
-          TextFormField(
-            autocorrect: false,
-            obscureText: true,
-            keyboardType: TextInputType.visiblePassword,
-            decoration: InputDecorations.authInputDecoration(
-              hintText: '*****',
-              labelText: 'Contraseña',
-              prefixIcon: FontAwesomeIcons.lock
+                : 'Contraseña incorrecta';
+              },
             ),
-            onChanged: (value) => loginForm.password = value,
-
-            validator: ( value ){
-
-              return (value != null && value.length >= 6)
-              ? null
-              : 'Contraseña incorrecta';
-            },
-          ),
-
-          const SizedBox(height: 30),
-          MaterialButton(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10)
-            ),
-            disabledColor: Colors.grey,
-            elevation: 0,
-            color: const Color.fromARGB(255, 9, 27, 43),
-            onPressed: loginForm.isLoading ? null : () async {
-              FocusScope.of(context).unfocus();
-              if(!loginForm.isValidForm()) return;
-              
-              loginForm.isLoading = true;
-
-              await Future.delayed(const Duration(seconds: 2));
-
-              loginForm.isLoading = false;
-
-
-              // ignore: use_build_context_synchronously
-              Navigator.pushReplacementNamed(context, 'home_screen');
-            },
-            child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 80, vertical: 15),
-              child: Text(
-                loginForm.isLoading
-                ? 'Espere...'
-                : 'Ingresar',
-               style: const TextStyle(color: Colors.white),)
-            ))
-        ],
+      
+            const SizedBox(height: 30),
+            MaterialButton(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10)
+              ),
+              disabledColor: Colors.grey,
+              elevation: 0,
+              color: const Color.fromARGB(255, 9, 27, 43),
+              onPressed: loginForm.isLoading ? null : () async {
+                FocusScope.of(context).unfocus();
+                if(!loginForm.isValidForm()) return;
+                
+                loginForm.isLoading = true;
+            
+                await Future.delayed(const Duration(seconds: 2));
+            
+                loginForm.isLoading = false;
+            
+            
+                // ignore: use_build_context_synchronously
+                Navigator.pushReplacementNamed(context, 'home_screen');
+              },
+              child: Container(
+                padding: const EdgeInsets.symmetric(horizontal: 80, vertical: 15),
+                child: Text(
+                  loginForm.isLoading
+                  ? 'Espere...'
+                  : 'Ingresar',
+                 style: const TextStyle(color: Colors.white),)
+              ))
+          ],
+        ),
       ),
     );
   }
