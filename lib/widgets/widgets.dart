@@ -1,3 +1,5 @@
+export 'package:ubb/widgets/card_container.dart';
+export 'package:ubb/widgets/auth_background.dart';
 export 'package:ubb/widgets/background.dart';
 export 'package:ubb/widgets/btn_follow_user.dart';
 export 'package:ubb/widgets/btn_location.dart';

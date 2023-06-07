@@ -13,7 +13,7 @@ class BtnCurrentLocation extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.only(bottom: 10),
       child: CircleAvatar(
-        backgroundColor: const Color.fromARGB(255, 8, 86, 100),
+        backgroundColor: const Color.fromARGB(255, 9, 27, 43),
         maxRadius: 25,
         child: IconButton(
           icon: const Icon(Icons.my_location, color: Colors.white),

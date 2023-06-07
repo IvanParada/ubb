@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 
 class PageTitle extends StatelessWidget {
@@ -12,23 +13,29 @@ class PageTitle extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const SizedBox(height: 20),
-            const Text(
-              '¡Bienvenid@!',
-              style: TextStyle(
-                  fontSize: 25,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white),
+            FadeInDown(
+              child: const Text(
+                '¡Bienvenid@!',
+                style: TextStyle(
+                    fontSize: 25,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white),
+              ),
             ),
             const SizedBox(height: 10),
-            const Text(
-              'Explora nuestro campus con el mapa interactivo.',
-              style: TextStyle(fontSize: 16, color: Colors.white),
+            FadeInLeft(
+              child: const Text(
+                'Explora nuestro campus con el mapa interactivo.',
+                style: TextStyle(fontSize: 16, color: Colors.white),
+              ),
             ),
             const SizedBox(height: 30),
-            Image.asset(
-              'assets/logo.png',
-              height: 90,
-              width: 150,
+            FadeInUp(
+              child: Image.asset(
+                'assets/logo.png',
+                height: 70,
+                width: 150,
+              ),
             ),
           ],
         ),

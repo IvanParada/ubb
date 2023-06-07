@@ -13,8 +13,8 @@ void showLoadingMessage(BuildContext context) {
           width: 100,
           height: 65,
           margin: const EdgeInsets.only(top: 10),
-          child: Column(
-            children: const [
+          child: const Column(
+            children: [
               Text('Calculando ruta'),
               SizedBox(height: 10),
               CircularProgressIndicator(
@@ -33,7 +33,9 @@ void showLoadingMessage(BuildContext context) {
     context: context,
     builder: (context) => const CupertinoAlertDialog(
       title: Text('Espere porfavor...'),
-      content: CupertinoActivityIndicator(),
+      content: CupertinoActivityIndicator(
+        
+      ),
     ),
   );
 }

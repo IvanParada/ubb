@@ -1,5 +1,6 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ubb/screens/screens.dart';
 
 class MainScreen extends StatefulWidget {
@@ -25,72 +26,45 @@ class _MainScreenState extends State<MainScreen> {
         index: selectedIndex,
         children: screens,
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.shifting,
-        currentIndex: selectedIndex,
-        onTap: (value) {
-          setState(() {
-            selectedIndex = value;
-          });
-        },
-        elevation: 0,
-        items: [
-          BottomNavigationBarItem(
-              icon: FadeInLeft(
-                child: const Icon(
-                  Icons.home_outlined,
-                  shadows: [
-                    Shadow(
-                      blurRadius: 5,
-                      color: Color.fromARGB(255, 8, 86, 100),
-                      offset: Offset(2, 5),
-                    )
-                  ],
+      bottomNavigationBar: BounceInUp(
+        child: BottomNavigationBar(
+          type: BottomNavigationBarType.shifting,
+          currentIndex: selectedIndex,
+          onTap: (value) {
+            setState(() {
+              selectedIndex = value;
+            });
+          },
+          elevation: 0,
+          items: [
+            BottomNavigationBarItem(
+                icon: FadeInLeft(
+                  child: const FaIcon(FontAwesomeIcons.house)
                 ),
-              ),
-              activeIcon: BounceInDown(
-                child: const Icon(
-                  Icons.home,
+                activeIcon: BounceInDown(
+                  child: const FaIcon(FontAwesomeIcons.house),
                 ),
-              ),
-              label: 'Home',
-              tooltip: 'Home',
-              backgroundColor: const Color(0xff1796AB)),
-          BottomNavigationBarItem(
-              icon: FadeInUp(
-                child: const Icon(
-                  Icons.map_outlined,
-                  shadows: [
-                    Shadow(
-                      blurRadius: 5,
-                      color: Color.fromARGB(255, 8, 86, 100),
-                      offset: Offset(2, 5),
-                    ),
-                  ],
+                label: 'Home',
+                tooltip: 'Home',
+                backgroundColor:const Color.fromARGB(255, 9, 27, 43),
+      ),
+            BottomNavigationBarItem(
+                icon: FadeInUp(
+                  child: const FaIcon(FontAwesomeIcons.mapLocationDot)
                 ),
-              ),
-              activeIcon: BounceInDown(child: const Icon(Icons.map)),
-              label: 'Mapa',
-              tooltip: 'Mapa',
-              backgroundColor: const Color(0xff1796AB)),
-          BottomNavigationBarItem(
-              icon: FadeInRight(
-                child: const Icon(
-                  Icons.settings_outlined,
-                  shadows: [
-                    Shadow(
-                      blurRadius: 5,
-                      color: Color.fromARGB(255, 8, 86, 100),
-                      offset: Offset(2, 5),
-                    )
-                  ],
-                ),
-              ),
-              activeIcon: BounceInDown(child: const Icon(Icons.settings)),
-              label: 'Ajustes',
-              tooltip: 'Ajustes',
-              backgroundColor: const Color(0xff1796AB)),
-        ],
+                activeIcon: BounceInDown(child: const FaIcon(FontAwesomeIcons.mapLocationDot)),
+                label: 'Mapa',
+                tooltip: 'Mapa',
+                backgroundColor:const Color.fromARGB(255, 9, 27, 43),),
+            BottomNavigationBarItem(
+                icon: FadeInRight(
+                  child: const FaIcon(FontAwesomeIcons.gear),),
+                activeIcon: BounceInDown(child: const FaIcon(FontAwesomeIcons.gear)),
+                label: 'Ajustes',
+                tooltip: 'Ajustes',
+                backgroundColor:const Color.fromARGB(255, 9, 27, 43),),
+          ],
+        ),
       ),
     );
   }

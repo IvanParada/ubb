@@ -7,8 +7,11 @@ class Background extends StatelessWidget {
     gradient: LinearGradient(
       begin: Alignment.topCenter,
       end: Alignment.bottomCenter,
-      stops: [0.2, 0.8],
-      colors: [Color(0xff2E305F), Color(0xff202333)],
+      stops: [0.3, 1],
+      colors: [
+        Color.fromARGB(255, 9, 27, 43),
+        Color.fromRGBO(14, 150, 171, 1),
+        ],
     ),
   );
 

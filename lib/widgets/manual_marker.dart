@@ -45,16 +45,11 @@ class _ManualMarkerBody extends StatelessWidget {
                   child: const Icon(
                     Icons.location_on_rounded,
                     size: 60,
-                    color: Color.fromARGB(255, 8, 86, 100),
-                    shadows: [
-                      Shadow(
-                          color: Colors.black,
-                          offset: Offset(2, 1),
-                          blurRadius: 4),
-                    ],
+                    color:  Color.fromARGB(255, 9, 27, 43)),
+                    
                   )),
             ),
-          ),
+          
 
           // Boton de confirmardestino
           Positioned(
@@ -64,7 +59,7 @@ class _ManualMarkerBody extends StatelessWidget {
               duration: const Duration(milliseconds: 300),
               child: MaterialButton(
                 minWidth: size.width - 120,
-                color: const Color.fromARGB(255, 8, 86, 100),
+                color: const Color.fromARGB(255, 9, 27, 43),
                 elevation: 0,
                 height: 50,
                 shape: const StadiumBorder(),
@@ -109,7 +104,7 @@ class _BtnBack extends StatelessWidget {
       duration: const Duration(milliseconds: 300),
       child: CircleAvatar(
         maxRadius: 30,
-        backgroundColor: const Color.fromARGB(255, 8, 86, 100),
+        backgroundColor: const Color.fromARGB(255, 9, 27, 43),
         child: IconButton(
           icon: const Icon(
             Icons.arrow_back_ios_new,

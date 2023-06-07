@@ -28,9 +28,10 @@ class MainApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'UBBMaps',
-      home: const MainScreen(),
+      initialRoute: 'login_screen',
       routes: {
-        'home_screen': (_) => const HomeScreen(),
+        'login_screen':(_) => const LoginScreen(),
+        'home_screen': (_) => const MainScreen(),
         'map_screen': (_) => const LoadingScreen(),
         'settings_screen': (_) => const SettingsScreen(),
       },
