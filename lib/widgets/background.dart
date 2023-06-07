@@ -5,9 +5,9 @@ class Background extends StatelessWidget {
   const Background({super.key});
   final boxDecoration = const BoxDecoration(
     gradient: LinearGradient(
-      begin: Alignment.topCenter,
-      end: Alignment.bottomCenter,
-      stops: [0.3, 1],
+      // begin: Alignment.topCenter,
+      // end: Alignment.bottomCenter,
+      stops: [0, 1],
       colors: [
         Color.fromARGB(255, 9, 27, 43),
         Color.fromRGBO(14, 150, 171, 1),

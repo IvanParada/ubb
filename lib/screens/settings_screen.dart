@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../ui/ui.dart';
 import '../widgets/widgets.dart';
 
 class SettingsScreen extends StatelessWidget {
@@ -6,13 +7,16 @@ class SettingsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Stack(
+     return Container(
+      color: Colors.grey.shade300,
+      width: double.infinity,
+      height: double.infinity,
+      child: const Stack(
         children: [
-          //Background
-          Background(),
-          HeaderWave(),
-          HeaderWave2(),
+          HeaderCurvo(),
+          Positioned(top: 200, left:300, child: Bubble()),
+          Positioned(top: -40, left:-30, child: Bubble()),
+          Positioned(top: -50, right:-20, child: Bubble()),
         ],
       ),
     );

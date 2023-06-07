@@ -12,12 +12,12 @@ class InputDecorations {
     return  InputDecoration(
                 enabledBorder: const UnderlineInputBorder(
                   borderSide: BorderSide(
-                    color: Colors.deepPurple
+                    color: Color.fromARGB(255, 9, 27, 43),
                   )
                 ),
                 focusedBorder: const UnderlineInputBorder(
                   borderSide: BorderSide(
-                    color: Colors.deepPurple,
+                    color: Color.fromARGB(255, 9, 27, 43),
                     width: 2
                   )
                 ),
@@ -27,7 +27,7 @@ class InputDecorations {
                   color: Colors.grey
                 ),
                 prefixIcon: prefixIcon != null
-                  ? FaIcon(prefixIcon, color: Colors.deepPurple)
+                  ? FaIcon(prefixIcon, color: const Color.fromARGB(255, 9, 27, 43),)
                   : null
                 );
     

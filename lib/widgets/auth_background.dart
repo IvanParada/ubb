@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+import '../ui/ui.dart';
+
 class AuthBackground extends StatelessWidget {
 
   final Widget child;
@@ -63,13 +65,13 @@ class _PurpleBox extends StatelessWidget {
       width: double.infinity,
       height: size.height * 0.4,
       decoration: _purpleBackground(),
-      child: Stack(
+      child: const Stack(
         children: [
-          Positioned(top: 90, left:30, child: _Bubble()),
-          Positioned(top: -40, left:-30, child: _Bubble()),
-          Positioned(top: -50, right:-20, child: _Bubble()),
-          Positioned(bottom: -50, left:10, child: _Bubble()),
-          Positioned(bottom: 120, right:30, child: _Bubble()),
+          Positioned(top: 90, left:30, child: Bubble()),
+          Positioned(top: -40, left:-30, child: Bubble()),
+          Positioned(top: -50, right:-20, child: Bubble()),
+          Positioned(bottom: -50, left:10, child: Bubble()),
+          Positioned(bottom: 120, right:30, child: Bubble()),
         ],
       ),
     );
@@ -78,25 +80,11 @@ class _PurpleBox extends StatelessWidget {
   BoxDecoration _purpleBackground() => const BoxDecoration(
     gradient: LinearGradient(
       colors:[
-        Color.fromRGBO(63, 63, 156, 1),
-        Color.fromRGBO(90, 70, 178, 1),
+        Color.fromARGB(255, 9, 27, 43),
+        Color.fromARGB(255, 9, 27, 43),
+
       ]
   )
   );
 }
 
-
-class _Bubble extends StatelessWidget {
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: 100,
-      height: 100,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(100),
-        color: const Color.fromRGBO(255,255,255,0.05)
-      ),
-    );
-  }
-}

@@ -14,27 +14,33 @@ class PageTitle extends StatelessWidget {
           children: [
             const SizedBox(height: 20),
             FadeInDown(
-              child: const Text(
-                '¡Bienvenid@!',
-                style: TextStyle(
-                    fontSize: 25,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white),
+              child:  const Center(
+                child: Text(
+                  '¡Bienvenid@!',
+                  style: TextStyle(
+                      fontSize: 25,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white),
+                ),
               ),
             ),
             const SizedBox(height: 10),
             FadeInLeft(
-              child: const Text(
-                'Explora nuestro campus con el mapa interactivo.',
-                style: TextStyle(fontSize: 16, color: Colors.white),
+              child: const Center(
+                child:  Text(
+                  'Explora nuestro campus con el mapa interactivo.',
+                  style: TextStyle(fontSize: 16, color: Colors.white),
+                ),
               ),
             ),
             const SizedBox(height: 30),
-            FadeInUp(
-              child: Image.asset(
-                'assets/logo.png',
-                height: 70,
-                width: 150,
+            Center(
+              child: FadeInUp(
+                child: Image.asset(
+                  'assets/logo.png',
+                  height: 100,
+                  width: 190,
+                ),
               ),
             ),
           ],

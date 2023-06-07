@@ -21,7 +21,14 @@ class LoginScreen extends StatelessWidget {
                 child: Column(
                   children: [
                     const SizedBox(height: 10),
-                    Text('Login', style: Theme.of(context).textTheme.headlineLarge,),
+                    const Text(
+                      'Login',
+                        style: TextStyle(
+                          color:Color.fromARGB(255, 9, 27, 43),
+                          fontSize: 35,
+                          fontWeight: FontWeight.w500
+                            ),
+                          ),
                     const SizedBox(height: 30),
                     ChangeNotifierProvider(
                       create: (_ ) => LoginFormProvider(),
@@ -101,7 +108,7 @@ class _LoginForm extends StatelessWidget {
             ),
             disabledColor: Colors.grey,
             elevation: 0,
-            color: Colors.deepPurple,
+            color: const Color.fromARGB(255, 9, 27, 43),
             onPressed: loginForm.isLoading ? null : () async {
               FocusScope.of(context).unfocus();
               if(!loginForm.isValidForm()) return;
