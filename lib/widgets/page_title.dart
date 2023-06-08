@@ -12,7 +12,7 @@ class PageTitle extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const SizedBox(height: 20),
+            const SizedBox(height: 40),
             FadeInDown(
               child:  const Center(
                 child: Text(

@@ -8,7 +8,7 @@ class AuthService extends ChangeNotifier{
   final String _baseUrl = 'identitytoolkit.googleapis.com';
   final String _firebaseToken = 'AIzaSyAZs_EqCGSCaM822d3HZCiRrKwVdC8jYaA';
 
-  final storage = new FlutterSecureStorage();
+  final storage = const FlutterSecureStorage();
 
   Future<String?> createUser(String nombre, String apellido, String email, String password) async {
 
@@ -51,7 +51,6 @@ class AuthService extends ChangeNotifier{
   final resp = await http.post(url,body: json.encode(authData));
   final Map<String, dynamic> decodedResp = json.decode(resp.body);
 
-  print(decodedResp);
 
  
   if(decodedResp.containsKey('idToken')){

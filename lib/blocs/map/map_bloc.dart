@@ -71,7 +71,7 @@ class MapBloc extends Bloc<MapEvent, MapState> {
   Future drawRoutePolyline(RouteDestination destination) async {
     final myRoute = Polyline(
       polylineId: const PolylineId('route'),
-      color: const Color(0xff8a004b),
+      color: const Color.fromARGB(255, 9, 27, 43),
       width: 5,
       points: destination.points,
       startCap: Cap.roundCap,
@@ -84,9 +84,9 @@ class MapBloc extends Bloc<MapEvent, MapState> {
     double tripDuration = (destination.duration / 60).floorToDouble();
 
     final startMarkerPin = await getNetworkImageMarker(
-        'http://icon-park.com/imagefiles/location_map_pin_purple10.png');
+        'http://icon-park.com/imagefiles/location_map_pin_navy_blue7.png');
     final endMarkerPin = await getNetworkImageMarker(
-        'http://icon-park.com/imagefiles/location_map_pin_purple10.png');
+        'http://icon-park.com/imagefiles/location_map_pin_navy_blue7.png');
 
     final startMarker = Marker(
       markerId: const MarkerId('start'),

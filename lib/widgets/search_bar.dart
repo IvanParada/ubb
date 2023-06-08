@@ -6,6 +6,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:ubb/models/models.dart';
 
+import '../helpers/helpers.dart';
+
 class SearchBar extends StatelessWidget {
   const SearchBar({super.key});
 
@@ -38,9 +40,14 @@ class _SearchBarBody extends StatelessWidget {
     }
 
     if (result.position != null) {
+                  showLoadingMessage(context);
+
       final destination = await searchBloc.getCoorsStartToEnd(
           locationBloc.state.lastKnowLocation!, result.position!);
       await mapBloc.drawRoutePolyline(destination);
+      // ignore: use_build_context_synchronously
+      Navigator.pop(context);
+
     }
   }
 
