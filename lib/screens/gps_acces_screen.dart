@@ -34,19 +34,17 @@ class _AccessButton extends StatelessWidget {
   }) : super(key: key);
 
   @override
-Widget build(BuildContext context) {
-
-  return const Stack(
-    children: [
+  Widget build(BuildContext context) {
+    return const Stack(
+      children: [
         HeaderCurvo(),
-        Positioned(top: 200, left:300, child: Bubble()),
-        Positioned(top: -40, left:-30, child: Bubble()),
-        Positioned(top: -50, right:-20, child: Bubble()),
+        Positioned(top: 200, left: 300, child: Bubble()),
+        Positioned(top: -40, left: -30, child: Bubble()),
+        Positioned(top: -50, right: -20, child: Bubble()),
         GpsAccesTitle(),
-    ],
-  );
-}
-
+      ],
+    );
+  }
 }
 
 class _EnableGpsMessage extends StatelessWidget {
@@ -56,13 +54,12 @@ class _EnableGpsMessage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return const Stack(
       children: [
         HeaderCurvo(),
-        Positioned(top: 200, left:300, child: Bubble()),
-        Positioned(top: -40, left:-30, child: Bubble()),
-        Positioned(top: -50, right:-20, child: Bubble()),
+        Positioned(top: 200, left: 300, child: Bubble()),
+        Positioned(top: -40, left: -30, child: Bubble()),
+        Positioned(top: -50, right: -20, child: Bubble()),
         GpsDisabled()
       ],
     );

@@ -14,7 +14,7 @@ class PageTitle extends StatelessWidget {
           children: [
             const SizedBox(height: 30),
             FadeInDown(
-              child:  const Center(
+              child: const Center(
                 child: Text(
                   '¡Bienvenid@!',
                   style: TextStyle(
@@ -27,12 +27,14 @@ class PageTitle extends StatelessWidget {
             const SizedBox(height: 10),
             FadeInLeft(
               child: const Center(
-                child:  Text(
+                child: Text(
                   'Explora nuestro campus con el mapa interactivo.',
-                  style: TextStyle(fontSize: 16, color: Colors.white,),
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: Colors.white,
+                  ),
                   textAlign: TextAlign.center,
                 ),
-                
               ),
             ),
             const SizedBox(height: 30),

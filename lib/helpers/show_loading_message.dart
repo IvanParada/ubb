@@ -10,18 +10,23 @@ void showLoadingMessage(BuildContext context) {
       barrierDismissible: false,
       builder: (context) => BounceInDown(
         child: AlertDialog(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(20)
-          ),
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
           backgroundColor: const Color.fromARGB(255, 9, 27, 43),
-          title: const Text('Espere porfavor...', style: TextStyle(color: Colors.white),),
+          title: const Text(
+            'Espere porfavor...',
+            style: TextStyle(color: Colors.white),
+          ),
           content: Container(
             width: 100,
             height: 80,
             margin: const EdgeInsets.only(top: 10),
             child: const Column(
               children: [
-                Text('Calculando ruta...',style: TextStyle(color: Colors.white),),
+                Text(
+                  'Calculando ruta...',
+                  style: TextStyle(color: Colors.white),
+                ),
                 SizedBox(height: 15),
                 CircularProgressIndicator(
                   strokeWidth: 5,
@@ -40,8 +45,7 @@ void showLoadingMessage(BuildContext context) {
     context: context,
     builder: (context) => const CupertinoAlertDialog(
       title: Text('Espere porfavor...'),
-      content: CupertinoActivityIndicator(        
-      ),
+      content: CupertinoActivityIndicator(),
     ),
   );
 }

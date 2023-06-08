@@ -40,14 +40,13 @@ class _SearchBarBody extends StatelessWidget {
     }
 
     if (result.position != null) {
-                  showLoadingMessage(context);
+      showLoadingMessage(context);
 
       final destination = await searchBloc.getCoorsStartToEnd(
           locationBloc.state.lastKnowLocation!, result.position!);
       await mapBloc.drawRoutePolyline(destination);
       // ignore: use_build_context_synchronously
       Navigator.pop(context);
-
     }
   }
 

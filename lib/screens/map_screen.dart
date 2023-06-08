@@ -88,7 +88,6 @@ class _MapScreenState extends State<MapScreen> {
 }
 
 class _MapLoading extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -108,60 +107,59 @@ class _MapLoading extends StatelessWidget {
               )),
             ),
             const SizedBox(height: 50),
-Center(
-  child: Container(
-    width: size.width * 0.8,
-    height: size.width * 0.5,
-    decoration: BoxDecoration(
-      color: Colors.white,
-      borderRadius: BorderRadius.circular(30),
-      boxShadow: const [
-        BoxShadow(
-          color: Colors.black12,
-          blurRadius: 15,
-          offset: Offset(0, 5),
-        ),
-      ],
-    ),
-    child: Stack(
-      children: [
-        Positioned(
-          top: 40,
-          left: 0,
-          right: 0,
-          child: Center(
-            child: FadeInDown(
-              child: const Text(
-                'Cargando...',
-                style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 30,
-                  fontWeight: FontWeight.bold,
+            Center(
+              child: Container(
+                width: size.width * 0.8,
+                height: size.width * 0.5,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(30),
+                  boxShadow: const [
+                    BoxShadow(
+                      color: Colors.black12,
+                      blurRadius: 15,
+                      offset: Offset(0, 5),
+                    ),
+                  ],
+                ),
+                child: Stack(
+                  children: [
+                    Positioned(
+                      top: 40,
+                      left: 0,
+                      right: 0,
+                      child: Center(
+                        child: FadeInDown(
+                          child: const Text(
+                            'Cargando...',
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 30,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    Positioned(
+                      bottom: 20,
+                      left: 0,
+                      right: 0,
+                      child: FadeInUp(
+                        child: Container(
+                          alignment: Alignment.center,
+                          child: const CircularProgressIndicator.adaptive(
+                            backgroundColor: Colors.blueGrey,
+                            valueColor: AlwaysStoppedAnimation(
+                                Color.fromARGB(255, 9, 27, 43)),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ),
-          ),
-        ),
-        Positioned(
-          bottom: 20,
-          left: 0,
-          right: 0,
-          child: FadeInUp(
-            child: Container(
-              alignment: Alignment.center,
-              child: const CircularProgressIndicator.adaptive(
-                backgroundColor: Colors.blueGrey,
-                valueColor: AlwaysStoppedAnimation(Color.fromARGB(255, 9, 27, 43)),
-              ),
-            ),
-          ),
-        ),
-      ],
-    ),
-  ),
-),
-
-
           ],
         ),
       ),

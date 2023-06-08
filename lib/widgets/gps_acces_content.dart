@@ -100,7 +100,6 @@ class GpsAccesTitle extends StatelessWidget {
   }
 }
 
-
 class GpsDisabled extends StatelessWidget {
   const GpsDisabled({super.key});
 
@@ -151,12 +150,9 @@ class GpsDisabled extends StatelessWidget {
                 ),
               ),
             ),
-
           ],
         ),
       ),
     );
   }
 }
-
-

@@ -15,9 +15,9 @@ class HomeScreen extends StatelessWidget {
       child: Stack(
         children: [
           const HeaderCurvo(),
-          const Positioned(top: 200, left:300, child: Bubble()),
-          const Positioned(top: -40, left:-30, child: Bubble()),
-          const Positioned(top: -50, right:-20, child: Bubble()),
+          const Positioned(top: 200, left: 300, child: Bubble()),
+          const Positioned(top: -40, left: -30, child: Bubble()),
+          const Positioned(top: -50, right: -20, child: Bubble()),
           _HomeBody()
         ],
       ),
@@ -38,5 +38,3 @@ class _HomeBody extends StatelessWidget {
     );
   }
 }
-
-

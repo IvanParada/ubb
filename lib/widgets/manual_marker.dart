@@ -39,17 +39,13 @@ class _ManualMarkerBody extends StatelessWidget {
 
           Center(
             child: Transform.translate(
-              offset: const Offset(0, -22),
-              child: BounceInDown(
+                offset: const Offset(0, -22),
+                child: BounceInDown(
                   from: 100,
-                  child: const Icon(
-                    Icons.location_on_rounded,
-                    size: 60,
-                    color:  Color.fromARGB(255, 9, 27, 43)),
-                    
-                  )),
-            ),
-          
+                  child: const Icon(Icons.location_on_rounded,
+                      size: 60, color: Color.fromARGB(255, 9, 27, 43)),
+                )),
+          ),
 
           // Boton de confirmardestino
           Positioned(

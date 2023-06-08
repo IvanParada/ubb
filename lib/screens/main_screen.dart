@@ -37,31 +37,33 @@ class _MainScreenState extends State<MainScreen> {
         elevation: 0,
         items: [
           BottomNavigationBarItem(
-              icon: FadeInLeft(
-                child: const FaIcon(FontAwesomeIcons.house)
-              ),
-              activeIcon: BounceInDown(
-                child: const FaIcon(FontAwesomeIcons.house),
-              ),
-              label: 'Home',
-              tooltip: 'Home',
-              backgroundColor:const Color.fromARGB(255, 9, 27, 43),
-      ),
+            icon: FadeInLeft(child: const FaIcon(FontAwesomeIcons.house)),
+            activeIcon: BounceInDown(
+              child: const FaIcon(FontAwesomeIcons.house),
+            ),
+            label: 'Home',
+            tooltip: 'Home',
+            backgroundColor: const Color.fromARGB(255, 9, 27, 43),
+          ),
           BottomNavigationBarItem(
-              icon: FadeInUp(
-                child: const FaIcon(FontAwesomeIcons.mapLocationDot)
-              ),
-              activeIcon: BounceInDown(child: const FaIcon(FontAwesomeIcons.mapLocationDot)),
-              label: 'Mapa',
-              tooltip: 'Mapa',
-              backgroundColor:const Color.fromARGB(255, 9, 27, 43),),
+            icon:
+                FadeInUp(child: const FaIcon(FontAwesomeIcons.mapLocationDot)),
+            activeIcon: BounceInDown(
+                child: const FaIcon(FontAwesomeIcons.mapLocationDot)),
+            label: 'Mapa',
+            tooltip: 'Mapa',
+            backgroundColor: const Color.fromARGB(255, 9, 27, 43),
+          ),
           BottomNavigationBarItem(
-              icon: FadeInRight(
-                child: const FaIcon(FontAwesomeIcons.gear),),
-              activeIcon: BounceInDown(child: const FaIcon(FontAwesomeIcons.gear)),
-              label: 'Ajustes',
-              tooltip: 'Ajustes',
-              backgroundColor:const Color.fromARGB(255, 9, 27, 43),),
+            icon: FadeInRight(
+              child: const FaIcon(FontAwesomeIcons.gear),
+            ),
+            activeIcon:
+                BounceInDown(child: const FaIcon(FontAwesomeIcons.gear)),
+            label: 'Ajustes',
+            tooltip: 'Ajustes',
+            backgroundColor: const Color.fromARGB(255, 9, 27, 43),
+          ),
         ],
       ),
     );

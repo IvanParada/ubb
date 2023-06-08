@@ -33,12 +33,10 @@ class MainApp extends StatelessWidget {
       initialRoute: 'checking',
       routes: {
         'checking': (_) => const CheckAuthScreen(),
-
         'home_screen': (_) => const MainScreen(),
-        'login_screen':(_) => const LoginScreen(),
-
+        'login_screen': (_) => const LoginScreen(),
         'map_screen': (_) => const LoadingScreen(),
-        'register_screen':(_) => const RegisterScreen(),
+        'register_screen': (_) => const RegisterScreen(),
         'settings_screen': (_) => const SettingsScreen(),
       },
       scaffoldMessengerKey: NotificationsService.messengerKey,

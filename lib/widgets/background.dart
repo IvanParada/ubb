@@ -11,7 +11,7 @@ class Background extends StatelessWidget {
       colors: [
         Color.fromARGB(255, 9, 27, 43),
         Color.fromRGBO(14, 150, 171, 1),
-        ],
+      ],
     ),
   );
 

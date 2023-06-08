@@ -89,11 +89,9 @@ class _HeaderWavePainter2 extends CustomPainter {
   }
 }
 
-
 class HeaderCurvo extends StatelessWidget {
   const HeaderCurvo({super.key});
 
-  
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -107,10 +105,8 @@ class HeaderCurvo extends StatelessWidget {
 }
 
 class _HeaderCurvoPainter extends CustomPainter {
-  
   @override
   void paint(Canvas canvas, Size size) {
-    
     final lapiz = Paint();
 
     // Propiedades
@@ -121,21 +117,16 @@ class _HeaderCurvoPainter extends CustomPainter {
     final path = Path();
 
     // Dibujar con el path y el lapiz
-    path.lineTo( 0, size.height * 0.35 );
-    path.quadraticBezierTo(size.width * 0.5, size.height * 0.45, size.width, size.height * 0.35 );
-    path.lineTo( size.width, 0 );
+    path.lineTo(0, size.height * 0.35);
+    path.quadraticBezierTo(
+        size.width * 0.5, size.height * 0.45, size.width, size.height * 0.35);
+    path.lineTo(size.width, 0);
 
-  
-
-
-    canvas.drawPath(path, lapiz );
+    canvas.drawPath(path, lapiz);
   }
 
   @override
   bool shouldRepaint(CustomPainter oldDelegate) {
     return true;
   }
-
 }
-
-
