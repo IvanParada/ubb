@@ -12,7 +12,7 @@ class PageTitle extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const SizedBox(height: 40),
+            const SizedBox(height: 30),
             FadeInDown(
               child:  const Center(
                 child: Text(
@@ -29,8 +29,10 @@ class PageTitle extends StatelessWidget {
               child: const Center(
                 child:  Text(
                   'Explora nuestro campus con el mapa interactivo.',
-                  style: TextStyle(fontSize: 16, color: Colors.white),
+                  style: TextStyle(fontSize: 16, color: Colors.white,),
+                  textAlign: TextAlign.center,
                 ),
+                
               ),
             ),
             const SizedBox(height: 30),

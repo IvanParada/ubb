@@ -49,12 +49,25 @@ class LoginScreen extends StatelessWidget {
                   overlayColor: MaterialStateProperty.all(const Color.fromARGB(255, 9, 27, 43).withOpacity(0.1)),
                   shape: MaterialStateProperty.all(const StadiumBorder())
                 ),
-                 child:Text(
-                   'Crear una nueva cuenta',
-                    style: TextStyle(
-                      color: const Color.fromARGB(255, 9, 27, 43).withOpacity(0.8),
-                     fontSize: 18,
-                      fontWeight: FontWeight.bold)),),
+                child: RichText(
+                text: TextSpan(
+                  style: TextStyle(
+                    fontSize: 18,
+                    color: const Color.fromARGB(255, 9, 27, 43).withOpacity(0.8),
+                  ),
+                  children: const [
+                    TextSpan(
+                      text: '¿No tienes cuenta? ',
+                      style: TextStyle(fontWeight: FontWeight.w300),
+                    ),
+                    TextSpan(
+                      text: 'Regístrate',
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                  ],
+                ),
+              ),
+              ),
               const SizedBox(height: 50),
             ],
           ),
@@ -155,7 +168,7 @@ class _LoginForm extends StatelessWidget {
                   ),
                   const Padding(
                     padding: EdgeInsets.only(left: 20),
-                    child: FaIcon(FontAwesomeIcons.rocket, color: Colors.white, size: 16,  ),
+                    child: FaIcon(FontAwesomeIcons.rocket, color: Colors.white, size: 16),
                   ),
                 ],
                 )

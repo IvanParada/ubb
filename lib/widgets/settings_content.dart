@@ -16,11 +16,11 @@ class SettingsTitle extends StatelessWidget {
 
     return SafeArea(
       child: Container(
-        margin: const EdgeInsets.symmetric(horizontal: 20),
+        margin: const EdgeInsets.symmetric(horizontal: 30),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const SizedBox(height: 20),
+            const SizedBox(height: 30),
             FadeInDown(
               child:  const Center(
                 child: FaIcon(FontAwesomeIcons.userGear, color: Colors.white, size: 80,)
@@ -61,7 +61,7 @@ class SettingsTitle extends StatelessWidget {
                    Navigator.pushReplacementNamed(context, 'login_screen');
                 },
                 child: Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 80, vertical: 15),
+                  padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 15),
                   child: const Row(
                           mainAxisSize: MainAxisSize.min,
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -69,12 +69,13 @@ class SettingsTitle extends StatelessWidget {
                     Text('Cerrar sesión', style: TextStyle(color: Colors.white),),
                     Padding(
                       padding: EdgeInsets.only(left: 20),
-                      child: FaIcon(FontAwesomeIcons.rightFromBracket, color: Colors.white),
-                    ),
-                  ],
-                  )
-                )),
+                      child: FaIcon(FontAwesomeIcons.rightFromBracket, color: Colors.white,size: 16),
+                   ),
+                ],
+                )
               ),
+            ),
+          ),
             )
                       ],
         ),
