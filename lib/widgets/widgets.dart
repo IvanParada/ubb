@@ -1,5 +1,3 @@
-
-  
 export 'package:ubb/widgets/auth_background.dart';
 export 'package:ubb/widgets/background.dart';
 export 'package:ubb/widgets/btn_follow_user.dart';

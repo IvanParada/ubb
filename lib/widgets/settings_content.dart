@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 
+import 'package:intl/intl.dart';
 import '../services/services.dart';
 
 class SettingsTitle extends StatelessWidget {
   const SettingsTitle({super.key});
-
 
   @override
   Widget build(BuildContext context) {
@@ -22,13 +22,14 @@ class SettingsTitle extends StatelessWidget {
           children: [
             const SizedBox(height: 30),
             FadeInDown(
-              child:  const Center(
-                child: FaIcon(FontAwesomeIcons.userGear, color: Colors.white, size: 80,)
-              ),
+              child: const Center(
+                  child: FaIcon(
+                FontAwesomeIcons.userGear,
+                color: Colors.white,
+                size: 80,
+              )),
             ),
-            const SizedBox(height: 20),
-            // const Center(child: Text('Ajustes', style: TextStyle(color: Colors.white, fontSize: 30, fontWeight: FontWeight.w500),)),
-            const SizedBox(height: 30),
+            const SizedBox(height: 50),
             Center(
               child: Container(
                 width: size.width * 0.8,
@@ -36,13 +37,99 @@ class SettingsTitle extends StatelessWidget {
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(30),
-                      boxShadow: const [
-                        BoxShadow(
-                          color: Colors.black12,
-                          blurRadius: 15,
-                          offset: Offset(0,5)
-                        )
-                      ]
+                  boxShadow: const [
+                    BoxShadow(
+                      color: Colors.black12,
+                      blurRadius: 15,
+                      offset: Offset(0, 5),
+                    ),
+                  ],
+                ),
+                child: SingleChildScrollView(
+                  child: Padding(
+                    padding: const EdgeInsets.all(10),
+                    child: Column(
+                      children: [
+                        ListTile(
+                          leading: const FaIcon(FontAwesomeIcons.userGraduate),
+                          title: const Text(
+                            'Nombre usuario',
+                            style: TextStyle(fontWeight: FontWeight.w500),
+                          ),
+                          subtitle: FutureBuilder<Map<String, dynamic>?>(
+                            future: AuthService().getUserData(),
+                            builder: (context, snapshot) {
+                              if (snapshot.connectionState ==
+                                  ConnectionState.waiting) {
+                                return const CircularProgressIndicator();
+                              } else if (snapshot.hasError) {
+                                return const Text(
+                                    'Error al obtener los datos del usuario');
+                              } else {
+                                final userData = snapshot.data;
+                                final displayName =
+                                    userData?['displayName'] ?? '';
+                                return Text(displayName);
+                              }
+                            },
+                          ),
+                        ),
+                        ListTile(
+                          leading: const FaIcon(FontAwesomeIcons.solidEnvelope),
+                          title: const Text(
+                            'Correo electrónico',
+                            style: TextStyle(fontWeight: FontWeight.w500),
+                          ),
+                          subtitle: FutureBuilder<Map<String, dynamic>?>(
+                            future: AuthService().getUserData(),
+                            builder: (context, snapshot) {
+                              if (snapshot.connectionState ==
+                                  ConnectionState.waiting) {
+                                return const CircularProgressIndicator();
+                              } else if (snapshot.hasError) {
+                                return const Text(
+                                    'Error al obtener los datos del usuario');
+                              } else {
+                                final userData = snapshot.data;
+                                final email = userData?['email'] ?? '';
+                                return Text(email);
+                              }
+                            },
+                          ),
+                        ),
+                        ListTile(
+                          leading: const FaIcon(FontAwesomeIcons.calendarMinus),
+                          title: const Text(
+                            'Fecha de registro',
+                            style: TextStyle(fontWeight: FontWeight.w500),
+                          ),
+                          subtitle: FutureBuilder<Map<String, dynamic>?>(
+                            future: AuthService().getUserData(),
+                            builder: (context, snapshot) {
+                              if (snapshot.connectionState ==
+                                  ConnectionState.waiting) {
+                                return const CircularProgressIndicator();
+                              } else if (snapshot.hasError) {
+                                return const Text(
+                                    'Error al obtener los datos del usuario');
+                              } else {
+                                final userData = snapshot.data;
+                                final createdAt =
+                                    userData?['createdAt'] as String?;
+                                final formattedDate = createdAt != null
+                                    ? DateFormat('dd/MM/yyyy').format(
+                                        DateTime.fromMillisecondsSinceEpoch(
+                                            int.parse(createdAt)))
+                                    : '';
+
+                                return Text(formattedDate);
+                              }
+                            },
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
               ),
             ),
@@ -50,34 +137,37 @@ class SettingsTitle extends StatelessWidget {
             FadeInUp(
               child: Center(
                 child: MaterialButton(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10)
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10)),
+                  disabledColor: Colors.grey,
+                  elevation: 0,
+                  color: const Color.fromARGB(255, 9, 27, 43),
+                  onPressed: () {
+                    authService.logout();
+                    Navigator.pushReplacementNamed(context, 'login_screen');
+                  },
+                  child: Container(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 40, vertical: 15),
+                      child: const Row(
+                        mainAxisSize: MainAxisSize.min,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            'Cerrar sesión',
+                            style: TextStyle(color: Colors.white),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.only(left: 20),
+                            child: FaIcon(FontAwesomeIcons.rightFromBracket,
+                                color: Colors.white, size: 16),
+                          ),
+                        ],
+                      )),
                 ),
-                disabledColor: Colors.grey,
-                elevation: 0,
-                color: const Color.fromARGB(255, 9, 27, 43),
-                onPressed: () {
-                  authService.logout();
-                   Navigator.pushReplacementNamed(context, 'login_screen');
-                },
-                child: Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 15),
-                  child: const Row(
-                          mainAxisSize: MainAxisSize.min,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                    Text('Cerrar sesión', style: TextStyle(color: Colors.white),),
-                    Padding(
-                      padding: EdgeInsets.only(left: 20),
-                      child: FaIcon(FontAwesomeIcons.rightFromBracket, color: Colors.white,size: 16),
-                   ),
-                ],
-                )
               ),
-            ),
-          ),
             )
-                      ],
+          ],
         ),
       ),
     );
