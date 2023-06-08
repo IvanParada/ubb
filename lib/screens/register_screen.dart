@@ -2,15 +2,14 @@ import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
-import 'package:ubb/providers/login_form_provider.dart';
+import 'package:ubb/providers/providers.dart';
+import 'package:ubb/services/auth_service.dart';
 import 'package:ubb/ui/input_decorations.dart';
 import 'package:ubb/widgets/widgets.dart';
 import 'package:ubb/ui/ui.dart';
 
-import '../services/services.dart';
-
-class LoginScreen extends StatelessWidget {
-  const LoginScreen({super.key});
+class RegisterScreen extends StatelessWidget {
+  const RegisterScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +24,7 @@ class LoginScreen extends StatelessWidget {
                   children: [
                     const SizedBox(height: 10),
                     const Text(
-                      'Iniciar Sesión',
+                      'Registrar',
                         style: TextStyle(
                           color:Color.fromARGB(255, 9, 27, 43),
                           fontSize: 35,
@@ -34,23 +33,23 @@ class LoginScreen extends StatelessWidget {
                           ),
                     const SizedBox(height: 30),
                     ChangeNotifierProvider(
-                      create: (_ ) => LoginFormProvider(),
-                      child: _LoginForm(),
+                      create: (_ ) => RegisterFormProvider(),
+                      child: _RegisterForm(),
                        )
                     
                   ],
                 ),
               ),
               const SizedBox(height: 50),
-              TextButton(
+                            TextButton(
                 onPressed: 
-                () => Navigator.pushReplacementNamed(context,'register_screen'),
+                () => Navigator.pushReplacementNamed(context,'login_screen'),
                 style: ButtonStyle(
                   overlayColor: MaterialStateProperty.all(const Color.fromARGB(255, 9, 27, 43).withOpacity(0.1)),
                   shape: MaterialStateProperty.all(const StadiumBorder())
                 ),
                  child:Text(
-                   'Crear una nueva cuenta',
+                   '¿Ya tienes una cuenta?',
                     style: TextStyle(
                       color: const Color.fromARGB(255, 9, 27, 43).withOpacity(0.8),
                      fontSize: 18,
@@ -65,20 +64,62 @@ class LoginScreen extends StatelessWidget {
 }
 
 
-class _LoginForm extends StatelessWidget {
+class _RegisterForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
 
-    final loginForm  =  Provider.of<LoginFormProvider>(context); //se obtiene el acceso a todo el LoginFormProvider
+    final registerForm  =  Provider.of<RegisterFormProvider>(context); //se obtiene el acceso a todo el LoginFormProvider
 
 
     return Form(
-      key: loginForm.formKey,
+      key: registerForm.formKey,
       autovalidateMode: AutovalidateMode.onUserInteraction,
       child: FadeIn(
         child: Column(
           children: [
+            TextFormField(
+              autocorrect: false,
+              keyboardType: TextInputType.name,
+              decoration: InputDecorations.authInputDecoration(
+                hintText: 'Nombre',
+                labelText: 'Nombre',
+                prefixIcon: FontAwesomeIcons.userLarge
+              ),
+              onChanged: (value) => registerForm.nombre = value,
+              validator: ( value ){
+                RegExp nombreRegExp = RegExp(r'^[a-zA-Zá-úÁ-ÚüÜñÑ\s]{3,}$');
+
+                return nombreRegExp.hasMatch(value ?? '')
+                ? null
+                : 'El nombre no es válido';
+              },
+
+
+            ),
+            const SizedBox(height: 30),
+            TextFormField(
+              autocorrect: false,
+              keyboardType: TextInputType.name,
+              decoration: InputDecorations.authInputDecoration(
+                hintText: 'Apellido ',
+                labelText: 'Apellido',
+                prefixIcon: FontAwesomeIcons.idCard
+              ),
+              onChanged: (value) => registerForm.apellido = value,
+                            validator: ( value ){
+      
+                RegExp nombreRegExp = RegExp(r'^[a-zA-Zá-úÁ-ÚüÜñÑ\s]{3,}$');
+
+                return nombreRegExp.hasMatch(value ?? '')
+                ? null
+                : 'El apellido no es válido';
+              },
+
+
+            ),
+            const SizedBox(height: 30),
+
             TextFormField(
               autocorrect: false,
               keyboardType: TextInputType.emailAddress,
@@ -87,7 +128,7 @@ class _LoginForm extends StatelessWidget {
                 labelText: 'Correo electronico',
                 prefixIcon: FontAwesomeIcons.at
               ),
-              onChanged: (value) => loginForm.email = value,
+              onChanged: (value) => registerForm.email = value,
               validator: ( value ){
                 String pattern = r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@alumnos\.ubiobio\.cl$';
                 RegExp regExp  = RegExp(pattern);
@@ -107,7 +148,7 @@ class _LoginForm extends StatelessWidget {
                 labelText: 'Contraseña',
                 prefixIcon: FontAwesomeIcons.lock
               ),
-              onChanged: (value) => loginForm.password = value,
+              onChanged: (value) => registerForm.password = value,
       
               validator: ( value ){
       
@@ -125,40 +166,40 @@ class _LoginForm extends StatelessWidget {
               disabledColor: Colors.grey,
               elevation: 0,
               color: const Color.fromARGB(255, 9, 27, 43),
-              onPressed: loginForm.isLoading ? null : () async {
+              onPressed: registerForm.isLoading ? null : () async {
                 FocusScope.of(context).unfocus();
                 final authService = Provider.of<AuthService>(context, listen: false);
 
-                if(!loginForm.isValidForm()) return;
+                if(!registerForm.isValidForm()) return;
                 
-                loginForm.isLoading = true;
+                registerForm.isLoading = true;
             
-                final String? errorMessage = await authService.login(loginForm.email, loginForm.password);
+                final String? errorMessage = await authService.createUser(registerForm.nombre, registerForm.apellido, registerForm.email ,registerForm.password);
                 if(errorMessage == null){
                 // ignore: use_build_context_synchronously
                 Navigator.pushReplacementNamed(context, 'home_screen');
                   
                 }else{
-                loginForm.isLoading = false;
+                registerForm.isLoading = false;
                 }
             
               },
-              child: Container(
-                padding: const EdgeInsets.symmetric(horizontal: 80, vertical: 15),
-                child: Row(
-                        mainAxisSize: MainAxisSize.min,
+                child: Container(
+    padding: const EdgeInsets.symmetric(horizontal: 80, vertical: 15),
+    child: Row(
+      mainAxisSize: MainAxisSize.min,
       mainAxisAlignment: MainAxisAlignment.center,
-        children: [
+      children: [
         Text(
-          loginForm.isLoading ? 'Espere...' : 'Ingresar',
+          registerForm.isLoading ? 'Espere...' : 'Registrar',
           style: const TextStyle(color: Colors.white),
         ),
         const Padding(
           padding: EdgeInsets.only(left: 20),
-          child: FaIcon(FontAwesomeIcons.rocket, color: Colors.white,  ),
+          child: FaIcon(FontAwesomeIcons.userAstronaut, color: Colors.white,  ),
         ),
       ],
-                )
+    ),
               ))
           ],
         ),

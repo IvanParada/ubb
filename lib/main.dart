@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:provider/provider.dart';
 import 'package:ubb/blocs/bloc.dart';
 import 'package:ubb/screens/screens.dart';
 import 'package:ubb/services/services.dart';
@@ -8,6 +9,7 @@ import 'package:ubb/services/services.dart';
 void main() {
   runApp(MultiBlocProvider(
     providers: [
+      ChangeNotifierProvider(create: (_) => AuthService()),
       BlocProvider(create: (context) => GpsBloc()),
       BlocProvider(create: (context) => LocationBloc()),
       BlocProvider(
@@ -28,11 +30,15 @@ class MainApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'UBBMaps',
-      initialRoute: 'login_screen',
+      initialRoute: 'checking',
       routes: {
-        'login_screen':(_) => const LoginScreen(),
+        'checking': (_) => const CheckAuthScreen(),
+
         'home_screen': (_) => const MainScreen(),
+        'login_screen':(_) => const LoginScreen(),
+
         'map_screen': (_) => const LoadingScreen(),
+        'register_screen':(_) => const RegisterScreen(),
         'settings_screen': (_) => const SettingsScreen(),
       },
     );
