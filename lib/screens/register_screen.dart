@@ -185,7 +185,7 @@ class _RegisterForm extends StatelessWidget {
             
               },
                 child: Container(
-    padding: const EdgeInsets.symmetric(horizontal: 80, vertical: 15),
+    padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 15),
     child: Row(
       mainAxisSize: MainAxisSize.min,
       mainAxisAlignment: MainAxisAlignment.center,
@@ -196,7 +196,7 @@ class _RegisterForm extends StatelessWidget {
         ),
         const Padding(
           padding: EdgeInsets.only(left: 20),
-          child: FaIcon(FontAwesomeIcons.userAstronaut, color: Colors.white,  ),
+          child: FaIcon(FontAwesomeIcons.userAstronaut, color: Colors.white, size: 16,  ),
         ),
       ],
     ),

@@ -144,22 +144,23 @@ class _LoginForm extends StatelessWidget {
             
               },
               child: Container(
-                padding: const EdgeInsets.symmetric(horizontal: 80, vertical: 15),
+                padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 15),
                 child: Row(
-                        mainAxisSize: MainAxisSize.min,
-      mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-        Text(
-          loginForm.isLoading ? 'Espere...' : 'Ingresar',
-          style: const TextStyle(color: Colors.white),
-        ),
-        const Padding(
-          padding: EdgeInsets.only(left: 20),
-          child: FaIcon(FontAwesomeIcons.rocket, color: Colors.white,  ),
-        ),
-      ],
+                  mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                  Text(
+                    loginForm.isLoading ? 'Espere...' : 'Ingresar',
+                    style: const TextStyle(color: Colors.white),
+                  ),
+                  const Padding(
+                    padding: EdgeInsets.only(left: 20),
+                    child: FaIcon(FontAwesomeIcons.rocket, color: Colors.white, size: 16,  ),
+                  ),
+                ],
                 )
-              ))
+              ),
+              )
           ],
         ),
       ),
