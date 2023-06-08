@@ -98,7 +98,7 @@ class _LoginForm extends StatelessWidget {
               decoration: InputDecorations.authInputDecoration(
                 hintText: 'nombre.apellido0000@alumnos.ubiobio.cl',
                 labelText: 'Correo electronico',
-                prefixIcon: FontAwesomeIcons.at
+                prefixIcon: FontAwesomeIcons.at,
               ),
               onChanged: (value) => loginForm.email = value,
               validator: ( value ){
@@ -118,7 +118,7 @@ class _LoginForm extends StatelessWidget {
               decoration: InputDecorations.authInputDecoration(
                 hintText: '*****',
                 labelText: 'Contraseña',
-                prefixIcon: FontAwesomeIcons.lock
+                prefixIcon: FontAwesomeIcons.lock, 
               ),
               onChanged: (value) => loginForm.password = value,
       
@@ -152,6 +152,7 @@ class _LoginForm extends StatelessWidget {
                 Navigator.pushReplacementNamed(context, 'home_screen');
                   
                 }else{
+                  NotificationsService.showSnackbar(errorMessage);
                 loginForm.isLoading = false;
                 }
             

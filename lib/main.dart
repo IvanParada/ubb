@@ -41,6 +41,7 @@ class MainApp extends StatelessWidget {
         'register_screen':(_) => const RegisterScreen(),
         'settings_screen': (_) => const SettingsScreen(),
       },
+      scaffoldMessengerKey: NotificationsService.messengerKey,
     );
   }
 }
