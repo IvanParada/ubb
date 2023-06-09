@@ -29,7 +29,7 @@ class MainApp extends StatelessWidget {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.light);
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'UBBMaps',
+      title: 'UBBMap',
       initialRoute: 'checking',
       routes: {
         'checking': (_) => const CheckAuthScreen(),
