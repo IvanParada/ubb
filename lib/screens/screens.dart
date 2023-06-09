@@ -1,3 +1,4 @@
+export 'package:ubb/screens/reset_password_screen.dart';
 export 'package:ubb/screens/animated_screen.dart';
 export 'package:ubb/screens/check_auth_screen.dart';
 export 'package:ubb/screens/gps_acces_screen.dart';

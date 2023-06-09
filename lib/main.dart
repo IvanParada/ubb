@@ -38,6 +38,7 @@ class MainApp extends StatelessWidget {
         'map_screen': (_) => const LoadingScreen(),
         'register_screen': (_) => const RegisterScreen(),
         'settings_screen': (_) => const SettingsScreen(),
+        'reset_password_screen': (_) => const PasswordResetScreen(),
       },
       scaffoldMessengerKey: NotificationsService.messengerKey,
     );

@@ -9,8 +9,8 @@ import 'package:ubb/ui/ui.dart';
 
 import '../services/services.dart';
 
-class LoginScreen extends StatelessWidget {
-  const LoginScreen({super.key});
+class PasswordResetScreen extends StatelessWidget {
+  const PasswordResetScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +25,7 @@ class LoginScreen extends StatelessWidget {
               children: [
                 const SizedBox(height: 10),
                 const Text(
-                  'Iniciar Sesión',
+                  'Recuperar cuenta',
                   style: TextStyle(
                       color: Color.fromARGB(255, 9, 27, 43),
                       fontSize: 35,
@@ -34,12 +34,39 @@ class LoginScreen extends StatelessWidget {
                 const SizedBox(height: 30),
                 ChangeNotifierProvider(
                   create: (_) => LoginFormProvider(),
-                  child: _LoginForm(),
+                  child: _ResetPasswordForm(),
                 )
               ],
             ),
           ),
           const SizedBox(height: 50),
+          TextButton(
+            onPressed: () =>
+                Navigator.pushReplacementNamed(context, 'login_screen'),
+            style: ButtonStyle(
+                overlayColor: MaterialStateProperty.all(
+                    const Color.fromARGB(255, 9, 27, 43).withOpacity(0.1)),
+                shape: MaterialStateProperty.all(const StadiumBorder())),
+            child: RichText(
+              text: TextSpan(
+                style: TextStyle(
+                  fontSize: 18,
+                  color: const Color.fromARGB(255, 9, 27, 43).withOpacity(0.8),
+                ),
+                children: const [
+                  TextSpan(
+                    text: '¿Ya tienes cuenta? ',
+                    style: TextStyle(fontWeight: FontWeight.w300),
+                  ),
+                  TextSpan(
+                    text: 'Inicia sesión',
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          const SizedBox(height: 5),
           TextButton(
             onPressed: () =>
                 Navigator.pushReplacementNamed(context, 'register_screen'),
@@ -66,21 +93,20 @@ class LoginScreen extends StatelessWidget {
               ),
             ),
           ),
-          const SizedBox(height: 50),
         ],
       ),
     )));
   }
 }
 
-class _LoginForm extends StatelessWidget {
+class _ResetPasswordForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final loginForm = Provider.of<LoginFormProvider>(
+    final resetPass = Provider.of<LoginFormProvider>(
         context); //se obtiene el acceso a todo el LoginFormProvider
 
     return Form(
-      key: loginForm.formKey,
+      key: resetPass.formKey,
       autovalidateMode: AutovalidateMode.onUserInteraction,
       child: FadeIn(
         child: Column(
@@ -90,10 +116,10 @@ class _LoginForm extends StatelessWidget {
               keyboardType: TextInputType.emailAddress,
               decoration: InputDecorations.authInputDecoration(
                 hintText: 'nombre.apellido0000@alumnos.ubiobio.cl',
-                labelText: 'Correo electronico',
+                labelText: 'Correo electrónico',
                 prefixIcon: FontAwesomeIcons.at,
               ),
-              onChanged: (value) => loginForm.email = value,
+              onChanged: (value) => resetPass.email = value,
               validator: (value) {
                 String pattern =
                     r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@alumnos\.ubiobio\.cl$';
@@ -105,85 +131,51 @@ class _LoginForm extends StatelessWidget {
               },
             ),
             const SizedBox(height: 30),
-            TextFormField(
-              autocorrect: false,
-              obscureText: true,
-              keyboardType: TextInputType.visiblePassword,
-              decoration: InputDecorations.authInputDecoration(
-                hintText: '*****',
-                labelText: 'Contraseña',
-                prefixIcon: FontAwesomeIcons.lock,
-              ),
-              onChanged: (value) => loginForm.password = value,
-              validator: (value) {
-                return (value != null && value.length >= 6)
-                    ? null
-                    : 'Contraseña incorrecta';
-              },
-            ),
-            const SizedBox(height: 5),
-            TextButton(
-                onPressed: () => Navigator.pushReplacementNamed(
-                    context, 'reset_password_screen'),
-                style: ButtonStyle(
-                    overlayColor: MaterialStateProperty.all(
-                        const Color.fromARGB(255, 9, 27, 43).withOpacity(0.1)),
-                    shape: MaterialStateProperty.all(const StadiumBorder())),
-                child: const Text(
-                  '¿Has olvidado tu contraseña?',
-                  textAlign: TextAlign.right,
-                  style: TextStyle(
-                    color: Color.fromARGB(255, 9, 27, 43),
-                  ),
-                )),
             MaterialButton(
               shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10)),
+                borderRadius: BorderRadius.circular(10),
+              ),
               disabledColor: Colors.grey,
               elevation: 0,
               color: const Color.fromARGB(255, 9, 27, 43),
-              onPressed: loginForm.isLoading
+              onPressed: resetPass.isLoading
                   ? null
                   : () async {
-                      FocusScope.of(context).unfocus();
                       final authService =
                           Provider.of<AuthService>(context, listen: false);
+                      final result =
+                          await authService.resetPassword(resetPass.email);
 
-                      if (!loginForm.isValidForm()) return;
-
-                      loginForm.isLoading = true;
-
-                      final String? errorMessage = await authService.login(
-                          loginForm.email, loginForm.password);
-                      if (errorMessage == null) {
-                        // ignore: use_build_context_synchronously
-                        Navigator.pushReplacementNamed(context, 'home_screen');
-                      } else {
+                      if (result == null) {
                         NotificationsService.showSnackbar(
-                            'El correo electrónico o la contraseña son incorrectos. Verifica tus credenciales e intenta nuevamente.');
-
-                        loginForm.isLoading = false;
+                            'Se ha enviado un correo para recuperar tu contraseña. Por favor, verifica tu bandeja de entrada');
+                      } else {
+                        // Error: mostrar un SnackBar con el mensaje de error
+                        // ignore: use_build_context_synchronously
+                        NotificationsService.showSnackbar(
+                            'El correo electrónico ingresado no está registrado. Verifica que hayas ingresado la dirección correcta.');
                       }
                     },
               child: Container(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 40, vertical: 15),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        loginForm.isLoading ? 'Espere...' : 'Ingresar',
-                        style: const TextStyle(color: Colors.white),
-                      ),
-                      const Padding(
-                        padding: EdgeInsets.only(left: 20),
-                        child: FaIcon(FontAwesomeIcons.rocket,
-                            color: Colors.white, size: 16),
-                      ),
-                    ],
-                  )),
-            )
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 40, vertical: 15),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      resetPass.isLoading ? 'Espere...' : 'Solicitar',
+                      style: const TextStyle(color: Colors.white),
+                    ),
+                    const Padding(
+                      padding: EdgeInsets.only(left: 20),
+                      child: FaIcon(FontAwesomeIcons.solidBell,
+                          color: Colors.white, size: 16),
+                    ),
+                  ],
+                ),
+              ),
+            ),
           ],
         ),
       ),

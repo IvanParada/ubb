@@ -179,7 +179,7 @@ class _RegisterForm extends StatelessWidget {
                         if (errorMessage == null) {
                           // ignore: use_build_context_synchronously
                           Navigator.pushReplacementNamed(
-                              context, 'home_screen');
+                              context, 'login_screen');
                         } else {
                           registerForm.isLoading = false;
                         }
