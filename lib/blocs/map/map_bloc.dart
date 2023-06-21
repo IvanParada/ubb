@@ -69,33 +69,43 @@ class MapBloc extends Bloc<MapEvent, MapState> {
   }
 
   Future drawRoutePolyline(RouteDestination destination) async {
-    final myRoute = Polyline(
-      polylineId: const PolylineId('route'),
-      color: const Color.fromARGB(255, 9, 27, 43),
-      width: 5,
+    Polyline backgroundRoute = Polyline(
+      jointType: JointType.round,
+      geodesic: true,
+      color: const Color(0xff0A2861).withOpacity(0.6),
+      polylineId: const PolylineId('route_background'),
+      width: 9,
       points: destination.points,
       startCap: Cap.roundCap,
       endCap: Cap.roundCap,
     );
 
-    double distance = (destination.distance * 100).floorToDouble();
-    distance /= 100;
+    Polyline foregroundRoute = Polyline(
+      jointType: JointType.round,
+      geodesic: true,
+      color: const Color(0xff0A2861),
+      polylineId: const PolylineId('route_foreground'),
+      width: 4,
+      points: destination.points,
+      startCap: Cap.roundCap,
+      endCap: Cap.roundCap,
+    );
 
-    double tripDuration = (destination.duration / 60).floorToDouble();
+    Set<Polyline> polylines = {};
+    polylines.add(backgroundRoute);
+    polylines.add(foregroundRoute);
 
     final startMarkerPin = await getNetworkImageMarker(
         'http://icon-park.com/imagefiles/location_map_pin_navy_blue7.png');
     final endMarkerPin = await getNetworkImageMarker(
-        'http://icon-park.com/imagefiles/location_map_pin_navy_blue7.png');
+        'http://icon-park.com/imagefiles/location_map_pin_red7.png');
 
     final startMarker = Marker(
       markerId: const MarkerId('start'),
       position: destination.points.first,
       icon: startMarkerPin,
-      // anchor: const Offset(0, 0),
-      infoWindow: InfoWindow(
-        title: 'Inicio',
-        snippet: 'Distancia: $distance metros, Duración: $tripDuration minutos',
+      infoWindow: const InfoWindow(
+        title: 'Esta es tu posición actual!',
       ),
     );
 
@@ -103,14 +113,15 @@ class MapBloc extends Bloc<MapEvent, MapState> {
       markerId: const MarkerId('end'),
       position: destination.points.last,
       icon: endMarkerPin,
-      infoWindow: InfoWindow(
-        title: destination.endPlace.text,
-        snippet: destination.endPlace.placeName,
+      infoWindow: const InfoWindow(
+        title: 'Este es tu destino!',
       ),
     );
 
     final currentPolylines = Map<String, Polyline>.from(state.polylines);
-    currentPolylines['route'] = myRoute;
+
+    currentPolylines['route_background'] = backgroundRoute;
+    currentPolylines['route_foreground'] = foregroundRoute;
 
     final currentMarker = Map<String, Marker>.from(state.markers);
     currentMarker['start'] = startMarker;
@@ -122,8 +133,9 @@ class MapBloc extends Bloc<MapEvent, MapState> {
     _mapController?.showMarkerInfoWindow(const MarkerId('end'));
   }
 
-  void moveCamera(LatLng newLocation) {
-    final cameraUpdate = CameraUpdate.newLatLng(newLocation);
+  void moveCamera(LatLng target) {
+    final cameraPosition = CameraPosition(target: target, zoom: 12.0);
+    final cameraUpdate = CameraUpdate.newCameraPosition(cameraPosition);
     _mapController?.animateCamera(cameraUpdate);
   }
 }

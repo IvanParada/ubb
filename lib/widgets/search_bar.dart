@@ -1,15 +1,14 @@
 import 'package:animate_do/animate_do.dart';
-import 'package:ubb/blocs/bloc.dart';
-
-import '../delegates/delegates.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:ubb/blocs/bloc.dart';
+import 'package:ubb/delegates/delegates.dart';
+import 'package:ubb/helpers/helpers.dart';
 import 'package:ubb/models/models.dart';
 
-import '../helpers/helpers.dart';
-
 class SearchBar extends StatelessWidget {
-  const SearchBar({super.key});
+  const SearchBar({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -29,26 +28,40 @@ class SearchBar extends StatelessWidget {
 class _SearchBarBody extends StatelessWidget {
   const _SearchBarBody();
 
-  void onSearchResults(BuildContext context, SearchResult result) async {
-    final searchBloc = BlocProvider.of<SearchBloc>(context);
-    final locationBloc = BlocProvider.of<LocationBloc>(context);
-    final mapBloc = BlocProvider.of<MapBloc>(context);
+void onSearchResults(BuildContext context, SearchResult result) async {
+  final searchBloc = BlocProvider.of<SearchBloc>(context);
+  final locationBloc = BlocProvider.of<LocationBloc>(context);
+  final mapBloc = BlocProvider.of<MapBloc>(context);
 
-    if (result.manual == true) {
-      searchBloc.add(OnActivateManualMarkerEvent());
-      return;
-    }
-
-    if (result.position != null) {
-      showLoadingMessage(context);
-
-      final destination = await searchBloc.getCoorsStartToEnd(
-          locationBloc.state.lastKnowLocation!, result.position!);
-      await mapBloc.drawRoutePolyline(destination);
-      // ignore: use_build_context_synchronously
-      Navigator.pop(context);
-    }
+  if (result.manual == true) {
+    searchBloc.add(OnActivateManualMarkerEvent());
+    return;
   }
+
+  if (result.position != null) {
+    showLoadingMessage(context);
+
+    final destination = await searchBloc.getCoorsStartToEnd(
+      locationBloc.state.lastKnowLocation!,
+      result.position!,
+    );
+    await mapBloc.drawRoutePolyline(destination);
+
+    // Adjust zoom level
+    const newZoom = 17.0; // Specify the desired zoom level
+    
+ final newCameraPosition = CameraPosition(
+  target: destination.points.last,
+  zoom: newZoom,
+);
+final newLocation = newCameraPosition.target;
+mapBloc.moveCamera(newLocation);
+
+
+    // ignore: use_build_context_synchronously
+    Navigator.pop(context);
+  }
+}
 
   @override
   Widget build(BuildContext context) {
@@ -61,7 +74,9 @@ class _SearchBarBody extends StatelessWidget {
         child: GestureDetector(
           onTap: () async {
             final result = await showSearch(
-                context: context, delegate: SearchDestinationDelegate());
+              context: context,
+              delegate: SearchDestinationDelegate(),
+            );
             if (result == null) return;
 
             // ignore: use_build_context_synchronously
@@ -73,20 +88,24 @@ class _SearchBarBody extends StatelessWidget {
               vertical: 13,
             ),
             decoration: BoxDecoration(
-                color: Colors.white.withOpacity(0.9),
-                borderRadius: BorderRadius.circular(100),
-                boxShadow: const [
-                  BoxShadow(
-                      color: Colors.black12,
-                      blurRadius: 5,
-                      offset: Offset(0, 7))
-                ]),
+              color: Colors.white.withOpacity(0.9),
+              borderRadius: BorderRadius.circular(100),
+              boxShadow: const [
+                BoxShadow(
+                  color: Colors.black12,
+                  blurRadius: 5,
+                  offset: Offset(0, 7),
+                ),
+              ],
+            ),
             alignment: Alignment.centerLeft,
-            child: const Text('¿Dónde quieres ir?',
-                style: TextStyle(
-                  color: Colors.black87,
-                  fontWeight: FontWeight.bold,
-                )),
+            child: const Text(
+              '¿Dónde quieres ir?',
+              style: TextStyle(
+                color: Colors.black87,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
           ),
         ),
       ),

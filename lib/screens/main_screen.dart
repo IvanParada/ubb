@@ -41,8 +41,8 @@ class _MainScreenState extends State<MainScreen> {
             activeIcon: BounceInDown(
               child: const FaIcon(FontAwesomeIcons.house),
             ),
-            label: 'Home',
-            tooltip: 'Home',
+            label: 'Inicio',
+            tooltip: 'Inicio',
             backgroundColor: const Color.fromARGB(255, 9, 27, 43),
           ),
           BottomNavigationBarItem(

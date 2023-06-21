@@ -21,6 +21,7 @@ class MapView extends StatelessWidget {
     const CameraPosition initialCameraPosition = CameraPosition(
         target: LatLng(-36.8220178016745, -73.0129262889358), zoom: 18);
 
+
     CameraTargetBounds cameraTargetBounds = CameraTargetBounds(
       LatLngBounds(
         southwest: const LatLng(-36.825952992476,
@@ -46,12 +47,13 @@ class MapView extends StatelessWidget {
           zoomControlsEnabled: false,
           polylines: polylines,
           zoomGesturesEnabled: true,
-          minMaxZoomPreference: const MinMaxZoomPreference(16.0, 19.0),
+          minMaxZoomPreference: const MinMaxZoomPreference(16.0, 20.0),
           markers: markers,
           rotateGesturesEnabled: true,
           onMapCreated: (controller) =>
               mapBloc.add(OnMapInitializedEvent(controller)),
           onCameraMove: (position) => mapBloc.mapCenter = position.target,
+          
         ),
       ),
     );

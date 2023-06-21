@@ -28,3 +28,4 @@ class DisplayPolylineEvent extends MapEvent {
   final Map<String, Marker> markers;
   const DisplayPolylineEvent(this.polylines, this.markers);
 }
+
