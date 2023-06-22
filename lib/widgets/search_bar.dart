@@ -47,12 +47,9 @@ void onSearchResults(BuildContext context, SearchResult result) async {
     );
     await mapBloc.drawRoutePolyline(destination);
 
-    // Adjust zoom level
-    const newZoom = 17.0; // Specify the desired zoom level
-    
  final newCameraPosition = CameraPosition(
   target: destination.points.last,
-  zoom: newZoom,
+
 );
 final newLocation = newCameraPosition.target;
 mapBloc.moveCamera(newLocation);
