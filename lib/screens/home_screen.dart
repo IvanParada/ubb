@@ -18,6 +18,7 @@ class HomeScreenState extends State<HomeScreen> {
   void initState() {
     super.initState();
     fetchWeatherData();
+    
   }
 
   Future<void> fetchWeatherData() async {
@@ -60,6 +61,9 @@ class _HomeBody extends StatelessWidget {
       child: Column(
         children: [
           PageTitle(weatherData: weatherData),
+          
+          
+          
           
           
         ],

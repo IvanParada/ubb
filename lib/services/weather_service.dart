@@ -1,8 +1,9 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
+   String apiKey = 'ecd1ed319961044c42aaf01424b0e21c'; 
+  
 class WeatherService {
-  final String apiKey = 'ecd1ed319961044c42aaf01424b0e21c'; // Reemplaza con tu clave de API
 
   Future<Map<String, dynamic>> fetchWeatherData() async {
     String apiUrl =
@@ -16,4 +17,6 @@ class WeatherService {
       throw Exception('Error al obtener los datos del clima');
     }
   }
+
 }
+

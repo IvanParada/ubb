@@ -182,6 +182,7 @@ class PageTitle extends StatelessWidget {
                                     fontWeight: FontWeight.w300,
                                   ),
                                 ),
+                                
                               ],
                             ),
                           ),
@@ -235,9 +236,10 @@ class PageTitle extends StatelessWidget {
                               const Icon(
                                 FontAwesomeIcons.wind,
                                 color: Colors.white,
-                              )
-                            ],
-                          ),
+                              ),
+                              const SizedBox(height: 10),                      
+                            ],                          
+                          ),                     
                       ],
                     ),
                   ),
