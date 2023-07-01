@@ -1,5 +1,5 @@
 # Selecciona la imagen base de Flutter
-FROM cirrusci/flutter:3.10.4
+FROM flutter:stable
 
 # Copia los archivos de la aplicación al contenedor
 COPY . /app
@@ -10,8 +10,4 @@ WORKDIR /app
 # Instala las dependencias de la aplicación
 RUN flutter pub get
 
-# Expone el puerto si es necesario
-# EXPOSE puerto
-
-# Especifica el comando predeterminado para ejecutar la aplicación
-CMD ["flutter", "run"]
+CMD ["flutter", "run", "--release"] //--release: ejecuta en modo compilacion, no debug, genera una version optimizada de la app.
