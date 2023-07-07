@@ -1,13 +1,21 @@
 # Selecciona la imagen base de Flutter
-FROM flutter:stable
+FROM mobiledevops/flutter-sdk-image:latest
 
-# Copia los archivos de la aplicación al contenedor
-COPY . /app
+#Se establece usuario root para ejecutar operaciones
+USER root
 
-# Establece el directorio de trabajo dentro del contenedor
+# Crear el directorio de la aplicación y establecerlo como directorio de trabajo
+RUN mkdir /app
 WORKDIR /app
 
-# Instala las dependencias de la aplicación
+# Agregar excepción para el directorio .flutter-sdk
+RUN git config --global --add safe.directory /home/mobiledevops/.flutter-sdk
+
+# Copiar el proyecto al directorio de trabajo
+COPY . /app
+
+# Obtener dependencias
 RUN flutter pub get
 
-CMD ["flutter", "run", "--release"] //--release: ejecuta en modo compilacion, no debug, genera una version optimizada de la app.
+# Ejecutar proyecto
+CMD ["flutter", "run", "--release", "--working-directory=/app/ubb"]
