@@ -127,8 +127,8 @@ class _RegisterForm extends StatelessWidget {
                   prefixIcon: FontAwesomeIcons.at),
               onChanged: (value) => registerForm.email = value,
               validator: (value) {
-                String pattern =
-                    r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@alumnos\.ubiobio\.cl$';
+                String pattern = r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@(alumnos\.ubiobio\.cl|ubiobio\.cl)$';
+
                 RegExp regExp = RegExp(pattern);
 
                 return regExp.hasMatch(value ?? '')
