@@ -122,7 +122,7 @@ class _ResetPasswordForm extends StatelessWidget {
               onChanged: (value) => resetPass.email = value,
               validator: (value) {
                 String pattern =
-                    r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@alumnos\.ubiobio\.cl$';
+                    r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@(alumnos\.ubiobio\.cl|ubiobio\.cl)$';
                 RegExp regExp = RegExp(pattern);
 
                 return regExp.hasMatch(value ?? '')
