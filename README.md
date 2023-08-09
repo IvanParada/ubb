@@ -1,4 +1,4 @@
-1.  Instalar flutter 
+1.  Instalar Flutter 3.10.4 
 2.  Agregar flutter/bin al path
 3.  Clonar repositorio
 4.  Acceder al directorio a través del terminal
