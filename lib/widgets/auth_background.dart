@@ -19,7 +19,7 @@ class AuthBackground extends StatelessWidget {
       height: double.infinity,
       child: Stack(
         children: [
-          _PurpleBox(),
+          _BlueBox(),
           _HeaderIcon(size: size),
           child,
         ],
@@ -53,7 +53,7 @@ class _HeaderIcon extends StatelessWidget {
   }
 }
 
-class _PurpleBox extends StatelessWidget {
+class _BlueBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -61,7 +61,7 @@ class _PurpleBox extends StatelessWidget {
     return Container(
       width: double.infinity,
       height: size.height * 0.4,
-      decoration: _purpleBackground(),
+      decoration: _blueBackground(),
       child: const Stack(
         children: [
           Positioned(top: 90, left: 30, child: Bubble()),
@@ -74,7 +74,7 @@ class _PurpleBox extends StatelessWidget {
     );
   }
 
-  BoxDecoration _purpleBackground() => const BoxDecoration(
+  BoxDecoration _blueBackground() => const BoxDecoration(
           gradient: LinearGradient(colors: [
         Color.fromARGB(255, 9, 27, 43),
         Color.fromARGB(255, 9, 27, 43),
