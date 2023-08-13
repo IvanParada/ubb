@@ -24,6 +24,10 @@ class MapBloc extends Bloc<MapEvent, MapState> {
     on<OnStopFollowingUserEvent>(
         (event, emit) => emit(state.copyWith(isFollowingUser: false)));
     on<UpdateUserPolylineEvent>(_onPolylineNewPoint);
+on<ToggleMarkerVisibilityEvent>((event, emit) {
+  final newMapState = state.copyWith(markersVisible: !state.markersVisible);
+  emit(newMapState);
+});
     on<OnToggleUserRoute>(
         (event, emit) => emit(state.copyWith(showMyRoute: !state.showMyRoute)));
     on<DisplayPolylineEvent>((event, emit) => emit(
@@ -138,4 +142,7 @@ class MapBloc extends Bloc<MapEvent, MapState> {
     final cameraUpdate = CameraUpdate.newCameraPosition(cameraPosition);
     _mapController?.animateCamera(cameraUpdate);
   }
+  
 }
+
+

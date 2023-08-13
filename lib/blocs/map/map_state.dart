@@ -4,6 +4,7 @@ class MapState extends Equatable {
   final bool isMapInitialized;
   final bool isFollowingUser;
   final bool showMyRoute;
+   final bool markersVisible;
 
   //Polylines
   final Map<String, Polyline> polylines;
@@ -13,6 +14,7 @@ class MapState extends Equatable {
     this.isMapInitialized = false,
     this.isFollowingUser = false,
     this.showMyRoute = false,
+    this.markersVisible = false,
     Map<String, Polyline>? polylines,
     Map<String, Marker>? markers,
   })  : polylines = polylines ?? const {},
@@ -22,6 +24,7 @@ class MapState extends Equatable {
     bool? isMapInitialized,
     bool? isFollowingUser,
     bool? showMyRoute,
+    bool? markersVisible, 
     Map<String, Polyline>? polylines,
     Map<String, Marker>? markers,
   }) =>
@@ -31,9 +34,10 @@ class MapState extends Equatable {
         showMyRoute: showMyRoute ?? this.showMyRoute,
         polylines: polylines ?? this.polylines,
         markers: markers ?? this.markers,
+        markersVisible: markersVisible ?? this.markersVisible,
       );
 
   @override
   List<Object> get props =>
-      [isMapInitialized, isFollowingUser, showMyRoute, polylines, markers];
+      [isMapInitialized, isFollowingUser, showMyRoute, polylines, markers,markersVisible];
 }
