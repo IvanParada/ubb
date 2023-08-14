@@ -127,7 +127,8 @@ class _RegisterForm extends StatelessWidget {
                   prefixIcon: FontAwesomeIcons.at),
               onChanged: (value) => registerForm.email = value,
               validator: (value) {
-                String pattern = r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@(alumnos\.ubiobio\.cl|ubiobio\.cl)$';
+                String pattern =
+                    r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@(alumnos\.ubiobio\.cl|ubiobio\.cl)$';
 
                 RegExp regExp = RegExp(pattern);
 
@@ -142,14 +143,36 @@ class _RegisterForm extends StatelessWidget {
               obscureText: true,
               keyboardType: TextInputType.visiblePassword,
               decoration: InputDecorations.authInputDecoration(
-                  hintText: '*****',
-                  labelText: 'Contraseña',
-                  prefixIcon: FontAwesomeIcons.lock),
+                hintText: '*****',
+                labelText: 'Contraseña',
+                prefixIcon: FontAwesomeIcons.lock,
+              ),
               onChanged: (value) => registerForm.password = value,
               validator: (value) {
-                return (value != null && value.length >= 6)
-                    ? null
-                    : 'Contraseña incorrecta';
+                if (value == null) {
+                  return 'Contraseña requerida';
+                }
+
+                if (value.length < 6) {
+                  return 'La contraseña debe contener al menos 6 caracteres';
+                }
+
+                bool hasUppercase = false;
+                bool hasLowercase = false;
+
+                for (int i = 0; i < value.length; i++) {
+                  if (value[i].toUpperCase() == value[i]) {
+                    hasUppercase = true;
+                  } else if (value[i].toLowerCase() == value[i]) {
+                    hasLowercase = true;
+                  }
+
+                  if (hasUppercase && hasLowercase) {
+                    return null;
+                  }
+                }
+
+                return 'La contraseña debe contener al menos una letra mayúscula y una minúscula';
               },
             ),
             const SizedBox(height: 30),
