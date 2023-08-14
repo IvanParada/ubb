@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:ubb/helpers/helpers.dart';
+// import 'package:ubb/helpers/helpers.dart';
 
 
 import '../blocs/bloc.dart';
@@ -9,13 +9,13 @@ import '../blocs/bloc.dart';
 class MapView extends StatefulWidget {
   final Set<Polyline> polylines;
   final Set<Marker> markers;
-  final ValueNotifier<bool> markersVisible;
+  // final ValueNotifier<bool> markersVisible;
 
   const MapView({
     Key? key,
     required this.polylines,
     required this.markers,
-    required this.markersVisible,
+    // required this.markersVisible,
   }) : super(key: key);
 
   @override
@@ -25,28 +25,28 @@ class MapView extends StatefulWidget {
 
 class _MapViewState extends State<MapView> {
 
-  Future<void> _initializeMarkers() async {
-    final BitmapDescriptor customMarkerIcon = await getAssetImageMarker();
+  // Future<void> _initializeMarkers() async {
+  //   final BitmapDescriptor customMarkerIcon = await getAssetImageMarker();
 
-    final List<LatLng> coordinates = [
-      const LatLng(-36.82167822894567, -73.01111290908632),
-      const LatLng(-36.82309990910144, -73.01051877590834),
-    ];
+  //   final List<LatLng> coordinates = [
+  //     const LatLng(-36.82167822894567, -73.01111290908632),
+  //     const LatLng(-36.82309990910144, -73.01051877590834),
+  //   ];
 
-    for (int i = 0; i < coordinates.length; i++) {
-      final LatLng coordinate = coordinates[i];
+  //   for (int i = 0; i < coordinates.length; i++) {
+  //     final LatLng coordinate = coordinates[i];
 
-      widget.markers.add(
-        Marker(
-          markerId: MarkerId('Desfibrilador_$i'), // Cambia el ID del marcador
-          position: coordinate,
-          icon: customMarkerIcon,
-          onTap: () {},
-          infoWindow: const InfoWindow(title: 'Desfibrilador', snippet: ''),
-        ),
-      );
-    }
-  }
+  //     widget.markers.add(
+  //       Marker(
+  //         markerId: MarkerId('Desfibrilador_$i'), // Cambia el ID del marcador
+  //         position: coordinate,
+  //         icon: customMarkerIcon,
+  //         onTap: () {},
+  //         infoWindow: const InfoWindow(title: 'Desfibrilador', snippet: ''),
+  //       ),
+  //     );
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -66,7 +66,7 @@ class _MapViewState extends State<MapView> {
 
     final size = MediaQuery.of(context).size;
 
-    _initializeMarkers(); // Inicializa los marcadores
+    // _initializeMarkers(); 
 
     return SizedBox(
       width: size.width,
@@ -83,7 +83,7 @@ class _MapViewState extends State<MapView> {
           polylines: widget.polylines,
           zoomGesturesEnabled: true,
           minMaxZoomPreference: const MinMaxZoomPreference(17.0, 20.0),
-          markers: mapBloc.state.markersVisible ? widget.markers : <Marker>{},
+          markers:  widget.markers,
           rotateGesturesEnabled: true,
           onMapCreated: (controller) =>
               mapBloc.add(OnMapInitializedEvent(controller)),

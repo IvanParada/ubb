@@ -17,14 +17,13 @@ class MapScreen extends StatefulWidget {
 
 class _MapScreenState extends State<MapScreen> {
   late LocationBloc locationBloc;
-  final ValueNotifier<bool> _markersVisible = ValueNotifier(true); // Agrega esta línea
+  // final ValueNotifier<bool> _markersVisible = ValueNotifier(true);
 
   @override
   void initState() {
     super.initState();
 
     locationBloc = BlocProvider.of<LocationBloc>(context);
-    // locationBloc.getCurrentPosition();
     locationBloc.startFollowingUser();
   }
 
@@ -65,7 +64,7 @@ class _MapScreenState extends State<MapScreen> {
                   MapView(
                     polylines: polylines.values.toSet(),
                     markers: mapState.markers.values.toSet(),
-                    markersVisible: _markersVisible, // Pasa el ValueNotifier aquí
+                    // markersVisible: _markersVisible, 
                   ),
                   const SearchBar(),
                   const ManualMarker()
@@ -76,13 +75,12 @@ class _MapScreenState extends State<MapScreen> {
         },
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
-      floatingActionButton: Column(
+      floatingActionButton: const Column(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
-          BtnToggleMarker(markersVisible: _markersVisible), // Pasa el ValueNotifier aquí
-          const BtnFollowUser(),
-          const BtnCurrentLocation(),
-          // BtnToggleUserRoute(),
+          // BtnToggleMarker(markersVisible: _markersVisible), 
+          BtnFollowUser(),
+          BtnCurrentLocation(),
         ],
       ),
     );

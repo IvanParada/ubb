@@ -5,16 +5,16 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../blocs/bloc.dart';
 
 class BtnToggleMarker extends StatelessWidget {
-  final ValueNotifier<bool> markersVisible; // Recibe el ValueNotifier como argumento
+  // final ValueNotifier<bool> markersVisible; // Recibe el ValueNotifier como argumento
 
   const BtnToggleMarker({
     Key? key,
-    required this.markersVisible,
+    // required this.markersVisible,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final mapBloc = BlocProvider.of<MapBloc>(context);
+    // final mapBloc = BlocProvider.of<MapBloc>(context);
 
     return Container(
       margin: const EdgeInsets.only(bottom: 10),
@@ -29,8 +29,8 @@ class BtnToggleMarker extends StatelessWidget {
                 color: Colors.white,
               ),
               onPressed: () {
-                markersVisible.value = !markersVisible.value; // Cambia esta línea
-                mapBloc.add(ToggleMarkerVisibilityEvent());
+                // markersVisible.value = !markersVisible.value; 
+                // mapBloc.add(ToggleMarkerVisibilityEvent());
               },
             );
           },
