@@ -38,6 +38,11 @@ class MapBloc extends Bloc<MapEvent, MapState> {
         markerId: MarkerId(event.medicalMarker.position.toString()),
         position: event.medicalMarker.position,
         icon: customMedicalMarker,
+        infoWindow: InfoWindow(
+          title: 'Kit Médico',
+          onTap: (){}
+        )
+        
       );
 
       final updatedMarkers = Map<String, Marker>.from(state.medicalMarkers)
