@@ -30,3 +30,12 @@ class DisplayPolylineEvent extends MapEvent {
   final Map<String, Marker> markers;
   const DisplayPolylineEvent(this.polylines, this.markers);
 }
+
+class AddMedicalMarkerEvent extends MapEvent {
+  final MedicalMarker medicalMarker;
+
+  const AddMedicalMarkerEvent(this.medicalMarker);
+
+  @override
+  List<Object> get props => [medicalMarker];
+}

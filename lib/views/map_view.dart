@@ -66,6 +66,12 @@ class _MapViewState extends State<MapView> {
 
     final size = MediaQuery.of(context).size;
 
+    final allMarkers = {
+  ...widget.markers,
+  ...mapBloc.state.medicalMarkers.values,
+};
+
+
     // _initializeMarkers(); 
 
     return SizedBox(
@@ -83,7 +89,7 @@ class _MapViewState extends State<MapView> {
           polylines: widget.polylines,
           zoomGesturesEnabled: true,
           minMaxZoomPreference: const MinMaxZoomPreference(17.0, 20.0),
-          markers:  widget.markers,
+          markers:  Set<Marker>.from(allMarkers),
           rotateGesturesEnabled: true,
           onMapCreated: (controller) =>
               mapBloc.add(OnMapInitializedEvent(controller)),

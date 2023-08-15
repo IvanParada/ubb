@@ -24,12 +24,32 @@ class MapBloc extends Bloc<MapEvent, MapState> {
     on<OnStopFollowingUserEvent>(
         (event, emit) => emit(state.copyWith(isFollowingUser: false)));
     on<UpdateUserPolylineEvent>(_onPolylineNewPoint);
-// on<ToggleMarkerVisibilityEvent>((event, emit) {
-//   final newMapState = state.copyWith(markersVisible: !state.markersVisible);
-//   emit(newMapState);
-// });
     on<OnToggleUserRoute>(
         (event, emit) => emit(state.copyWith(showMyRoute: !state.showMyRoute)));
+
+
+on<AddMedicalMarkerEvent>((event, emit) {
+      final newMarker = Marker(
+        markerId: MarkerId(event.medicalMarker.position.toString()),
+        position: event.medicalMarker.position,
+      );
+
+      final updatedMarkers = Map<String, Marker>.from(state.medicalMarkers)
+        ..[event.medicalMarker.position.toString()] = newMarker;
+
+      emit(state.copyWith(medicalMarkers: updatedMarkers));
+    });
+
+        for (final marker in predefinedMedicalMarkers) {
+      addAutomaticMedicalMarker(
+        marker.position,
+        marker.title,
+        marker.description,
+      );
+    }
+  
+
+
     on<DisplayPolylineEvent>((event, emit) => emit(
         state.copyWith(polylines: event.polylines, markers: event.markers)));
     locationBloc.stream.listen((locationState) {
@@ -42,6 +62,19 @@ class MapBloc extends Bloc<MapEvent, MapState> {
       moveCamera(locationState.lastKnowLocation!);
     });
   }
+
+  void addAutomaticMedicalMarker(LatLng position, String title, String description) {
+  final newMedicalMarker = MedicalMarker(
+    position: position,
+    title: title,
+    description: description,
+  );
+
+  add(AddMedicalMarkerEvent(newMedicalMarker));
+}
+
+
+
 
   void _onInitMap(OnMapInitializedEvent event, Emitter<MapState> emit) {
     _mapController = event.controller;
@@ -142,7 +175,4 @@ class MapBloc extends Bloc<MapEvent, MapState> {
     final cameraUpdate = CameraUpdate.newCameraPosition(cameraPosition);
     _mapController?.animateCamera(cameraUpdate);
   }
-  
 }
-
-
