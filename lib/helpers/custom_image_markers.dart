@@ -7,9 +7,8 @@ Future<BitmapDescriptor> getAssetImageMarker() async {
   return BitmapDescriptor.fromAssetImage(
     const ImageConfiguration(
       devicePixelRatio: 2,
-      ),
+    ),
     'assets/kit_medical.png',
-    
   );
 }
 

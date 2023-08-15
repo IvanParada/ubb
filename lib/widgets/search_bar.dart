@@ -28,37 +28,35 @@ class SearchBar extends StatelessWidget {
 class _SearchBarBody extends StatelessWidget {
   const _SearchBarBody();
 
-void onSearchResults(BuildContext context, SearchResult result) async {
-  final searchBloc = BlocProvider.of<SearchBloc>(context);
-  final locationBloc = BlocProvider.of<LocationBloc>(context);
-  final mapBloc = BlocProvider.of<MapBloc>(context);
+  void onSearchResults(BuildContext context, SearchResult result) async {
+    final searchBloc = BlocProvider.of<SearchBloc>(context);
+    final locationBloc = BlocProvider.of<LocationBloc>(context);
+    final mapBloc = BlocProvider.of<MapBloc>(context);
 
-  if (result.manual == true) {
-    searchBloc.add(OnActivateManualMarkerEvent());
-    return;
+    if (result.manual == true) {
+      searchBloc.add(OnActivateManualMarkerEvent());
+      return;
+    }
+
+    if (result.position != null) {
+      showLoadingMessage(context);
+
+      final destination = await searchBloc.getCoorsStartToEnd(
+        locationBloc.state.lastKnowLocation!,
+        result.position!,
+      );
+      await mapBloc.drawRoutePolyline(destination);
+
+      final newCameraPosition = CameraPosition(
+        target: destination.points.last,
+      );
+      final newLocation = newCameraPosition.target;
+      mapBloc.moveCamera(newLocation);
+
+      // ignore: use_build_context_synchronously
+      Navigator.pop(context);
+    }
   }
-
-  if (result.position != null) {
-    showLoadingMessage(context);
-
-    final destination = await searchBloc.getCoorsStartToEnd(
-      locationBloc.state.lastKnowLocation!,
-      result.position!,
-    );
-    await mapBloc.drawRoutePolyline(destination);
-
- final newCameraPosition = CameraPosition(
-  target: destination.points.last,
-
-);
-final newLocation = newCameraPosition.target;
-mapBloc.moveCamera(newLocation);
-
-
-    // ignore: use_build_context_synchronously
-    Navigator.pop(context);
-  }
-}
 
   @override
   Widget build(BuildContext context) {

@@ -95,7 +95,8 @@ class _LoginForm extends StatelessWidget {
               ),
               onChanged: (value) => loginForm.email = value,
               validator: (value) {
-                String pattern = r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@(alumnos\.ubiobio\.cl|ubiobio\.cl)$';
+                String pattern =
+                    r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@(alumnos\.ubiobio\.cl|ubiobio\.cl)$';
                 RegExp regExp = RegExp(pattern);
 
                 return regExp.hasMatch(value ?? '')

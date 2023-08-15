@@ -112,7 +112,7 @@ class PageTitle extends StatelessWidget {
                           children: [
                             Icon(FontAwesomeIcons.locationDot,
                                 color: Colors.white),
-                                SizedBox(width: 10),
+                            SizedBox(width: 10),
                             Text(
                               'Universidad del Bío-Bío',
                               style: TextStyle(
@@ -130,12 +130,14 @@ class PageTitle extends StatelessWidget {
                             decoration: const BoxDecoration(
                               boxShadow: [
                                 BoxShadow(
-                                  color: Color(0xff5CB3FF), // Color de la sombra y su opacidad
+                                  color: Color(
+                                      0xff5CB3FF), // Color de la sombra y su opacidad
                                   blurRadius:
                                       65, // Radio del desenfoque de la sombra
                                   spreadRadius:
                                       1, // Radio de propagación de la sombra
-                                  offset: Offset(0,0), // Desplazamiento de la sombra en eje X e Y
+                                  offset: Offset(0,
+                                      0), // Desplazamiento de la sombra en eje X e Y
                                 ),
                               ],
                             ),
@@ -182,7 +184,6 @@ class PageTitle extends StatelessWidget {
                                     fontWeight: FontWeight.w300,
                                   ),
                                 ),
-                                
                               ],
                             ),
                           ),
@@ -237,9 +238,9 @@ class PageTitle extends StatelessWidget {
                                 FontAwesomeIcons.wind,
                                 color: Colors.white,
                               ),
-                              const SizedBox(height: 10),                      
-                            ],                          
-                          ),                     
+                              const SizedBox(height: 10),
+                            ],
+                          ),
                       ],
                     ),
                   ),

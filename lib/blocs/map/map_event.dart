@@ -31,7 +31,6 @@ class DisplayPolylineEvent extends MapEvent {
 
 class ToggleMedicalMarkersVisibilityEvent extends MapEvent {}
 
-
 class AddMedicalMarkerEvent extends MapEvent {
   final MedicalMarker medicalMarker;
 

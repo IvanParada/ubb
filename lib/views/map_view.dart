@@ -58,9 +58,9 @@ class MapViewState extends State<MapView> {
           polylines: widget.polylines,
           zoomGesturesEnabled: true,
           minMaxZoomPreference: const MinMaxZoomPreference(17.0, 20.0),
-            markers: mapBloc.state.showMedicalMarkers
-      ? Set<Marker>.from(allMarkers)
-      : Set<Marker>.from(widget.markers),
+          markers: mapBloc.state.showMedicalMarkers
+              ? Set<Marker>.from(allMarkers)
+              : Set<Marker>.from(widget.markers),
           rotateGesturesEnabled: true,
           onMapCreated: (controller) =>
               mapBloc.add(OnMapInitializedEvent(controller)),

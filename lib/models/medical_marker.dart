@@ -12,8 +12,6 @@ class MedicalMarker {
   });
 }
 
-
-
 final List<MedicalMarker> predefinedMedicalMarkers = [
   MedicalMarker(
     position: const LatLng(-36.82168314282541, -73.01110765342172),
@@ -25,5 +23,4 @@ final List<MedicalMarker> predefinedMedicalMarkers = [
     title: 'MedicalKit CASINO',
     description: 'Descripción del MedicalKit CASINO',
   ),
-  // Puedes agregar más lugares médicos predefinidos aquí
 ];

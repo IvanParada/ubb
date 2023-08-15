@@ -5,6 +5,7 @@ class MapState extends Equatable {
   final bool isFollowingUser;
   final bool showMyRoute;
   final bool showMedicalMarkers;
+  final BitmapDescriptor customMedicalMarkerIcon;
 
   final Map<String, Polyline> polylines;
   final Map<String, Marker> markers;
@@ -14,13 +15,16 @@ class MapState extends Equatable {
     this.isMapInitialized = false,
     this.isFollowingUser = false,
     this.showMyRoute = false,
-    this.showMedicalMarkers = false ,
-    Map<String, Marker>? medicalMarkers,
+    this.showMedicalMarkers = false,
     Map<String, Polyline>? polylines,
     Map<String, Marker>? markers,
+    Map<String, Marker>? medicalMarkers,
+    BitmapDescriptor? customMedicalMarkerIcon,
   })  : polylines = polylines ?? const {},
         medicalMarkers = medicalMarkers ?? const {},
-        markers = markers ?? const {};
+        markers = markers ?? const {},
+        customMedicalMarkerIcon =
+            customMedicalMarkerIcon ?? BitmapDescriptor.defaultMarker;
 
   MapState copyWith(
           {bool? isMapInitialized,
@@ -28,6 +32,7 @@ class MapState extends Equatable {
           bool? showMyRoute,
           bool? showMedicalMarkers,
           Map<String, Polyline>? polylines,
+          BitmapDescriptor? customMedicalMarkerIcon,
           Map<String, Marker>? markers,
           Map<String, Marker>? medicalMarkers}) =>
       MapState(
@@ -37,6 +42,8 @@ class MapState extends Equatable {
           polylines: polylines ?? this.polylines,
           showMedicalMarkers: showMedicalMarkers ?? this.showMedicalMarkers,
           markers: markers ?? this.markers,
+          customMedicalMarkerIcon:
+              customMedicalMarkerIcon ?? this.customMedicalMarkerIcon,
           medicalMarkers: medicalMarkers ?? this.medicalMarkers);
 
   @override
@@ -47,5 +54,6 @@ class MapState extends Equatable {
         polylines,
         medicalMarkers,
         showMedicalMarkers,
+        customMedicalMarkerIcon
       ];
 }

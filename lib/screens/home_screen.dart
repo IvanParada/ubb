@@ -18,17 +18,14 @@ class HomeScreenState extends State<HomeScreen> {
   void initState() {
     super.initState();
     fetchWeatherData();
-    
   }
 
   Future<void> fetchWeatherData() async {
-
-      final weatherService = WeatherService();
-      final data = await weatherService.fetchWeatherData();
-      setState(() {
-        weatherData = data;
-      });
-
+    final weatherService = WeatherService();
+    final data = await weatherService.fetchWeatherData();
+    setState(() {
+      weatherData = data;
+    });
   }
 
   @override
@@ -61,11 +58,6 @@ class _HomeBody extends StatelessWidget {
       child: Column(
         children: [
           PageTitle(weatherData: weatherData),
-          
-          
-          
-          
-          
         ],
       ),
     );

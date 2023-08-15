@@ -26,17 +26,19 @@ class MapBloc extends Bloc<MapEvent, MapState> {
     on<UpdateUserPolylineEvent>(_onPolylineNewPoint);
     on<OnToggleUserRoute>(
         (event, emit) => emit(state.copyWith(showMyRoute: !state.showMyRoute)));
-        on<ToggleMedicalMarkersVisibilityEvent>((event, emit) {
-  final updatedState = state.copyWith(showMedicalMarkers: !state.showMedicalMarkers);
-  emit(updatedState);
-});
+    on<ToggleMedicalMarkersVisibilityEvent>((event, emit) {
+      final updatedState =
+          state.copyWith(showMedicalMarkers: !state.showMedicalMarkers);
+      emit(updatedState);
+    });
 
-    on<AddMedicalMarkerEvent>((event, emit) {
+    on<AddMedicalMarkerEvent>((event, emit) async {
+      final customMedicalMarker = await getAssetImageMarker();
       final newMarker = Marker(
         markerId: MarkerId(event.medicalMarker.position.toString()),
         position: event.medicalMarker.position,
+        icon: customMedicalMarker,
       );
-
 
       final updatedMarkers = Map<String, Marker>.from(state.medicalMarkers)
         ..[event.medicalMarker.position.toString()] = newMarker;
