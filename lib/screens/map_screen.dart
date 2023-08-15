@@ -17,7 +17,6 @@ class MapScreen extends StatefulWidget {
 
 class _MapScreenState extends State<MapScreen> {
   late LocationBloc locationBloc;
-  // final ValueNotifier<bool> _markersVisible = ValueNotifier(true);
 
   @override
   void initState() {
@@ -64,7 +63,6 @@ class _MapScreenState extends State<MapScreen> {
                   MapView(
                     polylines: polylines.values.toSet(),
                     markers: mapState.markers.values.toSet(),
-                    // markersVisible: _markersVisible, 
                   ),
                   const SearchBar(),
                   const ManualMarker()
@@ -78,7 +76,7 @@ class _MapScreenState extends State<MapScreen> {
       floatingActionButton: const Column(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
-          // BtnToggleMarker(markersVisible: _markersVisible), 
+          BtnToggleMarker(),
           BtnFollowUser(),
           BtnCurrentLocation(),
         ],
@@ -166,4 +164,3 @@ class _MapLoading extends StatelessWidget {
     );
   }
 }
-

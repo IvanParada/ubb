@@ -26,13 +26,17 @@ class MapBloc extends Bloc<MapEvent, MapState> {
     on<UpdateUserPolylineEvent>(_onPolylineNewPoint);
     on<OnToggleUserRoute>(
         (event, emit) => emit(state.copyWith(showMyRoute: !state.showMyRoute)));
+        on<ToggleMedicalMarkersVisibilityEvent>((event, emit) {
+  final updatedState = state.copyWith(showMedicalMarkers: !state.showMedicalMarkers);
+  emit(updatedState);
+});
 
-
-on<AddMedicalMarkerEvent>((event, emit) {
+    on<AddMedicalMarkerEvent>((event, emit) {
       final newMarker = Marker(
         markerId: MarkerId(event.medicalMarker.position.toString()),
         position: event.medicalMarker.position,
       );
+
 
       final updatedMarkers = Map<String, Marker>.from(state.medicalMarkers)
         ..[event.medicalMarker.position.toString()] = newMarker;
@@ -40,15 +44,13 @@ on<AddMedicalMarkerEvent>((event, emit) {
       emit(state.copyWith(medicalMarkers: updatedMarkers));
     });
 
-        for (final marker in predefinedMedicalMarkers) {
+    for (final marker in predefinedMedicalMarkers) {
       addAutomaticMedicalMarker(
         marker.position,
         marker.title,
         marker.description,
       );
     }
-  
-
 
     on<DisplayPolylineEvent>((event, emit) => emit(
         state.copyWith(polylines: event.polylines, markers: event.markers)));
@@ -63,18 +65,16 @@ on<AddMedicalMarkerEvent>((event, emit) {
     });
   }
 
-  void addAutomaticMedicalMarker(LatLng position, String title, String description) {
-  final newMedicalMarker = MedicalMarker(
-    position: position,
-    title: title,
-    description: description,
-  );
+  void addAutomaticMedicalMarker(
+      LatLng position, String title, String description) {
+    final newMedicalMarker = MedicalMarker(
+      position: position,
+      title: title,
+      description: description,
+    );
 
-  add(AddMedicalMarkerEvent(newMedicalMarker));
-}
-
-
-
+    add(AddMedicalMarkerEvent(newMedicalMarker));
+  }
 
   void _onInitMap(OnMapInitializedEvent event, Emitter<MapState> emit) {
     _mapController = event.controller;

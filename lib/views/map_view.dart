@@ -3,51 +3,23 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 // import 'package:ubb/helpers/helpers.dart';
 
-
 import '../blocs/bloc.dart';
 
 class MapView extends StatefulWidget {
   final Set<Polyline> polylines;
   final Set<Marker> markers;
-  // final ValueNotifier<bool> markersVisible;
 
   const MapView({
     Key? key,
     required this.polylines,
     required this.markers,
-    // required this.markersVisible,
   }) : super(key: key);
 
   @override
-  // ignore: library_private_types_in_public_api
-  _MapViewState createState() => _MapViewState();
+  MapViewState createState() => MapViewState();
 }
 
-class _MapViewState extends State<MapView> {
-
-  // Future<void> _initializeMarkers() async {
-  //   final BitmapDescriptor customMarkerIcon = await getAssetImageMarker();
-
-  //   final List<LatLng> coordinates = [
-  //     const LatLng(-36.82167822894567, -73.01111290908632),
-  //     const LatLng(-36.82309990910144, -73.01051877590834),
-  //   ];
-
-  //   for (int i = 0; i < coordinates.length; i++) {
-  //     final LatLng coordinate = coordinates[i];
-
-  //     widget.markers.add(
-  //       Marker(
-  //         markerId: MarkerId('Desfibrilador_$i'), // Cambia el ID del marcador
-  //         position: coordinate,
-  //         icon: customMarkerIcon,
-  //         onTap: () {},
-  //         infoWindow: const InfoWindow(title: 'Desfibrilador', snippet: ''),
-  //       ),
-  //     );
-  //   }
-  // }
-
+class MapViewState extends State<MapView> {
   @override
   Widget build(BuildContext context) {
     final mapBloc = BlocProvider.of<MapBloc>(context);
@@ -67,12 +39,9 @@ class _MapViewState extends State<MapView> {
     final size = MediaQuery.of(context).size;
 
     final allMarkers = {
-  ...widget.markers,
-  ...mapBloc.state.medicalMarkers.values,
-};
-
-
-    // _initializeMarkers(); 
+      ...widget.markers,
+      ...mapBloc.state.medicalMarkers.values,
+    };
 
     return SizedBox(
       width: size.width,
@@ -89,7 +58,9 @@ class _MapViewState extends State<MapView> {
           polylines: widget.polylines,
           zoomGesturesEnabled: true,
           minMaxZoomPreference: const MinMaxZoomPreference(17.0, 20.0),
-          markers:  Set<Marker>.from(allMarkers),
+            markers: mapBloc.state.showMedicalMarkers
+      ? Set<Marker>.from(allMarkers)
+      : Set<Marker>.from(widget.markers),
           rotateGesturesEnabled: true,
           onMapCreated: (controller) =>
               mapBloc.add(OnMapInitializedEvent(controller)),
