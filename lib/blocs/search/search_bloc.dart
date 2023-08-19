@@ -51,6 +51,7 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
     );
   }
 
+
   Future getPlacesByQuery(LatLng proximity, String query) async {
     final newPlaces = <Feature>[];
 
@@ -549,127 +550,14 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
       departamentoArteUBB,
       cimUBB,
     ]
-        .where((place) =>
+  .where((place) =>
             place.text.toLowerCase().contains(query.toLowerCase()) ||
             place.placeName.toLowerCase().contains(query.toLowerCase()))
-        .toList(); // Convertir el resultado a una lista
+        .toList(); 
 
-    newPlaces.add(plazaExteriorUBB);
-    newPlaces.add(plazaAulaMagnaUBB);
-    newPlaces.add(planetarioUBB);
-    newPlaces.add(lagunaUBB);
-    newPlaces.add(jardinesUBB);
-    newPlaces.add(oficinaInformacionesUBB);
-    newPlaces.add(estacionamientosGimnasioUBB);
-    newPlaces.add(gimnasioUBB);
-    newPlaces.add(raubbBoulder);
-    newPlaces.add(canchaRugbyUBB);
-    newPlaces.add(jamaicaUBB);
-    newPlaces.add(canchaUBB);
-    newPlaces.add(estacionamientoCanchaUBB);
-    newPlaces.add(parkourparkUBB);
-    newPlaces.add(parqueCalisteniaUBB);
-    newPlaces.add(canchasTenisUBB);
-    newPlaces.add(centroInnovacionUBB);
-    newPlaces.add(estacionamientoGantesUBB);
-    newPlaces.add(rectoriaUBB);
-    newPlaces.add(auditorioHermannGammUBB);
-    newPlaces.add(facultadCienciasUBB);
-    newPlaces.add(departamentoEstadisticasUBB);
-    newPlaces.add(bancoCorpbanca);
-    newPlaces.add(facultadIngenieriaUBB);
-    newPlaces.add(edificioGantesUBB);
-    newPlaces.add(escuelaIngenieriaConstruccionUBB);
-    newPlaces.add(paraninfoUBB);
-    newPlaces.add(plazaDemocraciaUBB);
-    newPlaces.add(escuelaTrabajoSocialUBB);
-    newPlaces.add(aulaMagnaUBB);
-    newPlaces.add(escuelaArquitecturaUBB);
-    newPlaces.add(salaExposicionesUBB);
-    newPlaces.add(espacio1202UBB);
-    newPlaces.add(ddeUBB);
-    newPlaces.add(estacionamientoDDEUBB);
-    newPlaces.add(estacionamientoFederacionUBB);
-    newPlaces.add(laboratorioCienciasConstruccionUBB);
-    newPlaces.add(laboratorioProcesosSustentablesUBB);
-    newPlaces.add(departamentoCienciasConstruccionUBB);
-    newPlaces.add(citecUBB);
-    newPlaces.add(estacionamientoCitecUBB);
-    newPlaces.add(incubadoraEmpresasUBB);
-    newPlaces.add(pabellonTecnologicoMaderaUBB);
-    newPlaces.add(lcgpaUBB);
-    newPlaces.add(estacionamientoMaderasUBB);
-    newPlaces.add(cbnUBB);
-    newPlaces.add(facultadDisenoIndustrialUBB);
-    newPlaces.add(edicionesUBB);
-    newPlaces.add(departamentoIngenieriaCivilAmbientalUBB);
-    newPlaces.add(laboratoriosTalleresDIMecUBB);
-    newPlaces.add(cipaUBB);
-    newPlaces.add(departamentoIngenieriaMecanicaUBB);
-    newPlaces.add(aulasExIMUBB);
-    newPlaces.add(impresionUBB);
-    newPlaces.add(salaEstudioUBB);
-    newPlaces.add(ingenieriaCivilIndustrialUBB);
-    newPlaces.add(ingenieriaMaderasUBB);
-    newPlaces.add(aulasAAUBB);
-    newPlaces.add(aulasABUBB);
-    newPlaces.add(aulasACUBB);
-    newPlaces.add(aulasADUBB);
-    newPlaces.add(edificioSistemaTerritorialUBB);
-    newPlaces.add(directorioExtensionUBB);
-    newPlaces.add(departamentoArteUBB);
-    newPlaces.add(cimUBB);
-    newPlaces.add(plazaChemamullUBB);
-    newPlaces.add(bibliotecaUBB);
-    newPlaces.add(pastosUBB);
-    newPlaces.add(plazaBibliotecaUBB);
-    newPlaces.add(auditorioFACEUBB);
-    newPlaces.add(estacionamientoAulasACUBB);
-    newPlaces.add(faceUBB);
-    newPlaces.add(estacionamientoPersonalFACEUBB);
-    newPlaces.add(casinoUBB);
-    newPlaces.add(estacionamientoCasinoUBB);
-    newPlaces.add(estacionamientoFiscalUBB);
-    newPlaces.add(sigloXXIUBB);
-    newPlaces.add(arquitecturaUBB);
-    newPlaces.add(estacionamientoFACEUBB);
-    newPlaces.add(jardinInfantilUBB);
-    newPlaces.add(estacionamientoMecanicaUBB);
+    newPlaces.addAll(filteredPlaces);
 
     add(OnNewPlacesFoundEvent(filteredPlaces));
   }
-}
-
-Feature createCustomPlace(
-  String id,
-  String name,
-  String placeName,
-  List<double> coordinates,
-) {
-  return Feature(
-    id: id,
-    type: 'Feature',
-    placeType: ['building'],
-    properties: Properties(
-      address: '',
-      category: '',
-      foursquare: '',
-      landmark: null,
-      maki: '',
-      wikidata: '',
-    ),
-    textEs: name,
-    placeNameEs: placeName,
-    text: name,
-    language: null,
-    placeName: placeName,
-    matchingText: null,
-    matchingPlaceName: null,
-    center: coordinates,
-    geometry: Geometry(
-      type: 'Point',
-      coordinates: coordinates,
-    ),
-    context: [],
-  );
+  
 }
