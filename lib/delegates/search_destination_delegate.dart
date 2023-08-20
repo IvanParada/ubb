@@ -41,7 +41,7 @@ class SearchDestinationDelegate extends SearchDelegate<SearchResult> {
             final place = places[i];
             return ListTile(
                 title: Text(place.text),
-                subtitle: Text(place.placeName),
+                // subtitle: Text(place.placeName),
                 leading: const Icon(
                   Icons.place_outlined,
                   color: Colors.black,

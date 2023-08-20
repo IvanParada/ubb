@@ -50,8 +50,6 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
       endPlace: endPlace,
     );
   }
-
-
   Future getPlacesByQuery(LatLng proximity, String query) async {
     final newPlaces = <Feature>[];
 
@@ -203,7 +201,7 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
     Feature edificioGantesUBB = createCustomPlace(
       'edificio-gantes',
       'Edificio Gantes',
-      'Edificio Gantes, Universidad del BioBio',
+      'A101EG, S204EG, S205EG, S206EG, S208EG, S209EG, S210EG, S2011EG, S212EG, S213EG',
       [-73.01378383204116, -36.821780734192856],
     );
     Feature escuelaIngenieriaConstruccionUBB = createCustomPlace(
@@ -349,8 +347,8 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
         [-73.01218111465829, -36.821653226044255]);
     Feature aulasExIMUBB = createCustomPlace(
         'aulas-ex-im',
-        'Aulas Ex IM UBB',
-        'Aulas Ex IM, Universidad del BioBio',
+        'Ingeniería Mecánica (Nueva remoledación)',
+        'S101ExIM, S102ExIM, S103ExIM',
         [-73.01243045071809, -36.82158807192213]);
     Feature impresionUBB = createCustomPlace('impresion', 'Impresión UBB',
         'Impresión UBB', [-73.01234745564797, -36.822020008565346]);
@@ -362,21 +360,36 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
     Feature ingenieriaCivilIndustrialUBB = createCustomPlace(
         'ingenieria-civil-industrial',
         'Escuela de Ingeniería Civil Industrial UBB',
-        'Escuela de Ingeniería Civil Industrial UBB',
+        'S101II, S102II, S103II',
         [-73.01262852459375, -36.82227119027796]);
     Feature ingenieriaMaderasUBB = createCustomPlace(
         'ingenieria-maderas',
         'Departamento Ingeniería en Maderas UBB',
         'Departamento Ingeniería en Maderas UBB',
         [-73.0127862966134, -36.82272274227057]);
-    Feature aulasAAUBB = createCustomPlace('aulas-aa', 'Aulas AA UBB',
-        'Aulas AA UBB', [-73.01208477165912, -36.82215201874491]);
-    Feature aulasABUBB = createCustomPlace('aulas-ab', 'Aulas AB UBB',
-        'Aulas AB UBB', [-73.01139244900415, -36.82231677111968]);
-    Feature aulasACUBB = createCustomPlace('aulas-ac', 'Aulas AC UBB',
-        'Aulas AC UBB', [-73.0110199502019, -36.82208229332249]);
-    Feature aulasADUBB = createCustomPlace('aulas-ad', 'Aulas AD UBB',
-        'Aulas AD UBB', [-73.01152851276187, -36.82258555097241]);
+    Feature aulasAAUBB = createCustomPlace(
+      'aulas-aa',
+      'Aulas AA UBB',
+      'A101AA, A102AA, A103AA, A104AA',
+      [-73.01208477165912, -36.82215201874491]);
+    Feature aulasABUBB = createCustomPlace(
+      'aulas-ab',
+      'Aulas AB UBB',
+      'A101AB, A102AB, A201AB, A202AB, A301AB, A302AB',
+      [-73.01139244900415, -36.82231677111968]);
+    Feature aulasACUBB = createCustomPlace(
+      'aulas-ac',
+      'Aulas AC UBB',
+      'A101AC, A102AC, A103AC, A104AC, A105AC, A106AC, A107AC, A108AC'
+      'A201AC, A202AC, A203AC, A204AC, A205AC, A206AC, A207AC, A208AC'
+      'A301AC, A302AC, A303AC, A304AC, A305AC, A306AC, A307AC, A308AC',
+      [-73.0110199502019, -36.82208229332249]);
+    Feature aulasADUBB = createCustomPlace(
+      'aulas-ad',
+      'Aulas AD UBB',
+      'S201AD, S202AD, S203AD'
+      'S301AD, S302AD, S303AD',
+      [-73.01152851276187, -36.82258555097241]);
     Feature edificioSistemaTerritorialUBB = createCustomPlace(
         'edificio-sistema-territorial',
         'Edificio Sistema Territorial UBB',
@@ -424,7 +437,8 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
     Feature faceUBB = createCustomPlace(
         'face',
         'FACE, Facultad de Ciencias Empresariales UBB',
-        'FACE, Facultad de Ciencias Empresariales UBB',
+        'S101CE, S102CE, S103CE'
+        'Lab1FACE, Lab2FACE, Lab3FACE',
         [-73.01109723762696, -36.82174804919615]);
     Feature estacionamientoPersonalFACEUBB = createCustomPlace(
         'estacionamiento-personal-face',
@@ -466,6 +480,9 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
         'Jardín Infantil Entre Valles UBB',
         [-73.00827959677228, -36.8252594603797]);
 //Se añaden los lugares creados
+//
+
+
 
     final filteredPlaces = [
       plazaAulaMagnaUBB,
@@ -550,14 +567,18 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
       departamentoArteUBB,
       cimUBB,
     ]
+
+    
   .where((place) =>
             place.text.toLowerCase().contains(query.toLowerCase()) ||
             place.placeName.toLowerCase().contains(query.toLowerCase()))
         .toList(); 
 
-    newPlaces.addAll(filteredPlaces);
+newPlaces.addAll(filteredPlaces);
+add(OnNewPlacesFoundEvent(filteredPlaces));
 
+        
+    newPlaces.addAll(filteredPlaces);
     add(OnNewPlacesFoundEvent(filteredPlaces));
   }
-  
 }
