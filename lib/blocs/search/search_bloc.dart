@@ -479,9 +479,6 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
         'Jardín Infantil Entre Valles UBB',
         'Jardín Infantil Entre Valles UBB',
         [-73.00827959677228, -36.8252594603797]);
-//Se añaden los lugares creados
-//
-
 
 
     final filteredPlaces = [
