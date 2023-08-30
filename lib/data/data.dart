@@ -1,0 +1,1 @@
+export 'package:ubb/data/registros_ccp.dart';

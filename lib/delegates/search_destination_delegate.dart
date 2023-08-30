@@ -93,11 +93,11 @@ class SearchDestinationDelegate extends SearchDelegate<SearchResult> {
               ),
               onTap: () {
                 final result = SearchResult(
-                    cancel: false,
-                    manual: false,
-                    position: LatLng(place.center[1], place.center[0]),
-                    name: place.text,
-                    description: place.placeName);
+                  cancel: false,
+                  manual: false,
+                  position: LatLng(place.center[1], place.center[0]),
+                  name: place.text,
+                );
 
                 close(context, result);
               },
