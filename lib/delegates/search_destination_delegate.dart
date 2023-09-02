@@ -84,7 +84,6 @@ class SearchDestinationDelegate extends SearchDelegate<SearchResult> {
         ),
         ...history.map((place) => ListTile(
               title: Text(place.text),
-              subtitle: Text(place.placeNameEs),
               leading: const Icon(
                 Icons.history,
                 color: Colors.black,

@@ -1,6 +1,6 @@
 import 'package:ubb/models/models.dart';
 
-List<Feature> customPlaces = [
+List<Feature> registrosCCP = [
   createCustomPlace(
     'plaza-exterior',
     'Plaza Exterior',

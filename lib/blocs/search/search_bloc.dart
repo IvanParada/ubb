@@ -7,7 +7,6 @@ import 'package:ubb/models/models.dart';
 import 'package:ubb/services/services.dart';
 import 'package:ubb/data/data.dart';
 
-
 part 'search_event.dart';
 part 'search_state.dart';
 
@@ -30,7 +29,6 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
   Future<RouteDestination> getCoorsStartToEnd(LatLng start, LatLng end) async {
     final trafficResponse = await trafficService.getCoorsStartToEnd(start, end);
 
-    //Informacion del destino
     final endPlace = await trafficService.getInformationByCoors(end);
 
     final geometry = trafficResponse.routes[0].geometry;
@@ -52,12 +50,15 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
       endPlace: endPlace,
     );
   }
+
   Future getPlacesByQuery(LatLng proximity, String query) async {
     final newPlaces = <Feature>[];
 
-    final filteredPlaces = customPlaces.where((place) =>
-        place.text.toLowerCase().contains(query.toLowerCase()) ||
-        place.placeName.toLowerCase().contains(query.toLowerCase())).toList();
+    final filteredPlaces = registrosCCP
+        .where((place) =>
+            place.text.toLowerCase().contains(query.toLowerCase()) ||
+            place.placeName.toLowerCase().contains(query.toLowerCase()))
+        .toList();
 
     newPlaces.addAll(filteredPlaces);
     add(OnNewPlacesFoundEvent(filteredPlaces));

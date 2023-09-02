@@ -8,28 +8,10 @@ Feature createCustomPlace(
 ) {
   return Feature(
     id: id,
-    type: 'Feature',
+    // type: 'Feature',
     placeType: ['building'],
-    properties: Properties(
-      address: '',
-      category: '',
-      foursquare: '',
-      landmark: null,
-      maki: '',
-      wikidata: '',
-    ),
-    textEs: name,
-    placeNameEs: placeName,
     text: name,
-    language: null,
     placeName: placeName,
-    matchingText: null,
-    matchingPlaceName: null,
     center: coordinates,
-    geometry: Geometry(
-      type: 'Point',
-      coordinates: coordinates,
-    ),
-    context: [],
   );
 }
