@@ -8,7 +8,6 @@ Feature createCustomPlace(
 ) {
   return Feature(
     id: id,
-    // type: 'Feature',
     placeType: ['building'],
     text: name,
     placeName: placeName,

@@ -8,6 +8,8 @@ import 'package:ubb/models/models.dart';
 import 'package:ubb/themes/themes.dart';
 import 'package:flutter/material.dart';
 
+import '../../data/data.dart';
+
 part 'map_event.dart';
 part 'map_state.dart';
 
