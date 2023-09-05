@@ -19,7 +19,7 @@ class LoginScreen extends StatelessWidget {
             child: SingleChildScrollView(
       child: Column(
         children: [
-          const SizedBox(height: 250),
+           const SizedBox(height: 250),
           CardContainer(
             child: Column(
               children: [
@@ -41,6 +41,7 @@ class LoginScreen extends StatelessWidget {
           ),
           const SizedBox(height: 50),
           TextButton(
+            
             onPressed: () =>
                 Navigator.pushReplacementNamed(context, 'register_screen'),
             style: ButtonStyle(
@@ -190,3 +191,5 @@ class _LoginForm extends StatelessWidget {
     );
   }
 }
+
+

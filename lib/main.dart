@@ -12,11 +12,12 @@ void main() {
       ChangeNotifierProvider(create: (_) => AuthService()),
       BlocProvider(create: (context) => GpsBloc()),
       BlocProvider(create: (context) => LocationBloc()),
-      BlocProvider(
-          create: (context) =>
-              MapBloc(locationBloc: BlocProvider.of<LocationBloc>(context))),
-      BlocProvider(
-          create: (context) => SearchBloc(trafficService: TrafficService())),
+
+      BlocProvider(create: (context) => MapBloc(locationBloc: BlocProvider.of<LocationBloc>(context))),
+      BlocProvider(create: (context) => SearchBloc(trafficService: TrafficService())),
+      
+      BlocProvider(create: (context) => MapBlocFM(locationBlocFM: BlocProvider.of<LocationBloc>(context))),
+      BlocProvider(create: (context) => SearchBlocFM(trafficService: TrafficService())),
     ],
     child: const MainApp(),
   ));
@@ -36,6 +37,7 @@ class MainApp extends StatelessWidget {
         'home_screen': (_) => const MainScreen(),
         'login_screen': (_) => const LoginScreen(),
         'map_screen': (_) => const LoadingScreen(),
+        'map_screen_fm': (_) => const LoadingScreenFM(),
         'register_screen': (_) => const RegisterScreen(),
         'settings_screen': (_) => const SettingsScreen(),
         'reset_password_screen': (_) => const PasswordResetScreen(),
