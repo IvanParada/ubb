@@ -91,19 +91,15 @@ Future<Map<String, dynamic>?> getUserData() async {
       final Map<String, dynamic> decodedResp = json.decode(resp.body);
 
       if (decodedResp.containsKey('users')) {
-        // Se espera que la respuesta contenga una lista de usuarios,
-        // pero solo se asume un usuario en este caso
         final userData = decodedResp['users'][0];
         return userData;
       } else {
         return null;
       }
     } else {
-      // Aquí puedes manejar el caso en que la respuesta no sea 200 (por ejemplo, error de servidor)
       return null;
     }
   } catch (e) {
-    // Aquí puedes manejar errores de conexión u otros errores inesperados
     return null;
   }
 }
