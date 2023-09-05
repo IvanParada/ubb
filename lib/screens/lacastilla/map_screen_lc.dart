@@ -6,29 +6,29 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:ubb/blocs/bloc.dart';
 import 'package:ubb/views/views.dart';
 import 'package:ubb/widgets/widgets.dart';
-import '../ui/ui.dart';
+import '../../ui/ui.dart';
 
-class MapScreen extends StatefulWidget {
-  const MapScreen({super.key});
+class MapScreenLC extends StatefulWidget {
+  const MapScreenLC({super.key});
 
   @override
-  State<MapScreen> createState() => _MapScreenState();
+  State<MapScreenLC> createState() => _MapScreenStateLC();
 }
 
-class _MapScreenState extends State<MapScreen> {
-  late LocationBloc locationBloc;
+class _MapScreenStateLC extends State<MapScreenLC> {
+  late LocationBloc locationBlocLC;
 
   @override
   void initState() {
     super.initState();
 
-    locationBloc = BlocProvider.of<LocationBloc>(context);
-    locationBloc.startFollowingUser();
+    locationBlocLC = BlocProvider.of<LocationBloc>(context);
+    locationBlocLC.startFollowingUser();
   }
 
   @override
   void dispose() {
-    locationBloc.stopFollowingUser();
+    locationBlocLC.stopFollowingUser();
     super.dispose();
   }
 
@@ -45,27 +45,27 @@ class _MapScreenState extends State<MapScreen> {
                   const Positioned(top: 200, left: 300, child: Bubble()),
                   const Positioned(top: -40, left: -30, child: Bubble()),
                   const Positioned(top: -50, right: -20, child: Bubble()),
-                  _MapLoading()
+                  _MapLoadingLC()
                 ],
               ),
             );
           }
 
-          return BlocBuilder<MapBloc, MapState>(
-            builder: (context, mapState) {
-              Map<String, Polyline> polylines = Map.from(mapState.polylines);
-              if (!mapState.showMyRoute) {
-                polylines.removeWhere((key, value) => key == 'myRoute');
+          return BlocBuilder<MapBlocLC, MapStateLC>(
+            builder: (context, mapStateLC) {
+              Map<String, Polyline> polylinesLC = Map.from(mapStateLC.polylinesLC);
+              if (!mapStateLC.showMyRouteLC) {
+                polylinesLC.removeWhere((key, value) => key == 'myRoute');
               }
 
               return Stack(
                 children: [
-                  MapView(
-                    polylines: polylines.values.toSet(),
-                    markers: mapState.markers.values.toSet(),
+                  MapViewLC(
+                    polylinesLC: polylinesLC.values.toSet(),
+                    markersLC: mapStateLC.markersLC.values.toSet(),
                   ),
-                  const SearchBar(),
-                  const ManualMarker()
+                  const SearchBarLC(),
+                  const ManualMarkerLC()
                 ],
               );
             },
@@ -76,16 +76,16 @@ class _MapScreenState extends State<MapScreen> {
       floatingActionButton: const Column(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
-          BtnToggleMarker(),
-          BtnFollowUser(),
-          BtnCurrentLocation(),
+          BtnToggleMarkerLC(),
+          BtnFollowUserLC(),
+          BtnCurrentLocationLC(),
         ],
       ),
     );
   }
 }
 
-class _MapLoading extends StatelessWidget {
+class _MapLoadingLC extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;

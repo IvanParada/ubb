@@ -2,23 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-import '../blocs/bloc.dart';
+import '../../blocs/bloc.dart';
 
-class BtnToggleMarkerFM extends StatelessWidget {
-  const BtnToggleMarkerFM({
+class BtnToggleMarkerLC extends StatelessWidget {
+  const BtnToggleMarkerLC({
     Key? key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final mapBlocFM = BlocProvider.of<MapBlocFM>(context);
+    final mapBlocLC = BlocProvider.of<MapBlocLC>(context);
 
     return Container(
       margin: const EdgeInsets.only(bottom: 10),
       child: CircleAvatar(
         backgroundColor: const Color.fromARGB(255, 9, 27, 43),
         maxRadius: 25,
-        child: BlocBuilder<MapBlocFM, MapStateFM>(
+        child: BlocBuilder<MapBlocLC, MapStateLC>(
           builder: (context, state) {
             return IconButton(
               icon: const FaIcon(
@@ -26,7 +26,7 @@ class BtnToggleMarkerFM extends StatelessWidget {
                 color: Colors.white,
               ),
               onPressed: () {
-                mapBlocFM.add(ToggleMedicalMarkersVisibilityEventFM());
+                mapBlocLC.add(ToggleMedicalMarkersVisibilityEventLC());
               },
             );
           },

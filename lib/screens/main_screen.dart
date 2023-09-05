@@ -19,6 +19,7 @@ class _MainScreenState extends State<MainScreen> {
       const HomeScreen(),
       const LoadingScreen(),
       const LoadingScreenFM(),
+      const LoadingScreenLC(),
       const SettingsScreen(),
     ];
 
@@ -62,6 +63,15 @@ class _MainScreenState extends State<MainScreen> {
                 child: const FaIcon(FontAwesomeIcons.mapLocationDot)),
             label: 'Mapa FM',
             tooltip: 'Mapa FM',
+            backgroundColor: const Color.fromARGB(255, 9, 27, 43),
+          ),
+          BottomNavigationBarItem(
+            icon:
+                FadeInUp(child: const FaIcon(FontAwesomeIcons.mapLocationDot)),
+            activeIcon: BounceInDown(
+                child: const FaIcon(FontAwesomeIcons.mapLocationDot)),
+            label: 'Mapa LC',
+            tooltip: 'Mapa LC',
             backgroundColor: const Color.fromARGB(255, 9, 27, 43),
           ),
           BottomNavigationBarItem(

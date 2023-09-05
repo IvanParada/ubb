@@ -18,6 +18,9 @@ void main() {
       
       BlocProvider(create: (context) => MapBlocFM(locationBlocFM: BlocProvider.of<LocationBloc>(context))),
       BlocProvider(create: (context) => SearchBlocFM(trafficService: TrafficService())),
+
+      BlocProvider(create: (context) => MapBlocLC(locationBlocLC: BlocProvider.of<LocationBloc>(context))),
+      BlocProvider(create: (context) => SearchBlocLC(trafficService: TrafficService())),
     ],
     child: const MainApp(),
   ));
@@ -38,6 +41,7 @@ class MainApp extends StatelessWidget {
         'login_screen': (_) => const LoginScreen(),
         'map_screen': (_) => const LoadingScreen(),
         'map_screen_fm': (_) => const LoadingScreenFM(),
+        'map_screen_lc': (_) => const LoadingScreenLC(),
         'register_screen': (_) => const RegisterScreen(),
         'settings_screen': (_) => const SettingsScreen(),
         'reset_password_screen': (_) => const PasswordResetScreen(),

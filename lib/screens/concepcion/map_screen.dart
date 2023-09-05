@@ -6,29 +6,29 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:ubb/blocs/bloc.dart';
 import 'package:ubb/views/views.dart';
 import 'package:ubb/widgets/widgets.dart';
-import '../ui/ui.dart';
+import '../../ui/ui.dart';
 
-class MapScreenFM extends StatefulWidget {
-  const MapScreenFM({super.key});
+class MapScreen extends StatefulWidget {
+  const MapScreen({super.key});
 
   @override
-  State<MapScreenFM> createState() => _MapScreenStateFM();
+  State<MapScreen> createState() => _MapScreenState();
 }
 
-class _MapScreenStateFM extends State<MapScreenFM> {
-  late LocationBloc locationBlocFM;
+class _MapScreenState extends State<MapScreen> {
+  late LocationBloc locationBloc;
 
   @override
   void initState() {
     super.initState();
 
-    locationBlocFM = BlocProvider.of<LocationBloc>(context);
-    locationBlocFM.startFollowingUser();
+    locationBloc = BlocProvider.of<LocationBloc>(context);
+    locationBloc.startFollowingUser();
   }
 
   @override
   void dispose() {
-    locationBlocFM.stopFollowingUser();
+    locationBloc.stopFollowingUser();
     super.dispose();
   }
 
@@ -45,27 +45,27 @@ class _MapScreenStateFM extends State<MapScreenFM> {
                   const Positioned(top: 200, left: 300, child: Bubble()),
                   const Positioned(top: -40, left: -30, child: Bubble()),
                   const Positioned(top: -50, right: -20, child: Bubble()),
-                  _MapLoadingFM()
+                  _MapLoading()
                 ],
               ),
             );
           }
 
-          return BlocBuilder<MapBlocFM, MapStateFM>(
-            builder: (context, mapStateFM) {
-              Map<String, Polyline> polylinesFM = Map.from(mapStateFM.polylinesFM);
-              if (!mapStateFM.showMyRouteFM) {
-                polylinesFM.removeWhere((key, value) => key == 'myRoute');
+          return BlocBuilder<MapBloc, MapState>(
+            builder: (context, mapState) {
+              Map<String, Polyline> polylines = Map.from(mapState.polylines);
+              if (!mapState.showMyRoute) {
+                polylines.removeWhere((key, value) => key == 'myRoute');
               }
 
               return Stack(
                 children: [
-                  MapViewFM(
-                    polylinesFM: polylinesFM.values.toSet(),
-                    markersFM: mapStateFM.markersFM.values.toSet(),
+                  MapView(
+                    polylines: polylines.values.toSet(),
+                    markers: mapState.markers.values.toSet(),
                   ),
-                  const SearchBarFM(),
-                  const ManualMarkerFM()
+                  const SearchBar(),
+                  const ManualMarker()
                 ],
               );
             },
@@ -76,16 +76,16 @@ class _MapScreenStateFM extends State<MapScreenFM> {
       floatingActionButton: const Column(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
-          BtnToggleMarkerFM(),
-          BtnFollowUserFM(),
-          BtnCurrentLocationFM(),
+          BtnToggleMarker(),
+          BtnFollowUser(),
+          BtnCurrentLocation(),
         ],
       ),
     );
   }
 }
 
-class _MapLoadingFM extends StatelessWidget {
+class _MapLoading extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
