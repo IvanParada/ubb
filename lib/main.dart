@@ -42,6 +42,7 @@ class MainApp extends StatelessWidget {
         'map_screen': (_) => const LoadingScreen(),
         'map_screen_fm': (_) => const LoadingScreenFM(),
         'map_screen_lc': (_) => const LoadingScreenLC(),
+        'maps_options': (_) => const MapsOptionsScreen(),
         'register_screen': (_) => const RegisterScreen(),
         'settings_screen': (_) => const SettingsScreen(),
         'reset_password_screen': (_) => const PasswordResetScreen(),

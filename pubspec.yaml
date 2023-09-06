@@ -25,6 +25,7 @@ dependencies:
   latlong2: ^0.9.0
   permission_handler: ^10.2.0
   provider: ^6.0.5
+  card_swiper: ^3.0.1
 
 
 dev_dependencies:

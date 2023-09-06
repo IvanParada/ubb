@@ -9,6 +9,7 @@ export 'package:ubb/widgets/headers.dart';
 export 'package:ubb/widgets/home_content.dart';
 export 'package:ubb/widgets/settings_content.dart';
 export 'package:ubb/widgets/map_options_content.dart';
+export 'package:ubb/widgets/btn_back.dart';
 
 
 export 'package:ubb/widgets/concepcion/search_bar.dart';

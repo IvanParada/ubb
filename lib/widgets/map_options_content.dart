@@ -1,5 +1,19 @@
 import 'package:animate_do/animate_do.dart';
+import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
+final List<String> campusNames = [
+  'map_screen',
+  'map_screen_fm',
+  'map_screen_lc',
+];
+
+final Map<String, String> campusImages = {
+  'map_screen': 'assets/Concepcion.jpg',
+  'map_screen_fm': 'assets/Fernando_May.jpg',
+  'map_screen_lc': 'assets/La_Castilla.jpg',
+};
 
 class MapsOptions extends StatelessWidget {
   const MapsOptions({super.key});
@@ -15,10 +29,25 @@ class MapsOptions extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const SizedBox(height: 30),
+            FadeInDown(
+              child: const Center(),
+            ),
+            const SizedBox(height: 10),
+            Center(
+              child: FadeInDown(
+                child: const Center(
+                    child: FaIcon(
+                  FontAwesomeIcons.mapLocationDot,
+                  color: Colors.white,
+                  size: 80,
+                )),
+              ),
+            ),
+            const SizedBox(height: 40),
             FadeInLeft(
               child: const Center(
                 child: Text(
-                  'Selecciona el mapa que desees',
+                  'Mapas disponibles.',
                   style: TextStyle(
                     fontSize: 16,
                     color: Colors.white,
@@ -28,202 +57,39 @@ class MapsOptions extends StatelessWidget {
                 ),
               ),
             ),
-            const SizedBox(height: 30),
+            const SizedBox(height: 50),
             Center(
-              child: FadeInUp(
-                child: Image.asset(
-                  'assets/logo.png',
-                  height: 100,
-                  width: 190,
-                ),
-              ),
-            ),
-            const SizedBox(height: 40),
-            Center(
-                child: SingleChildScrollView(
-              child: Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(30),
-                  color: Colors.white,
-                ),
-                width: size.width * 0.8,
-                height: size.height * 0.55,
-                padding: const EdgeInsets.all(20),
-                child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          GestureDetector(
-                            onTap: () => {},
-                            child: Container(
-                              padding: const EdgeInsets.all(20),
-                              width: size.width * 0.3,
-                              height: size.width * 0.3,
-                              decoration: BoxDecoration(
-                                gradient: const RadialGradient(
-                                  colors: [
-                                    Color.fromARGB(255, 9, 27, 43),
-                                    Color.fromARGB(255, 3, 42, 77),
-                                  ],
-                                ),
-                                borderRadius: BorderRadius.circular(30),
-                                boxShadow: const [
-                                  BoxShadow(
-                                    color: Colors.black12,
-                                    blurRadius: 5,
-                                    offset: Offset(0, 2),
-                                  ),
-                                ],
-                              ),
-                              child: Image.asset('assets/logo_ubbmap.png'),
-                            ),
-                          ),
-                          GestureDetector(
-                                                      onTap: () => {},
+              child: BounceInUp(
+                child: Swiper(
+                  autoplay: false,
+                  itemCount: campusNames.length,
+                  layout: SwiperLayout.STACK,
+                  itemWidth: size.width * 0.7,
+                  itemHeight: size.height * 0.5,
+                  itemBuilder: (BuildContext context, int index) {
+                    final campusName = campusNames[index];
+                    final campusImage = campusImages[campusName];
 
-                            child: Container(
-                              padding: const EdgeInsets.all(20),
-                              width: size.width * 0.3,
-                              height: size.width * 0.3,
-                              decoration: BoxDecoration(
-                                gradient: const RadialGradient(
-                                  colors: [
-                                    Color.fromARGB(255, 9, 27, 43),
-                                    Color.fromARGB(255, 3, 42, 77),
-                                  ],
-                                ),
-                                borderRadius: BorderRadius.circular(30),
-                                boxShadow: const [
-                                  BoxShadow(
-                                    color: Colors.black12,
-                                    blurRadius: 5,
-                                    offset: Offset(0, 2),
-                                  ),
-                                ],
-                              ),
-                              child: Image.asset('assets/logo_yosoyubb.png'),
-                            ),
+                    return GestureDetector(
+                      onTap: () => Navigator.pushNamed(context, campusName),
+                      child: Hero(
+                        tag: campusName,
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(20),
+                          child: FadeInImage(
+                            placeholder:
+                                const AssetImage('assets/no-image.jpg'),
+                            image: AssetImage(campusImage ??
+                                'assets/no-image.jpg'),
+                            fit: BoxFit.cover,
                           ),
-                        ],
+                        ),
                       ),
-                      const SizedBox(height: 20),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Container(
-                            width: size.width * 0.3,
-                            height: size.width * 0.3,
-                            decoration: BoxDecoration(
-                              gradient: const RadialGradient(
-                                colors: [
-                                  Color.fromARGB(255, 9, 27, 43),
-                                  Color.fromARGB(255, 3, 42, 77),
-                                ],
-                              ),
-                              borderRadius: BorderRadius.circular(30),
-                              boxShadow: const [
-                                BoxShadow(
-                                  color: Colors.black12,
-                                  blurRadius: 5,
-                                  offset: Offset(0, 2),
-                                ),
-                              ],
-                            ),
-                            child: const Icon(Icons.account_balance,
-                                color: Colors.white),
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Container(
-                                width: size.width * 0.3,
-                                height: size.width * 0.3,
-                                decoration: BoxDecoration(
-                                  gradient: const RadialGradient(
-                                    colors: [
-                                      Color.fromARGB(255, 9, 27, 43),
-                                      Color.fromARGB(255, 3, 42, 77),
-                                    ],
-                                  ),
-                                  borderRadius: BorderRadius.circular(30),
-                                  boxShadow: const [
-                                    BoxShadow(
-                                      color: Colors.black12,
-                                      blurRadius: 5,
-                                      offset: Offset(0, 2),
-                                    ),
-                                  ],
-                                ),
-                                child: const Icon(Icons.g_translate_sharp,
-                                    color: Colors.white),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 20),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Container(
-                            width: size.width * 0.3,
-                            height: size.width * 0.3,
-                            decoration: BoxDecoration(
-                              gradient: const RadialGradient(
-                                colors: [
-                                  Color.fromARGB(255, 9, 27, 43),
-                                  Color.fromARGB(255, 3, 42, 77),
-                                ],
-                              ),
-                              borderRadius: BorderRadius.circular(30),
-                              boxShadow: const [
-                                BoxShadow(
-                                  color: Colors.black12,
-                                  blurRadius: 5,
-                                  offset: Offset(0, 2),
-                                ),
-                              ],
-                            ),
-                            child: const Icon(
-                              Icons.face,
-                              color: Colors.white,
-                            ),
-                          ),
-                          const SizedBox(height: 30),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Container(
-                                width: size.width * 0.3,
-                                height: size.width * 0.3,
-                                decoration: BoxDecoration(
-                                  gradient: const RadialGradient(
-                                    colors: [
-                                      Color.fromARGB(255, 9, 27, 43),
-                                      Color.fromARGB(255, 3, 42, 77),
-                                    ],
-                                  ),
-                                  borderRadius: BorderRadius.circular(30),
-                                  boxShadow: const [
-                                    BoxShadow(
-                                      color: Colors.black12,
-                                      blurRadius: 5,
-                                      offset: Offset(0, 2),
-                                    ),
-                                  ],
-                                ),
-                                child: const Icon(Icons.dangerous,
-                                    color: Colors.white),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ]),
+                    );
+                  },
+                ),
               ),
-            ))
+            )
           ],
         ),
       ),

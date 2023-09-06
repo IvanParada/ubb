@@ -7,6 +7,8 @@ import 'package:ubb/delegates/delegates.dart';
 import 'package:ubb/helpers/helpers.dart';
 import 'package:ubb/models/models.dart';
 
+import '../widgets.dart';
+
 class SearchBarFM extends StatelessWidget {
   const SearchBarFM({Key? key}) : super(key: key);
 
@@ -66,42 +68,50 @@ class _SearchBarBodyFM extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 30),
         width: double.infinity,
         height: 50,
-        child: GestureDetector(
-          onTap: () async {
-            final result = await showSearch(
-              context: context,
-              delegate: SearchDestinationDelegateFM(),
-            );
-            if (result == null) return;
-
-            // ignore: use_build_context_synchronously
-            onSearchResultsFM(context, result);
-          },
-          child: Container(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 20,
-              vertical: 13,
-            ),
-            decoration: BoxDecoration(
-              color: Colors.white.withOpacity(0.9),
-              borderRadius: BorderRadius.circular(100),
-              boxShadow: const [
-                BoxShadow(
-                  color: Colors.black12,
-                  blurRadius: 5,
-                  offset: Offset(0, 7),
+        child: Row(
+          children: [
+            const BtnBack(), 
+            const SizedBox(
+                width: 10),
+            Expanded(
+              child: GestureDetector(
+                onTap: () async {
+                  final result = await showSearch(
+                    context: context,
+                    delegate: SearchDestinationDelegateFM(),
+                  );
+                  if (result == null) return;
+                  // ignore: use_build_context_synchronously
+                  onSearchResultsFM(context, result);
+                },
+                child: Container(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 20,
+                    vertical: 13,
+                  ),
+                  decoration: BoxDecoration(
+                    color: Colors.white.withOpacity(0.9),
+                    borderRadius: BorderRadius.circular(100),
+                    boxShadow: const [
+                      BoxShadow(
+                        color: Colors.black12,
+                        blurRadius: 5,
+                        offset: Offset(0, 7),
+                      ),
+                    ],
+                  ),
+                  alignment: Alignment.centerLeft,
+                  child: const Text(
+                    '¿Dónde quieres ir?',
+                    style: TextStyle(
+                      color: Colors.black87,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
                 ),
-              ],
-            ),
-            alignment: Alignment.centerLeft,
-            child: const Text(
-              '¿Dónde quieres ir?',
-              style: TextStyle(
-                color: Colors.black87,
-                fontWeight: FontWeight.bold,
               ),
             ),
-          ),
+          ],
         ),
       ),
     );
