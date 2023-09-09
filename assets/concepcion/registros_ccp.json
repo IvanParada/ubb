@@ -1,0 +1,974 @@
+[
+    {
+        "id": "plaza-exterior",
+        "placetype": [
+            "building"
+        ],
+        "text": "Plaza Exterior",
+        "placeName": "Plaza Exterior, Universidad del BioBio",
+        "center": [
+            -73.0153504402849,
+            -36.820460728849575
+        ]
+    },
+    {
+        "id": "plaza-aula-magna",
+        "placetype": [
+            "building"
+        ],
+        "text": "Plaza Aula Magna",
+        "placeName": "Plaza Aula Magna, Universidad del BioBio",
+        "center": [
+            -73.013245,
+            -36.822510
+        ]
+    },
+    {
+        "id": "planetario",
+        "placetype": [
+            "building"
+        ],
+        "text": "Planetario",
+        "placeName": "Planetario, Universidad del BioBio",
+        "center": [
+            -73.01561379475291,
+            -36.820955875894356
+        ]
+    },
+    {
+        "id": "laguna",
+        "placetype": [
+            "building"
+        ],
+        "text": "Laguna",
+        "placeName": "Laguna , Universidad del BioBio",
+        "center": [
+            -73.01589095927775,
+            -36.82137210312746
+        ]
+    },
+    {
+        "id": "jardines",
+        "placetype": [
+            "building"
+        ],
+        "text": "Jardines",
+        "placeName": "Jardines, Universidad del BioBio",
+        "center": [
+            -73.01525135312855,
+            -36.82113895896988
+        ]
+    },
+    {
+        "id": "oficina-informaciones",
+        "placetype": [
+            "building"
+        ],
+        "text": "Oficina de Informaciones ",
+        "placeName": "Oficina de Informaciones, Universidad del BioBio",
+        "center": [
+            -73.0149587064697,
+            -36.82058427412565
+        ]
+    },
+    {
+        "id": "estacionamientos-gimnasio",
+        "placetype": [
+            "building"
+        ],
+        "text": "Estacionamientos Gimnasio",
+        "placeName": "Estacionamientos Gimnasio, Universidad del BioBio",
+        "center": [
+            -73.0154501742581,
+            -36.821620351834426
+        ]
+    },
+    {
+        "id": "gimnasio",
+        "placetype": [
+            "building"
+        ],
+        "text": "Gimnasio",
+        "placeName": "Gimnasio, Universidad del BioBio",
+        "center": [
+            -73.01555195945721,
+            -36.82189548101085
+        ]
+    },
+    {
+        "id": "rama-andinismo",
+        "placetype": [
+            "building"
+        ],
+        "text": "Rama Andinismo",
+        "placeName": "Rama Andinismo, Universidad del BioBio",
+        "center": [
+            -73.015504963593,
+            -36.822090598125804
+        ]
+    },
+    {
+        "id": "cancha-rugby",
+        "placetype": [
+            "building"
+        ],
+        "text": "Cancha Rugby",
+        "placeName": "Cancha Rugby, Universidad del BioBio",
+        "center": [
+            -73.01553658118888,
+            -36.82265923510146
+        ]
+    },
+    {
+        "id": "jamaica",
+        "placetype": [
+            "building"
+        ],
+        "text": "Jamaica",
+        "placeName": "Jamaica, Universidad del BioBio",
+        "center": [
+            -73.01501025046915,
+            -36.82303554853736
+        ]
+    },
+    {
+        "id": "cancha-pasto-sintetico",
+        "placetype": [
+            "building"
+        ],
+        "text": "Cancha",
+        "placeName": "Cancha, Universidad del BioBio",
+        "center": [
+            -73.01501025046915,
+            -36.82303554853736
+        ]
+    },
+    {
+        "id": "estacionamiento-cancha",
+        "placetype": [
+            "building"
+        ],
+        "text": "Estacionamiento Cancha",
+        "placeName": "Estacionamiento Cancha, Universidad del BioBio",
+        "center": [
+            -73.01501025046915,
+            -36.82303554853736
+        ]
+    },
+    {
+        "id": "parkpur-park",
+        "placetype": [
+            "building"
+        ],
+        "text": "Parkour Park",
+        "placeName": "Parkour Park, Universidad del BioBio",
+        "center": [
+            -73.01431540946841,
+            -36.82275077499071
+        ]
+    },
+    {
+        "id": "parque-calistenia",
+        "placetype": [
+            "building"
+        ],
+        "text": "Parque de Calistenia",
+        "placeName": "Jamaica, Universidad del BioBio",
+        "center": [
+            -73.01396529015231,
+            -36.82266903005002
+        ]
+    },
+    {
+        "id": "canchas-tenis",
+        "placetype": [
+            "building"
+        ],
+        "text": "Canchas de Tenis",
+        "placeName": "Canchas de Tenis, Universidad del BioBio",
+        "center": [
+            -73.01412576224908,
+            -36.822342049964945
+        ]
+    },
+    {
+        "id": "centro-innovacion",
+        "placetype": [
+            "building"
+        ],
+        "text": "Centro de Innovación",
+        "placeName": "Centro de Innovación, Universidad del BioBio",
+        "center": [
+            -73.01480655054475,
+            -36.82225641282157
+        ]
+    },
+    {
+        "id": "estacionamiento-gantes",
+        "placetype": [
+            "building"
+        ],
+        "text": "Estacionamiento Gantes",
+        "placeName": "Estacionamiento Gantes, Universidad del BioBio",
+        "center": [
+            -73.0141233318405,
+            -36.821997552261436
+        ]
+    },
+    {
+        "id": "rectoria",
+        "placetype": [
+            "building"
+        ],
+        "text": "Rectoría, Vicerrectoría Académica,Dirreción de Docencia, Dirección de Admisión y Registro Académico",
+        "placeName": "Rectoría, Vicerrectoría Académica,Dirreción de Docencia, Dirección de Admisión y Registro Académico, Universidad del BioBio",
+        "center": [
+            -73.01430289893341,
+            -36.82113092522013
+        ]
+    },
+    {
+        "id": "auditorio-hermann",
+        "placetype": [
+            "building"
+        ],
+        "text": "Auditorio Hermann Gamm",
+        "placeName": "Auditorio Hermann Gamm, Universidad del BioBio",
+        "center": [
+            -73.01423980983913,
+            -36.821661012520686
+        ]
+    },
+    {
+        "id": "facultad-ciencias",
+        "placetype": [
+            "building"
+        ],
+        "text": "Facultad de Ciencias",
+        "placeName": "Facultad de Ciencias, Universidad del BioBio",
+        "center": [
+            -73.0135650076763,
+            -36.82101421862468
+        ]
+    },
+    {
+        "id": "departamento-estadisticas",
+        "placetype": [
+            "building"
+        ],
+        "text": "Departamento de Estadisticas",
+        "placeName": "Departamento de Estadisticas, Universidad del BioBio",
+        "center": [
+            -73.01367202459946,
+            -36.82150803896075
+        ]
+    },
+    {
+        "id": "banco-corpbanca",
+        "placetype": [
+            "building"
+        ],
+        "text": "Banco Corpanca, Cajero",
+        "placeName": "Banco Corpbanca, Universidad del BioBio",
+        "center": [
+            -73.01405798258688,
+            -36.82152395296069
+        ]
+    },
+    {
+        "id": "facultad-ingenieria",
+        "placetype": [
+            "building"
+        ],
+        "text": "Facultad de Ingenieria",
+        "placeName": "Facultad de Ingenieria, Universidad del BioBio",
+        "center": [
+            -73.01378383204116,
+            -36.821780734192856
+        ]
+    },
+    {
+        "id": "edificio-gantes",
+        "placetype": [
+            "building"
+        ],
+        "text": "Edificio Gantes",
+        "placeName": "A101EG, S204EG, S205EG, S206EG, S208EG, S209EG, S210EG, S2011EG, S212EG, S213EG",
+        "center": [
+            -73.01378383204116,
+            -36.821780734192856
+        ]
+    },
+    {
+        "id": "escuela-ingenieria-construccion",
+        "placetype": [
+            "building"
+        ],
+        "text": "Escuela de Ingenieria en Construccion ",
+        "placeName": "Escuela de Ingenieria en Construccion , Universidad del BioBio",
+        "center": [
+            -73.01280870175296,
+            -36.821222220553345
+        ]
+    },
+    {
+        "id": "paraninfo",
+        "placetype": [
+            "building"
+        ],
+        "text": "Paraninfo",
+        "placeName": "Paraninfo, Universidad del BioBio",
+        "center": [
+            -73.01286893576328,
+            -36.82142124719916
+        ]
+    },
+    {
+        "id": "plaza-democracia",
+        "placetype": [
+            "building"
+        ],
+        "text": "Plaza de la Democracia",
+        "placeName": "Plaza de la Democracia, Universidad del BioBio",
+        "center": [
+            -73.01286893576328,
+            -36.82142124719916
+        ]
+    },
+    {
+        "id": "trabajo-social",
+        "placetype": [
+            "building"
+        ],
+        "text": "Escuela de Trabajo Social",
+        "placeName": "Escuela de Trabajo Social, Universidad del BioBio",
+        "center": [
+            -73.01302829054036,
+            -36.82185341915902
+        ]
+    },
+    {
+        "id": "aula-magna",
+        "placetype": [
+            "building"
+        ],
+        "text": "Aula Magna",
+        "placeName": "Aula Magna, Universidad del BioBio",
+        "center": [
+            -73.01314909590728,
+            -36.82228667499436
+        ]
+    },
+    {
+        "id": "escuela-arquitectura",
+        "placetype": [
+            "building"
+        ],
+        "text": "Escuela de Arquitectura",
+        "placeName": "Escuela de Arquitectura, Universidad del BioBio",
+        "center": [
+            -73.01324054535345,
+            -36.82129632974265
+        ]
+    },
+    {
+        "id": "sala-exposiciones",
+        "placetype": [
+            "building"
+        ],
+        "text": "Sala de Exposiciones",
+        "placeName": "Sala de Exposiciones, Universidad del BioBio",
+        "center": [
+            -73.01350862146745,
+            -36.82290295568258
+        ]
+    },
+    {
+        "id": "espacio-1202",
+        "placetype": [
+            "building"
+        ],
+        "text": "Espacio 1202",
+        "placeName": "Espacio 1202, Universidad del BioBio",
+        "center": [
+            -73.01329634037104,
+            -36.82303526629553
+        ]
+    },
+    {
+        "id": "dde",
+        "placetype": [
+            "building"
+        ],
+        "text": "Dirección de Desarrollo Estudiantil ",
+        "placeName": "DDE, Dirección de Desarrollo Estudiantil , Universidad del BioBio",
+        "center": [
+            -73.01349158503193,
+            -36.8233899889007
+        ]
+    },
+    {
+        "id": "estacionamiento-dde",
+        "placetype": [
+            "building"
+        ],
+        "text": "Estacionamiento DDE ",
+        "placeName": "Estacionamiento DDE, Universidad del BioBio",
+        "center": [
+            -73.0134356829278,
+            -36.823196754794644
+        ]
+    },
+    {
+        "id": "estacionamiento-federacion",
+        "placetype": [
+            "building"
+        ],
+        "text": "Estacionamiento Federación ",
+        "placeName": "Estacionamiento Federación, Universidad del BioBio",
+        "center": [
+            -73.01323796483089,
+            -36.82362799338529
+        ]
+    },
+    {
+        "id": "laboratorio-ciencias-construccion",
+        "placetype": [
+            "building"
+        ],
+        "text": "Laboratorio Ciencias de la Construcción ",
+        "placeName": "Laboratorio Ciencias de la Construcción, Universidad del BioBio",
+        "center": [
+            -73.01290316053763,
+            -36.82383186765058
+        ]
+    },
+    {
+        "id": "departamento-ciencias-construccion",
+        "placetype": [
+            "building"
+        ],
+        "text": "Departamento Ciencias de la Construcción ",
+        "placeName": "Departamento Ciencias de la Construcción, Universidad del BioBio",
+        "center": [
+            -73.0126207318842,
+            -36.82377804507284
+        ]
+    },
+    {
+        "id": "citec",
+        "placetype": [
+            "building"
+        ],
+        "text": "CITEC UBB",
+        "placeName": "CITEC, Universidad del BioBio",
+        "center": [
+            -73.0137282338395,
+            -36.8240443379694
+        ]
+    },
+    {
+        "id": "estacionamiento-citec",
+        "placetype": [
+            "building"
+        ],
+        "text": "Estacionamiento CITEC ",
+        "placeName": "Estacionamiento CITEC, Universidad del BioBio",
+        "center": [
+            -73.01334734409615,
+            -36.8241412908316
+        ]
+    },
+    {
+        "id": "laboratorio-procesos-sustentables",
+        "placetype": [
+            "building"
+        ],
+        "text": "Laboratorio de Procesos Sustentables UBB",
+        "placeName": "Laboratorio de Procesos Sustentables, Universidad del BioBio",
+        "center": [
+            -73.01302185140796,
+            -36.82349924861111
+        ]
+    },
+    {
+        "id": "incubadora-empresas",
+        "placetype": [
+            "building"
+        ],
+        "text": "Incubadora de Empresas UBB",
+        "placeName": "Incubadora de Empresas, Universidad del BioBio",
+        "center": [
+            -73.01249045103822,
+            -36.82300580687556
+        ]
+    },
+    {
+        "id": "pabellon-tecnologico-madera",
+        "placetype": [
+            "building"
+        ],
+        "text": "Pabellón Tecnológico de la Madera UBB",
+        "placeName": "Pabellón Tecnológico de la Madera, Universidad del BioBio",
+        "center": [
+            -73.0128373569203,
+            -36.82309381938699
+        ]
+    },
+    {
+        "id": "lcgpa",
+        "placetype": [
+            "building"
+        ],
+        "text": "LCGPA UBB",
+        "placeName": "LCGPA, Universidad del BioBio",
+        "center": [
+            -73.01215867160751,
+            -36.82307159429834
+        ]
+    },
+    {
+        "id": "estacionamiento-maderas",
+        "placetype": [
+            "building"
+        ],
+        "text": "Estacionamiento de Maderas UBB",
+        "placeName": "Estacionamiento de Maderas, Universidad del BioBio",
+        "center": [
+            -73.01207915885723,
+            -36.823345557993235
+        ]
+    },
+    {
+        "id": "cbn",
+        "placetype": [
+            "building"
+        ],
+        "text": "CBN UBB",
+        "placeName": "CBN, Universidad del BioBio",
+        "center": [
+            -73.01240574782511,
+            -36.823447145712166
+        ]
+    },
+    {
+        "id": "facultad-diseno-industrial",
+        "placetype": [
+            "building"
+        ],
+        "text": "Facultad de Diseño Industrial UBB",
+        "placeName": "Facultad de Diseño Industrial, Universidad del BioBio",
+        "center": [
+            -73.01183388861404,
+            -36.823193214508
+        ]
+    },
+    {
+        "id": "ediciones",
+        "placetype": [
+            "building"
+        ],
+        "text": "Ediciones UBB",
+        "placeName": "Ediciones, Universidad del BioBio",
+        "center": [
+            -73.01212623730615,
+            -36.82354071145458
+        ]
+    },
+    {
+        "id": "departamento-ingenieria-civil-ambiental",
+        "placetype": [
+            "building"
+        ],
+        "text": "Departamento Ingeniería Civil y Ambiental UBB",
+        "placeName": "Departamento Ingeniería Civil y Ambiental, Universidad del BioBio",
+        "center": [
+            -73.01129791345598,
+            -36.82338409137286
+        ]
+    },
+    {
+        "id": "laboratorios-talleres-dimec",
+        "placetype": [
+            "building"
+        ],
+        "text": "Laboratorios y Talleres DIMec UBB",
+        "placeName": "Laboratorios y Talleres DIMec, Universidad del BioBio",
+        "center": [
+            -73.01171863301998,
+            -36.823827265730785
+        ]
+    },
+    {
+        "id": "cipa",
+        "placetype": [
+            "building"
+        ],
+        "text": "CIPA, Centro de Investigación de Polímeros Avanzados UBB",
+        "placeName": "CIPA, Centro de Investigación de Polímeros Avanzados, Universidad del BioBio",
+        "center": [
+            -73.01201944617053,
+            -36.8240534418508
+        ]
+    },
+    {
+        "id": "departamento-ingenieria-mecanica",
+        "placetype": [
+            "building"
+        ],
+        "text": "Departamento de Ingeniería Mecánica UBB",
+        "placeName": "Departamento de Ingeniería Mecánica, Universidad del BioBio",
+        "center": [
+            -73.01218111465829,
+            -36.821653226044255
+        ]
+    },
+    {
+        "id": "aulas-ex-im",
+        "placetype": [
+            "building"
+        ],
+        "text": "Ingeniería Mecánica (Nueva remoledación}",
+        "placeName": "S101ExIM, S102ExIM, S103ExIM",
+        "center": [
+            -73.01243045071809,
+            -36.82158807192213
+        ]
+    },
+    {
+        "id": "impresion",
+        "placetype": [
+            "building"
+        ],
+        "text": "Impresión UBB",
+        "placeName": "Impresión UBB",
+        "center": [
+            -73.01234745564797,
+            -36.822020008565346
+        ]
+    },
+    {
+        "id": "sala-estudio",
+        "placetype": [
+            "building"
+        ],
+        "text": "Sala de Estudio UBB",
+        "placeName": "Sala de Estudio UBB",
+        "center": [
+            -73.0124630667595,
+            -36.822053718810565
+        ]
+    },
+    {
+        "id": "ingenieria-civil-industrial",
+        "placetype": [
+            "building"
+        ],
+        "text": "Escuela de Ingeniería Civil Industrial UBB",
+        "placeName": "S101II, S102II, S103II",
+        "center": [
+            -73.01262852459375,
+            -36.82227119027796
+        ]
+    },
+    {
+        "id": "ingenieria-maderas",
+        "placetype": [
+            "building"
+        ],
+        "text": "Departamento Ingeniería en Maderas UBB",
+        "placeName": "Departamento Ingeniería en Maderas UBB",
+        "center": [
+            -73.0127862966134,
+            -36.82272274227057
+        ]
+    },
+    {
+        "id": "aulas-aa",
+        "placetype": [
+            "building"
+        ],
+        "text": "Aulas AA UBB",
+        "placeName": "A101AA, A102AA, A103AA, A104AA",
+        "center": [
+            -73.01208477165912,
+            -36.82215201874491
+        ]
+    },
+    {
+        "id": "aulas-ab",
+        "placetype": [
+            "building"
+        ],
+        "text": "Aulas AB UBB",
+        "placeName": "A101AB, A102AB, A201AB, A202AB, A301AB, A302AB",
+        "center": [
+            -73.01139244900415,
+            -36.82231677111968
+        ]
+    },
+    {
+        "id": "aulas-ac",
+        "placetype": [
+            "building"
+        ],
+        "text": "Aulas AC UBB",
+        "placeName": "A101AC, A102AC, A103AC, A104AC, A105AC, A106AC, A107AC, A108AC,A201AC, A202AC, A203AC, A204AC, A205AC, A206AC, A207AC, A208AC, A301AC, A302AC, A303AC, A304AC, A305AC, A306AC, A307AC, A308AC",
+        "center": [
+            -73.0110199502019,
+            -36.82208229332249
+        ]
+    },
+    {
+        "id": "aulas-ad",
+        "placetype": [
+            "building"
+        ],
+        "text": "Aulas AD UBB",
+        "placeName": "S201AD, S202AD, S203AD, S301AD, S302AD, S303AD",
+        "center": [
+            -73.01152851276187,
+            -36.82258555097241
+        ]
+    },
+    {
+        "id": "edificio-sistema-territorial",
+        "placetype": [
+            "building"
+        ],
+        "text": "Edificio Sistema Territorial UBB",
+        "placeName": "Edificio Sistema Territorial UBB",
+        "center": [
+            -73.0117541706447,
+            -36.82284948924725
+        ]
+    },
+    {
+        "id": "directorio-extension",
+        "placetype": [
+            "building"
+        ],
+        "text": "Directorio de Extensión UBB",
+        "placeName": "Directorio de Extensión UBB",
+        "center": [
+            -73.0122752646328,
+            -36.82271338639085
+        ]
+    },
+    {
+        "id": "departamento-arte",
+        "placetype": [
+            "building"
+        ],
+        "text": "Departamento Arte, Cultura y Comunicación UBB",
+        "placeName": "Departamento Arte, Cultura y Comunicación UBB",
+        "center": [
+            -73.01213801537808,
+            -36.822633841419794
+        ]
+    },
+    {
+        "id": "cim",
+        "placetype": [
+            "building"
+        ],
+        "text": "CIM UBB",
+        "placeName": "CIM UBB",
+        "center": [
+            -73.01190487283094,
+            -36.822808503831
+        ]
+    },
+    {
+        "id": "plaza-chemamull",
+        "placetype": [
+            "building"
+        ],
+        "text": "Plaza Chemamull UBB",
+        "placeName": "Plaza Chemamull UBB",
+        "center": [
+            -73.01119397673214,
+            -36.82268563870563
+        ]
+    },
+    {
+        "id": "biblioteca",
+        "placetype": [
+            "building"
+        ],
+        "text": "Biblioteca Universidad del Bio-Bio, Hilario Hernandez Gurruchaga UBB",
+        "placeName": "Biblioteca Universidad del Bio-Bio, Hilario Hernandez Gurruchaga UBB",
+        "center": [
+            -73.0117503048976,
+            -36.821544003447904
+        ]
+    },
+    {
+        "id": "pastos",
+        "placetype": [
+            "building"
+        ],
+        "text": "Pastos UBB",
+        "placeName": "Pastos UBB",
+        "center": [
+            -73.01162208630586,
+            -36.82193475141963
+        ]
+    },
+    {
+        "id": "plaza-biblioteca",
+        "placetype": [
+            "building"
+        ],
+        "text": "Plaza Biblioteca UBB",
+        "placeName": "Plaza Biblioteca UBB",
+        "center": [
+            -73.0116190136438,
+            -36.82153838589379
+        ]
+    },
+    {
+        "id": "auditorio-face",
+        "placetype": [
+            "building"
+        ],
+        "text": "Auditorio FACE UBB",
+        "placeName": "Auditorio FACE UBB",
+        "center": [
+            -73.01118945821361,
+            -36.8218038566358
+        ]
+    },
+    {
+        "id": "estacionamiento-aulas-ac",
+        "placetype": [
+            "building"
+        ],
+        "text": "Estacionamiento Aulas AC UBB",
+        "placeName": "Estacionamiento Aulas AC UBB",
+        "center": [
+            -73.01068990543648,
+            -36.822086187969035
+        ]
+    },
+    {
+        "id": "face",
+        "placetype": [
+            "building"
+        ],
+        "text": "FACE, Facultad de Ciencias Empresariales UBB",
+        "placeName": "S101CE, S102CE, S103CE, Lab1FACE, Lab2FACE, Lab3FACE",
+        "center": [
+            -73.01109723762696,
+            -36.82174804919615
+        ]
+    },
+    {
+        "id": "estacionamiento-personal-face",
+        "placetype": [
+            "building"
+        ],
+        "text": "Estacionamiento Personal FACE UBB",
+        "placeName": "Estacionamiento Personal FACE UBB",
+        "center": [
+            -73.01061578346635,
+            -36.82162724187765
+        ]
+    },
+    {
+        "id": "casino",
+        "placetype": [
+            "building"
+        ],
+        "text": "Casino UBB",
+        "placeName": "Casino UBB",
+        "center": [
+            -73.01072661815245,
+            -36.82308075843948
+        ]
+    },
+    {
+        "id": "estacionamiento-casino",
+        "placetype": [
+            "building"
+        ],
+        "text": "Estacionamiento Casino UBB",
+        "placeName": "Estacionamiento Casino UBB",
+        "center": [
+            -73.0109888697642,
+            -36.82380398374272
+        ]
+    },
+    {
+        "id": "estacionamiento-fiscal",
+        "placetype": [
+            "building"
+        ],
+        "text": "Estacionamiento Fiscal UBB",
+        "placeName": "Estacionamiento Fiscal UBB",
+        "center": [
+            -73.01452572760134,
+            -36.82050117901974
+        ]
+    },
+    {
+        "id": "siglo-xxi",
+        "placetype": [
+            "building"
+        ],
+        "text": "Siglo XXI UBB",
+        "placeName": "Siglo XXI UBB",
+        "center": [
+            -73.01416234272469,
+            -36.82077375584268
+        ]
+    },
+    {
+        "id": "arquitectura",
+        "placetype": [
+            "building"
+        ],
+        "text": "Facultad de Arquitectura, Construcción y Diseño UBB",
+        "placeName": "Facultad de Arquitectura, Construcción y Diseño UBB",
+        "center": [
+            -73.0131542051368,
+            -36.820791098911194
+        ]
+    },
+    {
+        "id": "estacionamiento-mecanica",
+        "placetype": [
+            "building"
+        ],
+        "text": "Estacionamiento Mecánica UBB",
+        "placeName": "Estacionamiento Mecánica UBB",
+        "center": [
+            -73.01187355187255,
+            -36.821094910539365
+        ]
+    },
+    {
+        "id": "estacionamiento-face",
+        "placetype": [
+            "building"
+        ],
+        "text": "Estacionamiento FACE UBB",
+        "placeName": "Estacionamiento FACE UBB",
+        "center": [
+            -73.01079137418117,
+            -36.821303686692886
+        ]
+    },
+    {
+        "id": "jardin-infantil",
+        "placetype": [
+            "building"
+        ],
+        "text": "Jardín Infantil Entre Valles UBB",
+        "placeName": "Jardín Infantil Entre Valles UBB",
+        "center": [
+            -73.00827959677228,
+            -36.8252594603797
+        ]
+    }
+]

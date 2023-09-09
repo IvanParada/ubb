@@ -10,9 +10,9 @@ final List<String> campusNames = [
 ];
 
 final Map<String, String> campusImages = {
-  'map_screen': 'assets/Concepcion.jpg',
-  'map_screen_fm': 'assets/Fernando_May.jpg',
-  'map_screen_lc': 'assets/La_Castilla.jpg',
+  'map_screen': 'assets/concepcion/Concepcion.jpg',
+  'map_screen_fm': 'assets/fernando_may/Fernando_May.jpg',
+  'map_screen_lc': 'assets/la_castilla/La_Castilla.jpg',
 };
 
 class MapsOptions extends StatelessWidget {

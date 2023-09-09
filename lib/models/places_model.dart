@@ -16,24 +16,24 @@ class PlacesResponse {
 
   String toJson() => json.encode(toMap());
 
-  factory PlacesResponse.fromMap(Map<String, dynamic> json) => PlacesResponse(
-        type: json["type"],
-        features:
-            List<Feature>.from(json["features"].map((x) => Feature.fromMap(x))),
-        attribution: json["attribution"],
-      );
+  factory PlacesResponse.fromMap(Map<String, dynamic> json) {
+    return PlacesResponse(
+      type: json["type"] ?? "", // Provide a default empty string if 'type' is null
+      features: List<Feature>.from((json["features"] as List<dynamic>? ?? []).map((x) => Feature.fromMap(x))),
+      attribution: json["attribution"] ?? "", // Provide a default empty string if 'attribution' is null
+    );
+  }
 
   Map<String, dynamic> toMap() => {
-        "type": type,
-        "features": List<dynamic>.from(features.map((x) => x.toMap())),
-        "attribution": attribution,
-      };
+    "type": type,
+    "features": List<dynamic>.from(features.map((x) => x.toMap())),
+    "attribution": attribution,
+  };
 }
 
 class Feature {
   Feature({
     required this.id,
-    // required this.type,
     required this.placeType,
     required this.text,
     required this.placeName,
@@ -41,7 +41,6 @@ class Feature {
   });
 
   final String id;
-  // final String type;
   final List<String> placeType;
   final String text;
   final String placeName;
@@ -52,37 +51,23 @@ class Feature {
   String toJson() => json.encode(toMap());
 
   factory Feature.fromMap(Map<String, dynamic> json) => Feature(
-        id: json["id"],
-        // type: json["type"],
-        placeType: List<String>.from(json["place_type"].map((x) => x)),
-        text: json["text"],
-        placeName: json["place_name"],
-        center: List<double>.from(json["center"].map((x) => x.toDouble())),
-      );
+    id: json["id"] ?? "", // Provide a default empty string if 'id' is null
+    placeType: List<String>.from(json["place_type"]?.map((x) => x.toString()) ?? []),
+    text: json["text"] ?? "", // Provide a default empty string if 'text' is null
+    placeName: json["place_name"] ?? "", // Provide a default empty string if 'place_name' is null
+    center: List<double>.from(json["center"]?.map((x) => x.toDouble()) ?? []),
+  );
 
   Map<String, dynamic> toMap() => {
-        "id": id,
-        // "type": type,
-        "place_type": List<dynamic>.from(placeType.map((x) => x)),
-        "text": text,
-        "place_name": placeName,
-        "center": List<dynamic>.from(center.map((x) => x)),
-      };
+    "id": id,
+    "place_type": List<dynamic>.from(placeType.map((x) => x)),
+    "text": text,
+    "place_name": placeName,
+    "center": List<dynamic>.from(center.map((x) => x)),
+  };
 
   @override
   String toString() {
     return 'Feature: $text';
-  }
-}
-
-class EnumValues<T> {
-  Map<String, T> map;
-  Map<T, String>? reverseMap;
-
-  EnumValues(this.map);
-
-  Map<T, String> get reverse {
-    reverseMap ??= map.map((k, v) => MapEntry(v, k));
-    return reverseMap!;
   }
 }
