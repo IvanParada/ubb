@@ -1,4 +1,3 @@
-import 'package:flutter/services.dart' show rootBundle;
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -6,6 +5,8 @@ import 'package:google_polyline_algorithm/google_polyline_algorithm.dart';
 import 'dart:convert';
 import 'package:ubb/models/models.dart';
 import 'package:ubb/services/services.dart';
+import 'package:http/http.dart' as http;
+
 // import 'package:ubb/data/data.dart';
 
 part 'search_event.dart';
@@ -54,11 +55,19 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
 
 
 Future<List<Feature>> loadPlacesFromJsonCCP() async {
-  final jsonString = await rootBundle.loadString('assets/concepcion/registros_ccp.json');
-  final jsonList = json.decode(jsonString) as List;
+  // Cambia la URL al enlace en línea.
+  final response = await http.get(Uri.parse('https://ubbmap-81adc-default-rtdb.firebaseio.com/registros_ccp.json'));
 
-  final places = jsonList.map((json) => Feature.fromMap(json)).toList();
-  return places;
+  if (response.statusCode == 200) {
+    // Decodifica la respuesta JSON.
+    final jsonList = json.decode(response.body) as List;
+
+    final places = jsonList.map((json) => Feature.fromMap(json)).toList();
+    return places;
+  } else {
+    // Maneja el error de la solicitud HTTP aquí si es necesario.
+    throw Exception('Error al cargar datos desde la URL');
+  }
 }
 
 

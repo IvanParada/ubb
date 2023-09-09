@@ -1,8 +1,8 @@
 import 'dart:convert';
+import 'package:http/http.dart' as http;
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter/services.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:google_polyline_algorithm/google_polyline_algorithm.dart';
 
@@ -53,26 +53,35 @@ class SearchBlocLC extends Bloc<SearchEventLC, SearchStateLC> {
     );
   }
 
-Future<List<Feature>> loadPlacesFromJsonLC() async {
-  final jsonString = await rootBundle.loadString('assets/la_castilla/registros_lc.json');
-  final jsonList = json.decode(jsonString) as List;
+  Future<List<Feature>> loadPlacesFromJsonLC() async {
+    // Cambia la URL al enlace en línea.
+    final response = await http.get(Uri.parse(
+        'https://ubbmap-81adc-default-rtdb.firebaseio.com/registros_lc.json'));
 
-  final places = jsonList.map((json) => Feature.fromMap(json)).toList();
-  return places;
-}
+    if (response.statusCode == 200) {
+      // Decodifica la respuesta JSON.
+      final jsonList = json.decode(response.body) as List;
 
+      final places = jsonList.map((json) => Feature.fromMap(json)).toList();
+      return places;
+    } else {
+      // Maneja el error de la solicitud HTTP aquí si es necesario.
+      throw Exception('Error al cargar datos desde la URL');
+    }
+  }
 
+  Future getPlacesByQuery(LatLng proximity, String query) async {
+    final newPlaces = <Feature>[];
 
-Future getPlacesByQuery(LatLng proximity, String query) async {
-  final newPlaces = <Feature>[];
+    final places = await loadPlacesFromJsonLC();
 
-  final places = await loadPlacesFromJsonLC();
+    final filteredPlaces = places
+        .where((place) =>
+            place.text.toLowerCase().contains(query.toLowerCase()) ||
+            place.placeName.toLowerCase().contains(query.toLowerCase()))
+        .toList();
 
-  final filteredPlaces = places.where((place) =>
-      place.text.toLowerCase().contains(query.toLowerCase()) ||
-      place.placeName.toLowerCase().contains(query.toLowerCase())).toList();
-
-  newPlaces.addAll(filteredPlaces);
-  add(OnNewPlacesFoundEventLC(filteredPlaces));
-}
+    newPlaces.addAll(filteredPlaces);
+    add(OnNewPlacesFoundEventLC(filteredPlaces));
+  }
 }

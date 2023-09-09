@@ -1,13 +1,14 @@
 import 'dart:convert';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter/services.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:ubb/blocs/bloc.dart';
 import 'package:ubb/helpers/helpers.dart';
 import 'package:ubb/models/models.dart';
 import 'package:ubb/themes/themes.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+
 
 part 'map_event_lc.dart';
 part 'map_state_lc.dart';
@@ -62,18 +63,23 @@ class MapBlocLC extends Bloc<MapEventLC, MapStateLC> {
     });
   }
 
-  Future<void> loadMedicalMarkersFromJson() async {
-    final jsonString = await rootBundle
-        .loadString('assets/la_castilla/registros_kitmarker_lc.json');
-    final List<dynamic> jsonList = json.decode(jsonString);
+Future<void> loadMedicalMarkersFromJson() async {
+  final response = await http.get(Uri.parse('https://ubbmap-81adc-default-rtdb.firebaseio.com/registros_kitmarker_lc.json'));
 
-    final medicalMarkers =
-        jsonList.map((json) => MedicalMarker.fromJson(json)).toList();
+  if (response.statusCode == 200) {
+    // Decodifica la respuesta JSON.
+    final jsonList = json.decode(response.body) as List;
+
+    final medicalMarkers = jsonList.map((json) => MedicalMarker.fromJson(json)).toList();
 
     for (final marker in medicalMarkers) {
       add(AddMedicalMarkerEventLC(marker));
     }
+  } else {
+    // Maneja el error de la solicitud HTTP aquí si es necesario.
+    throw Exception('Error al cargar datos desde la URL');
   }
+}
 
   void _onInitMapLC(OnMapInitializedEventLC event, Emitter<MapStateLC> emit) {
     _mapControllerLC = event.controllerLC;
