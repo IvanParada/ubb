@@ -1,14 +1,13 @@
 import 'dart:convert';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/services.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:ubb/blocs/bloc.dart';
 import 'package:ubb/helpers/helpers.dart';
 import 'package:ubb/models/models.dart';
 import 'package:ubb/themes/themes.dart';
 import 'package:flutter/material.dart';
-
-import '../../data/data.dart';
 
 part 'map_event_fm.dart';
 part 'map_state_fm.dart';
@@ -26,8 +25,8 @@ class MapBlocFM extends Bloc<MapEventFM, MapStateFM> {
     on<OnStopFollowingUserEventFM>(
         (event, emit) => emit(state.copyWith(isFollowingUserFM: false)));
     on<UpdateUserPolylineEventFM>(_onPolylineNewPointFM);
-    on<OnToggleUserRouteFM>(
-        (event, emit) => emit(state.copyWith(showMyRouteFM: !state.showMyRouteFM)));
+    on<OnToggleUserRouteFM>((event, emit) =>
+        emit(state.copyWith(showMyRouteFM: !state.showMyRouteFM)));
     on<ToggleMedicalMarkersVisibilityEventFM>((event, emit) {
       final updatedStateFM =
           state.copyWith(showMedicalMarkersFM: !state.showMedicalMarkersFM);
@@ -37,15 +36,10 @@ class MapBlocFM extends Bloc<MapEventFM, MapStateFM> {
     on<AddMedicalMarkerEventFM>((event, emit) async {
       final customMedicalMarkerFM = await getAssetImageMarker();
       final newMarkerFM = Marker(
-        markerId: MarkerId(event.medicalMarkerFM.position.toString()),
-        position: event.medicalMarkerFM.position,
-        icon: customMedicalMarkerFM,
-        infoWindow: InfoWindow(
-          title: 'Kit Médico',
-          onTap: (){}
-        )
-        
-      );
+          markerId: MarkerId(event.medicalMarkerFM.position.toString()),
+          position: event.medicalMarkerFM.position,
+          icon: customMedicalMarkerFM,
+          infoWindow: InfoWindow(title: 'Kit Médico', onTap: () {}));
 
       final updatedMarkersFM = Map<String, Marker>.from(state.medicalMarkersFM)
         ..[event.medicalMarkerFM.position.toString()] = newMarkerFM;
@@ -53,16 +47,10 @@ class MapBlocFM extends Bloc<MapEventFM, MapStateFM> {
       emit(state.copyWith(medicalMarkersFM: updatedMarkersFM));
     });
 
-    for (final marker in predefinedMedicalMarkersFM) {
-      addAutomaticMedicalMarkerFM(
-        marker.position,
-        marker.title,
-        marker.description,
-      );
-    }
+    loadMedicalMarkersFromJson();
 
-    on<DisplayPolylineEventFM>((event, emit) => emit(
-        state.copyWith(polylinesFM: event.polylinesFM, markersFM: event.markersFM)));
+    on<DisplayPolylineEventFM>((event, emit) => emit(state.copyWith(
+        polylinesFM: event.polylinesFM, markersFM: event.markersFM)));
     locationBlocFM.stream.listen((locationState) {
       if (locationState.lastKnowLocation != null) {
         add(UpdateUserPolylineEventFM(locationState.myLocationHistory));
@@ -74,15 +62,17 @@ class MapBlocFM extends Bloc<MapEventFM, MapStateFM> {
     });
   }
 
-  void addAutomaticMedicalMarkerFM(
-      LatLng position, String title, String description) {
-    final newMedicalMarkerFM = MedicalMarker(
-      position: position,
-      title: title,
-      description: description,
-    );
+  Future<void> loadMedicalMarkersFromJson() async {
+    final jsonString = await rootBundle
+        .loadString('assets/fernando_may/registros_kitmarker_fm.json');
+    final List<dynamic> jsonList = json.decode(jsonString);
 
-    add(AddMedicalMarkerEventFM(newMedicalMarkerFM));
+    final medicalMarkers =
+        jsonList.map((json) => MedicalMarker.fromJson(json)).toList();
+
+    for (final marker in medicalMarkers) {
+      add(AddMedicalMarkerEventFM(marker));
+    }
   }
 
   void _onInitMapFM(OnMapInitializedEventFM event, Emitter<MapStateFM> emit) {

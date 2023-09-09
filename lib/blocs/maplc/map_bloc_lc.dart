@@ -1,14 +1,13 @@
 import 'dart:convert';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/services.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:ubb/blocs/bloc.dart';
 import 'package:ubb/helpers/helpers.dart';
 import 'package:ubb/models/models.dart';
 import 'package:ubb/themes/themes.dart';
 import 'package:flutter/material.dart';
-
-import '../../data/data.dart';
 
 part 'map_event_lc.dart';
 part 'map_state_lc.dart';
@@ -26,8 +25,8 @@ class MapBlocLC extends Bloc<MapEventLC, MapStateLC> {
     on<OnStopFollowingUserEventLC>(
         (event, emit) => emit(state.copyWith(isFollowingUserLC: false)));
     on<UpdateUserPolylineEventLC>(_onPolylineNewPointLC);
-    on<OnToggleUserRouteLC>(
-        (event, emit) => emit(state.copyWith(showMyRouteLC: !state.showMyRouteLC)));
+    on<OnToggleUserRouteLC>((event, emit) =>
+        emit(state.copyWith(showMyRouteLC: !state.showMyRouteLC)));
     on<ToggleMedicalMarkersVisibilityEventLC>((event, emit) {
       final updatedStateLC =
           state.copyWith(showMedicalMarkersLC: !state.showMedicalMarkersLC);
@@ -37,15 +36,10 @@ class MapBlocLC extends Bloc<MapEventLC, MapStateLC> {
     on<AddMedicalMarkerEventLC>((event, emit) async {
       final customMedicalMarkerLC = await getAssetImageMarker();
       final newMarkerLC = Marker(
-        markerId: MarkerId(event.medicalMarkerLC.position.toString()),
-        position: event.medicalMarkerLC.position,
-        icon: customMedicalMarkerLC,
-        infoWindow: InfoWindow(
-          title: 'Kit Médico',
-          onTap: (){}
-        )
-        
-      );
+          markerId: MarkerId(event.medicalMarkerLC.position.toString()),
+          position: event.medicalMarkerLC.position,
+          icon: customMedicalMarkerLC,
+          infoWindow: InfoWindow(title: 'Kit Médico', onTap: () {}));
 
       final updatedMarkersLC = Map<String, Marker>.from(state.medicalMarkersLC)
         ..[event.medicalMarkerLC.position.toString()] = newMarkerLC;
@@ -53,16 +47,10 @@ class MapBlocLC extends Bloc<MapEventLC, MapStateLC> {
       emit(state.copyWith(medicalMarkersLC: updatedMarkersLC));
     });
 
-    for (final marker in predefinedMedicalMarkersLC) {
-      addAutomaticMedicalMarkerLC(
-        marker.position,
-        marker.title,
-        marker.description,
-      );
-    }
+    loadMedicalMarkersFromJson();
 
-    on<DisplayPolylineEventLC>((event, emit) => emit(
-        state.copyWith(polylinesLC: event.polylinesLC, markersLC: event.markersLC)));
+    on<DisplayPolylineEventLC>((event, emit) => emit(state.copyWith(
+        polylinesLC: event.polylinesLC, markersLC: event.markersLC)));
     locationBlocLC.stream.listen((locationState) {
       if (locationState.lastKnowLocation != null) {
         add(UpdateUserPolylineEventLC(locationState.myLocationHistory));
@@ -74,15 +62,17 @@ class MapBlocLC extends Bloc<MapEventLC, MapStateLC> {
     });
   }
 
-  void addAutomaticMedicalMarkerLC(
-      LatLng position, String title, String description) {
-    final newMedicalMarkerLC = MedicalMarker(
-      position: position,
-      title: title,
-      description: description,
-    );
+  Future<void> loadMedicalMarkersFromJson() async {
+    final jsonString = await rootBundle
+        .loadString('assets/la_castilla/registros_kitmarker_lc.json');
+    final List<dynamic> jsonList = json.decode(jsonString);
 
-    add(AddMedicalMarkerEventLC(newMedicalMarkerLC));
+    final medicalMarkers =
+        jsonList.map((json) => MedicalMarker.fromJson(json)).toList();
+
+    for (final marker in medicalMarkers) {
+      add(AddMedicalMarkerEventLC(marker));
+    }
   }
 
   void _onInitMapLC(OnMapInitializedEventLC event, Emitter<MapStateLC> emit) {
@@ -172,7 +162,6 @@ class MapBlocLC extends Bloc<MapEventLC, MapStateLC> {
     final currentMarker = Map<String, Marker>.from(state.markersLC);
     currentMarker['start'] = startMarker;
     currentMarker['end'] = endMarker;
-
 
     add(DisplayPolylineEventLC(currentPolylinesLC, currentMarker));
 

@@ -1,14 +1,13 @@
 import 'dart:convert';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/services.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:ubb/blocs/bloc.dart';
 import 'package:ubb/helpers/helpers.dart';
 import 'package:ubb/models/models.dart';
 import 'package:ubb/themes/themes.dart';
 import 'package:flutter/material.dart';
-
-import '../../data/data.dart';
 
 part 'map_event.dart';
 part 'map_state.dart';
@@ -37,15 +36,10 @@ class MapBloc extends Bloc<MapEvent, MapState> {
     on<AddMedicalMarkerEvent>((event, emit) async {
       final customMedicalMarker = await getAssetImageMarker();
       final newMarker = Marker(
-        markerId: MarkerId(event.medicalMarker.position.toString()),
-        position: event.medicalMarker.position,
-        icon: customMedicalMarker,
-        infoWindow: InfoWindow(
-          title: 'Kit Médico',
-          onTap: (){}
-        )
-        
-      );
+          markerId: MarkerId(event.medicalMarker.position.toString()),
+          position: event.medicalMarker.position,
+          icon: customMedicalMarker,
+          infoWindow: InfoWindow(title: 'Kit Médico', onTap: () {}));
 
       final updatedMarkers = Map<String, Marker>.from(state.medicalMarkers)
         ..[event.medicalMarker.position.toString()] = newMarker;
@@ -53,13 +47,7 @@ class MapBloc extends Bloc<MapEvent, MapState> {
       emit(state.copyWith(medicalMarkers: updatedMarkers));
     });
 
-    for (final marker in predefinedMedicalMarkers) {
-      addAutomaticMedicalMarker(
-        marker.position,
-        marker.title,
-        marker.description,
-      );
-    }
+    loadMedicalMarkersFromJson();
 
     on<DisplayPolylineEvent>((event, emit) => emit(
         state.copyWith(polylines: event.polylines, markers: event.markers)));
@@ -74,15 +62,17 @@ class MapBloc extends Bloc<MapEvent, MapState> {
     });
   }
 
-  void addAutomaticMedicalMarker(
-      LatLng position, String title, String description) {
-    final newMedicalMarker = MedicalMarker(
-      position: position,
-      title: title,
-      description: description,
-    );
+  Future<void> loadMedicalMarkersFromJson() async {
+    final jsonString = await rootBundle
+        .loadString('assets/concepcion/registros_kitmarker_ccp.json');
+    final List<dynamic> jsonList = json.decode(jsonString);
 
-    add(AddMedicalMarkerEvent(newMedicalMarker));
+    final medicalMarkers =
+        jsonList.map((json) => MedicalMarker.fromJson(json)).toList();
+
+    for (final marker in medicalMarkers) {
+      add(AddMedicalMarkerEvent(marker));
+    }
   }
 
   void _onInitMap(OnMapInitializedEvent event, Emitter<MapState> emit) {
