@@ -1,11 +1,13 @@
+import 'dart:convert';
+
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/services.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:google_polyline_algorithm/google_polyline_algorithm.dart';
 
 import 'package:ubb/models/models.dart';
 import 'package:ubb/services/services.dart';
-import 'package:ubb/data/data.dart';
 
 part 'search_event_lc.dart';
 part 'search_state_lc.dart';
@@ -51,16 +53,26 @@ class SearchBlocLC extends Bloc<SearchEventLC, SearchStateLC> {
     );
   }
 
-  Future getPlacesByQuery(LatLng proximity, String query) async {
-    final newPlacesLC = <Feature>[];
+Future<List<Feature>> loadPlacesFromJsonLC() async {
+  final jsonString = await rootBundle.loadString('assets/la_castilla/registros_lc.json');
+  final jsonList = json.decode(jsonString) as List;
 
-    final filteredPlacesLC = registrosLC
-        .where((placeLC) =>
-            placeLC.text.toLowerCase().contains(query.toLowerCase()) ||
-            placeLC.placeName.toLowerCase().contains(query.toLowerCase()))
-        .toList();
+  final places = jsonList.map((json) => Feature.fromMap(json)).toList();
+  return places;
+}
 
-    newPlacesLC.addAll(filteredPlacesLC);
-    add(OnNewPlacesFoundEventLC(filteredPlacesLC));
-  }
+
+
+Future getPlacesByQuery(LatLng proximity, String query) async {
+  final newPlaces = <Feature>[];
+
+  final places = await loadPlacesFromJsonLC();
+
+  final filteredPlaces = places.where((place) =>
+      place.text.toLowerCase().contains(query.toLowerCase()) ||
+      place.placeName.toLowerCase().contains(query.toLowerCase())).toList();
+
+  newPlaces.addAll(filteredPlaces);
+  add(OnNewPlacesFoundEventLC(filteredPlaces));
+}
 }

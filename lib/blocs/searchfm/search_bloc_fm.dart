@@ -1,11 +1,13 @@
+import 'dart:convert';
+
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/services.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:google_polyline_algorithm/google_polyline_algorithm.dart';
 
 import 'package:ubb/models/models.dart';
 import 'package:ubb/services/services.dart';
-import 'package:ubb/data/data.dart';
 
 part 'search_event_fm.dart';
 part 'search_state_fm.dart';
@@ -51,16 +53,26 @@ class SearchBlocFM extends Bloc<SearchEventFM, SearchStateFM> {
     );
   }
 
-  Future getPlacesByQuery(LatLng proximity, String query) async {
-    final newPlacesFM = <Feature>[];
+Future<List<Feature>> loadPlacesFromJsonFM() async {
+  final jsonString = await rootBundle.loadString('assets/fernando_may/registros_fm.json');
+  final jsonList = json.decode(jsonString) as List;
 
-    final filteredPlacesFM = registrosFM
-        .where((placeFM) =>
-            placeFM.text.toLowerCase().contains(query.toLowerCase()) ||
-            placeFM.placeName.toLowerCase().contains(query.toLowerCase()))
-        .toList();
+  final places = jsonList.map((json) => Feature.fromMap(json)).toList();
+  return places;
+}
 
-    newPlacesFM.addAll(filteredPlacesFM);
-    add(OnNewPlacesFoundEventFM(filteredPlacesFM));
-  }
+
+
+Future getPlacesByQuery(LatLng proximity, String query) async {
+  final newPlaces = <Feature>[];
+
+  final places = await loadPlacesFromJsonFM();
+
+  final filteredPlaces = places.where((place) =>
+      place.text.toLowerCase().contains(query.toLowerCase()) ||
+      place.placeName.toLowerCase().contains(query.toLowerCase())).toList();
+
+  newPlaces.addAll(filteredPlaces);
+  add(OnNewPlacesFoundEventFM(filteredPlaces));
+}
 }

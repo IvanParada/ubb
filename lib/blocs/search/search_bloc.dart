@@ -53,7 +53,7 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
   }
 
 
-Future<List<Feature>> loadPlacesFromJson() async {
+Future<List<Feature>> loadPlacesFromJsonCCP() async {
   final jsonString = await rootBundle.loadString('assets/concepcion/registros_ccp.json');
   final jsonList = json.decode(jsonString) as List;
 
@@ -66,7 +66,7 @@ Future<List<Feature>> loadPlacesFromJson() async {
 Future getPlacesByQuery(LatLng proximity, String query) async {
   final newPlaces = <Feature>[];
 
-  final places = await loadPlacesFromJson();
+  final places = await loadPlacesFromJsonCCP();
 
   final filteredPlaces = places.where((place) =>
       place.text.toLowerCase().contains(query.toLowerCase()) ||
