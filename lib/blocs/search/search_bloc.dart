@@ -76,10 +76,11 @@ Future getPlacesByQuery(LatLng proximity, String query) async {
   final newPlaces = <Feature>[];
 
   final places = await loadPlacesFromJsonCCP();
+  final queryLetters = query.replaceAll(RegExp('[^a-zA-Z]'),"");
 
   final filteredPlaces = places.where((place) =>
       place.text.toLowerCase().contains(query.toLowerCase()) ||
-      place.placeName.toLowerCase().contains(query.toLowerCase())).toList();
+      place.placeName.toLowerCase().contains(queryLetters.toLowerCase())).toList();
 
   newPlaces.addAll(filteredPlaces);
   add(OnNewPlacesFoundEvent(filteredPlaces));

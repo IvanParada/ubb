@@ -52,17 +52,17 @@ class Feature {
 
   factory Feature.fromMap(Map<String, dynamic> json) => Feature(
     id: json["id"] ?? "", // Provide a default empty string if 'id' is null
-    placeType: List<String>.from(json["place_type"]?.map((x) => x.toString()) ?? []),
+    placeType: List<String>.from(json["placetype"]?.map((x) => x.toString()) ?? []),
     text: json["text"] ?? "", // Provide a default empty string if 'text' is null
-    placeName: json["place_name"] ?? "", // Provide a default empty string if 'place_name' is null
+    placeName: json["placeName"] as String, // Provide a default empty string if 'place_name' is null
     center: List<double>.from(json["center"]?.map((x) => x.toDouble()) ?? []),
   );
 
   Map<String, dynamic> toMap() => {
     "id": id,
-    "place_type": List<dynamic>.from(placeType.map((x) => x)),
+    "placetype": List<dynamic>.from(placeType.map((x) => x)),
     "text": text,
-    "place_name": placeName,
+    "placeName": placeName,
     "center": List<dynamic>.from(center.map((x) => x)),
   };
 
