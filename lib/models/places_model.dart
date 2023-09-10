@@ -43,7 +43,7 @@ class Feature {
   final String id;
   final List<String> placeType;
   final String text;
-  final String placeName;
+  final List<String> placeName;
   final List<double> center;
 
   factory Feature.fromJson(String str) => Feature.fromMap(json.decode(str));
@@ -54,7 +54,9 @@ class Feature {
     id: json["id"] ?? "", // Provide a default empty string if 'id' is null
     placeType: List<String>.from(json["placetype"]?.map((x) => x.toString()) ?? []),
     text: json["text"] ?? "", // Provide a default empty string if 'text' is null
-    placeName: json["placeName"] as String, // Provide a default empty string if 'place_name' is null
+    placeName: List<String>.from(json["placeName"]?.map((x) => x.toString()) ?? []),
+   
+    // placeName: json["placeName"] as String, // Provide a default empty string if 'place_name' is null
     center: List<double>.from(json["center"]?.map((x) => x.toDouble()) ?? []),
   );
 

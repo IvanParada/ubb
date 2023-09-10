@@ -70,18 +70,18 @@ class SearchBlocFM extends Bloc<SearchEventFM, SearchStateFM> {
     }
   }
 
-  Future getPlacesByQuery(LatLng proximity, String query) async {
-    final newPlaces = <Feature>[];
+Future getPlacesByQuery(LatLng proximity, String query) async {
+  final newPlaces = <Feature>[];
 
-    final places = await loadPlacesFromJsonFM();
+  final places = await loadPlacesFromJsonFM();
+  final queryLetters = query.replaceAll(RegExp('[^a-zA-Z]+'), "").toLowerCase();
 
-    final filteredPlaces = places
-        .where((place) =>
-            place.text.toLowerCase().contains(query.toLowerCase()) ||
-            place.placeName.toLowerCase().contains(query.toLowerCase()))
-        .toList();
+  final filteredPlaces = places.where((place) =>
+    place.text.toLowerCase().contains(query.toLowerCase()) ||
+    place.placeName.any((name) => name.replaceAll(RegExp('[^a-zA-Z]+'), "").toLowerCase() == queryLetters)
+  ).toList();
 
-    newPlaces.addAll(filteredPlaces);
-    add(OnNewPlacesFoundEventFM(filteredPlaces));
-  }
+  newPlaces.addAll(filteredPlaces);
+  add(OnNewPlacesFoundEventFM(filteredPlaces));
+}
 }

@@ -3,14 +3,14 @@ import 'package:ubb/models/places_model.dart';
 Feature createCustomPlace(
   String id,
   String name,
-  String secondaryText,
+  String placeName,
   List<double> coordinates,
 ) {
   return Feature(
     id: id,
     placeType: ['building'],
     text: name,
-    placeName: secondaryText,
+    placeName: [placeName], 
     center: coordinates,
   );
 }

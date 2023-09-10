@@ -50,7 +50,7 @@ class SearchDestinationDelegate extends SearchDelegate<SearchResult> {
                       manual: false,
                       position: LatLng(place.center[1], place.center[0]),
                       name: place.text,
-                      description: place.placeName);
+                      );
 
                   searchBloc.add(AddToHistoryEvent(place));
 

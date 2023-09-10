@@ -50,7 +50,7 @@ class SearchDestinationDelegateFM extends SearchDelegate<SearchResult> {
                       manual: false,
                       position: LatLng(placeFM.center[1], placeFM.center[0]),
                       name: placeFM.text,
-                      description: placeFM.placeName);
+                      );
 
                   searchBloc.add(AddToHistoryEventFM(placeFM));
 
