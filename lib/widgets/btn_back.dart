@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../screens/screens.dart';
 
 class BtnBack extends StatelessWidget {
   const BtnBack({
@@ -18,11 +17,7 @@ class BtnBack extends StatelessWidget {
           color: Colors.white,
         ),
         onPressed: () {
-          Navigator.of(context).pushReplacement(
-            MaterialPageRoute(
-              builder: (context) => const MapsOptionsScreen(), 
-            ),
-          );
+          Navigator.of(context).pop();
         },
       ),
     );
