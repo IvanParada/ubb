@@ -76,16 +76,25 @@ Future getPlacesByQuery(LatLng proximity, String query) async {
   final newPlaces = <Feature>[];
 
   final places = await loadPlacesFromJsonCCP();
-  final queryLetters = query.replaceAll(RegExp('[^a-zA-Z]+'), "").toLowerCase();
 
-  final filteredPlaces = places.where((place) =>
-    place.text.toLowerCase().contains(query.toLowerCase()) ||
-    place.placeName.any((name) => name.replaceAll(RegExp('[^a-zA-Z]+'), "").toLowerCase() == queryLetters)
-  ).toList();
+  // Usamos una expresión regular para encontrar la parte "ab" después de los números
+  final match = RegExp(r'\d+([a-zA-Z]+)').firstMatch(query);
+  if (match != null) {
+    final queryLetters = match.group(1)?.toLowerCase() ?? '';
 
-  newPlaces.addAll(filteredPlaces);
-  add(OnNewPlacesFoundEvent(filteredPlaces));
+
+    final filteredPlaces = places.where((place) =>
+      place.text.toLowerCase().contains(query.toLowerCase()) ||
+      place.placeName.any((name) => name.replaceAll(RegExp('[^a-zA-Z]+'), "").toLowerCase() == queryLetters)
+    ).toList();
+
+    newPlaces.addAll(filteredPlaces);
+    add(OnNewPlacesFoundEvent(filteredPlaces));
+  } else {
+  }
 }
 
 
+
 }
+
