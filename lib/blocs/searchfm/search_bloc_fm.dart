@@ -70,25 +70,32 @@ class SearchBlocFM extends Bloc<SearchEventFM, SearchStateFM> {
     }
   }
 
-Future getPlacesByQuery(LatLng proximity, String query) async {
-  final newPlaces = <Feature>[];
+  Future getPlacesByQuery(LatLng proximity, String query) async {
+    final newPlaces = <Feature>[];
 
-  final places = await loadPlacesFromJsonFM();
+    final places = await loadPlacesFromJsonFM();
 
-  // Usamos una expresión regular para encontrar la parte "ab" después de los números
-  final match = RegExp(r'\d+([a-zA-Z]+)').firstMatch(query);
-  if (match != null) {
-    final queryLetters = match.group(1)?.toLowerCase() ?? '';
+    // Usamos una expresión regular para encontrar la parte "ab" después de los números
+    final match = RegExp(r'\d+([a-zA-Z]+)').firstMatch(query);
+    if (match != null) {
+      final queryLetters = match.group(1)?.toLowerCase() ?? '';
 
+      final filteredPlaces = places
+          .where((place) => place.placeName.any((name) =>
+              name.replaceAll(RegExp('[^a-zA-Z]+'), "").toLowerCase() ==
+              queryLetters))
+          .toList();
 
-    final filteredPlaces = places.where((place) =>
-      place.text.toLowerCase().contains(query.toLowerCase()) ||
-      place.placeName.any((name) => name.replaceAll(RegExp('[^a-zA-Z]+'), "").toLowerCase() == queryLetters)
-    ).toList();
+      newPlaces.addAll(filteredPlaces);
+      add(OnNewPlacesFoundEventFM(filteredPlaces));
+    } else {
+      final filteredPlaces = places
+          .where(
+              (place) => place.text.toLowerCase().contains(query.toLowerCase()))
+          .toList();
 
-    newPlaces.addAll(filteredPlaces);
-    add(OnNewPlacesFoundEventFM(filteredPlaces));
-  } else {
+      newPlaces.addAll(filteredPlaces);
+      add(OnNewPlacesFoundEventFM(filteredPlaces));
+    }
   }
-}
 }

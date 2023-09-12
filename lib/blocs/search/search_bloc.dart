@@ -53,48 +53,49 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
     );
   }
 
+  Future<List<Feature>> loadPlacesFromJsonCCP() async {
+    // Cambia la URL al enlace en línea.
+    final response = await http.get(Uri.parse(
+        'https://ubbmap-81adc-default-rtdb.firebaseio.com/registros_ccp.json'));
 
-Future<List<Feature>> loadPlacesFromJsonCCP() async {
-  // Cambia la URL al enlace en línea.
-  final response = await http.get(Uri.parse('https://ubbmap-81adc-default-rtdb.firebaseio.com/registros_ccp.json'));
+    if (response.statusCode == 200) {
+      // Decodifica la respuesta JSON.
+      final jsonList = json.decode(response.body) as List;
 
-  if (response.statusCode == 200) {
-    // Decodifica la respuesta JSON.
-    final jsonList = json.decode(response.body) as List;
+      final places = jsonList.map((json) => Feature.fromMap(json)).toList();
+      return places;
+    } else {
+      // Maneja el error de la solicitud HTTP aquí si es necesario.
+      throw Exception('Error al cargar datos desde la URL');
+    }
+  }
 
-    final places = jsonList.map((json) => Feature.fromMap(json)).toList();
-    return places;
-  } else {
-    // Maneja el error de la solicitud HTTP aquí si es necesario.
-    throw Exception('Error al cargar datos desde la URL');
+  Future getPlacesByQuery(LatLng proximity, String query) async {
+    final newPlaces = <Feature>[];
+
+    final places = await loadPlacesFromJsonCCP();
+
+    // Usamos una expresión regular para encontrar la parte "ab" después de los números
+    final match = RegExp(r'\d+([a-zA-Z]+)').firstMatch(query);
+    if (match != null) {
+      final queryLetters = match.group(1)?.toLowerCase() ?? '';
+
+      final filteredPlaces = places
+          .where((place) => place.placeName.any((name) =>
+              name.replaceAll(RegExp('[^a-zA-Z]+'), "").toLowerCase() ==
+              queryLetters))
+          .toList();
+
+      newPlaces.addAll(filteredPlaces);
+      add(OnNewPlacesFoundEvent(filteredPlaces));
+    } else {
+      final filteredPlaces = places
+          .where(
+              (place) => place.text.toLowerCase().contains(query.toLowerCase()))
+          .toList();
+
+      newPlaces.addAll(filteredPlaces);
+      add(OnNewPlacesFoundEvent(filteredPlaces));
+    }
   }
 }
-
-
-
-Future getPlacesByQuery(LatLng proximity, String query) async {
-  final newPlaces = <Feature>[];
-
-  final places = await loadPlacesFromJsonCCP();
-
-  // Usamos una expresión regular para encontrar la parte "ab" después de los números
-  final match = RegExp(r'\d+([a-zA-Z]+)').firstMatch(query);
-  if (match != null) {
-    final queryLetters = match.group(1)?.toLowerCase() ?? '';
-
-
-    final filteredPlaces = places.where((place) =>
-      place.text.toLowerCase().contains(query.toLowerCase()) ||
-      place.placeName.any((name) => name.replaceAll(RegExp('[^a-zA-Z]+'), "").toLowerCase() == queryLetters)
-    ).toList();
-
-    newPlaces.addAll(filteredPlaces);
-    add(OnNewPlacesFoundEvent(filteredPlaces));
-  } else {
-  }
-}
-
-
-
-}
-
