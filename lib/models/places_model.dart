@@ -51,12 +51,11 @@ class Feature {
   String toJson() => json.encode(toMap());
 
   factory Feature.fromMap(Map<String, dynamic> json) => Feature(
-    id: json["id"] ?? "", // Provide a default empty string if 'id' is null
+    id: json["id"] ?? "",
     placeType: List<String>.from(json["placetype"]?.map((x) => x.toString()) ?? []),
-    text: json["text"] ?? "", // Provide a default empty string if 'text' is null
+    text: json["text"] ?? "",
     placeName: List<String>.from(json["placeName"]?.map((x) => x.toString()) ?? []),
    
-    // placeName: json["placeName"] as String, // Provide a default empty string if 'place_name' is null
     center: List<double>.from(json["center"]?.map((x) => x.toDouble()) ?? []),
   );
 
@@ -73,3 +72,4 @@ class Feature {
     return 'Feature: $text';
   }
 }
+

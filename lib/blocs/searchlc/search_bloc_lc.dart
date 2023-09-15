@@ -75,7 +75,6 @@ class SearchBlocLC extends Bloc<SearchEventLC, SearchStateLC> {
 
     final places = await loadPlacesFromJsonLC();
 
-    // Usamos una expresión regular para encontrar la parte "ab" después de los números
     final match = RegExp(r'\d+([a-zA-Z]+)').firstMatch(query);
     if (match != null) {
       final queryLetters = match.group(1)?.toLowerCase() ?? '';
