@@ -79,8 +79,8 @@ class MapsOptions extends StatelessWidget {
                           child: FadeInImage(
                             placeholder:
                                 const AssetImage('assets/no-image.jpg'),
-                            image: AssetImage(campusImage ??
-                                'assets/no-image.jpg'),
+                            image: AssetImage(
+                                campusImage ?? 'assets/no-image.jpg'),
                             fit: BoxFit.cover,
                           ),
                         ),
@@ -89,7 +89,7 @@ class MapsOptions extends StatelessWidget {
                   },
                 ),
               ),
-            )
+            ),
           ],
         ),
       ),
