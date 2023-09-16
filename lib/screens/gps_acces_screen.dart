@@ -7,23 +7,28 @@ import '../widgets/widgets.dart';
 
 class GpsAccessScreen extends StatelessWidget {
   const GpsAccessScreen({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
         color: Colors.grey.shade300,
-        child: Center(child: BlocBuilder<GpsBloc, GpsState>(
-          builder: (context, state) {
-            return !state.isGpsEnabled
-                ? const _EnableGpsMessage()
-                : const _AccessButton();
-          },
-        )
-            //  _AccessButton(),
-            //  child: _EnableGpsMessage()
-            ),
+        child: Center(
+          child: BlocBuilder<GpsBloc, GpsState>(
+            builder: (context, state) {
+              return !state.isGpsEnabled
+                  ? const _EnableGpsMessage()
+                  : const _AccessButton();
+            },
+          ),
+        ),
       ),
+         floatingActionButton: const Padding(
+           padding: EdgeInsets.only(bottom: 60, left: 60),
+           child: Align(
+               alignment: Alignment.bottomLeft,
+               child: BtnBack(),
+             ),
+         ),
     );
   }
 }
