@@ -22,6 +22,26 @@ class WeatherCard extends StatelessWidget {
     'Clear': 'Despejado',
     'Clouds': 'Nubes',
   };
+  final Map<String, String> icons = {
+    '01d': 'assets/Sun.png',
+    '01n': 'assets/Moon.png',
+    '02d': 'assets/Cloudy_Day.png',
+    '02n': 'assets/Cloudy_Night.png',
+    '03d': 'assets/Cloud.png',
+    '03n': 'assets/Cloud.png',
+    '04d': 'assets/Cloud.png',
+    '04n': 'assets/Cloud.png',
+    '09d': 'assets/Raining.png',
+    '09n': 'assets/Raining.png',
+    '10d': 'assets/Raining.png',
+    '10n': 'assets/Raining.png',
+    '11d': 'assets/Thunder.png',
+    '11n': 'assets/Thunder.png',
+    '13d': 'assets/Snow.png',
+    '13n': 'assets/Snow.png',
+    '50d': 'assets/Mist.png',
+    '50n': 'assets/Mist.png',
+  };
 
   String translateWeather(String weather) {
     return weatherTranslations[weather] ?? weather;
@@ -69,11 +89,11 @@ class WeatherCard extends StatelessWidget {
                   const Icon(FontAwesomeIcons.locationDot, color: Colors.white),
                   const SizedBox(width: 10),
                   Text(
-                    weatherData != null
+                    weatherData != null && weatherData!['name'] != null
                         ? weatherData!['name']
                         : 'Ubicación Desconocida',
                     style: const TextStyle(
-                      fontSize: 22,
+                      fontSize: 30,
                       fontWeight: FontWeight.bold,
                       color: Colors.white,
                     ),
@@ -82,8 +102,8 @@ class WeatherCard extends StatelessWidget {
               ),
               if (weatherData != null && weatherData!['weather'] != null) ...[
                 Container(
-                  width: 100,
-                  height: 100,
+                  width: 150,
+                  height: 150,
                   decoration: const BoxDecoration(
                     boxShadow: [
                       BoxShadow(
@@ -94,8 +114,10 @@ class WeatherCard extends StatelessWidget {
                       ),
                     ],
                   ),
-                  child: Image.network(
-                    'https://openweathermap.org/img/wn/${weatherData!['weather'][0]['icon']}.png',
+                  child: Image.asset(
+                    icons.containsKey(weatherData!['weather'][0]['icon'])
+                        ? icons[weatherData!['weather'][0]['icon']]!
+                        : 'assets/no-image.jpg', 
                     fit: BoxFit.contain,
                   ),
                 ),
@@ -112,7 +134,7 @@ class WeatherCard extends StatelessWidget {
                           children: [
                             const Icon(
                               FontAwesomeIcons.temperatureEmpty,
-                              size: 50,
+                              size: 35,
                               color: Colors.white,
                             ),
                             Container(
@@ -120,7 +142,7 @@ class WeatherCard extends StatelessWidget {
                               child: Text(
                                 '${(weatherData!['main']['temp'] - 273.15).toStringAsFixed(1)}',
                                 style: const TextStyle(
-                                  fontSize: 80,
+                                  fontSize: 50,
                                   color: Colors.white,
                                   fontWeight: FontWeight.bold,
                                 ),
@@ -131,7 +153,7 @@ class WeatherCard extends StatelessWidget {
                       const Text(
                         '°C',
                         style: TextStyle(
-                          fontSize: 40,
+                          fontSize: 30,
                           color: Colors.white,
                           fontWeight: FontWeight.w300,
                         ),
@@ -149,7 +171,7 @@ class WeatherCard extends StatelessWidget {
                     ),
                   ),
               ],
-              const SizedBox(height: 40),
+              const SizedBox(height: 20),
               if (weatherData?['main'] != null &&
                   weatherData!['main']['humidity'] != null)
                 Row(

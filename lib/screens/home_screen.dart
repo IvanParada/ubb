@@ -96,15 +96,14 @@ class _HomeBody extends StatelessWidget {
           const PageTitle(),
           Swiper(
             layout: SwiperLayout.STACK,
-                itemWidth: size.width * 0.7,
-                itemHeight: size.height * 0.5,
+            itemWidth: size.width * 0.7,
+            itemHeight: size.height * 0.5,
             itemBuilder: (BuildContext context, int index) {
               if (index == 0) {
                 return WeatherCard(weatherData: ccpWeatherData);
-              } else if (index == 1) {
+              } else {
                 return WeatherCard(weatherData: chillanWeatherData);
               }
-              return WeatherCard(weatherData: null);
             },
             itemCount: 2,
           ),
