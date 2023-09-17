@@ -28,11 +28,10 @@ class MapsOptions extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const SizedBox(height: 30),
+            const SizedBox(height: 40),
             FadeInDown(
               child: const Center(),
             ),
-            const SizedBox(height: 10),
             Center(
               child: FadeInDown(
                 child: const Center(
@@ -43,7 +42,7 @@ class MapsOptions extends StatelessWidget {
                 )),
               ),
             ),
-            const SizedBox(height: 40),
+            const SizedBox(height: 50),
             FadeInLeft(
               child: const Center(
                 child: Text(
@@ -57,7 +56,7 @@ class MapsOptions extends StatelessWidget {
                 ),
               ),
             ),
-            const SizedBox(height: 50),
+            const SizedBox(height: 80),
             Center(
               child: BounceInUp(
                 child: Swiper(

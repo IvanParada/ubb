@@ -20,7 +20,7 @@ class SettingsTitle extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const SizedBox(height: 30),
+            const SizedBox(height: 40),
             FadeInDown(
               child: const Center(
                   child: FaIcon(
@@ -30,6 +30,20 @@ class SettingsTitle extends StatelessWidget {
               )),
             ),
             const SizedBox(height: 50),
+            FadeInLeft(
+              child: const Center(
+                child: Text(
+                  'Datos del usuario.',
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: Colors.white,
+                    decoration: TextDecoration.none,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+              ),
+            ),
+            const SizedBox(height: 80),
             Center(
               child: Container(
                 width: size.width * 0.8,
