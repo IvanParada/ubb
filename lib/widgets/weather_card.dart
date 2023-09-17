@@ -101,26 +101,35 @@ class WeatherCard extends StatelessWidget {
                 ],
               ),
               if (weatherData != null && weatherData!['weather'] != null) ...[
-                Container(
-                  width: 150,
-                  height: 150,
-                  decoration: const BoxDecoration(
-                    boxShadow: [
-                      BoxShadow(
-                        color: Color(0xff5CB3FF),
-                        blurRadius: 65,
-                        spreadRadius: 1,
-                        offset: Offset(0, 0),
+                Stack(
+                  alignment: Alignment.center,
+                  children: [
+                    Container(
+                      width: 150,
+                      height: 150,
+                      decoration: const BoxDecoration(
+                        boxShadow: [
+                          BoxShadow(
+                            color: Color(0xff5CB3FF),
+                            blurRadius: 60,
+                            spreadRadius: 0.1,
+                            offset: Offset(0, 0),
+                          ),
+                        ],
                       ),
-                    ],
-                  ),
-                  child: Image.asset(
-                    icons.containsKey(weatherData!['weather'][0]['icon'])
-                        ? icons[weatherData!['weather'][0]['icon']]!
-                        : 'assets/no-image.jpg', 
-                    fit: BoxFit.contain,
-                  ),
+                    ),
+                    Image.asset(
+                      icons.containsKey(weatherData!['weather'][0]['icon'])
+                          ? icons[weatherData!['weather'][0]['icon']]!
+                          : 'assets/no-image.jpg',
+                      width: 160, // Ajusta el ancho de la imagen aquí
+                      height: 160, // Ajusta la altura de la imagen aquí
+                      fit: BoxFit.contain,
+                    ),
+                  ],
                 ),
+                  const SizedBox(height: 10),
+
                 Align(
                   alignment: Alignment.topCenter,
                   child: Stack(
@@ -161,29 +170,38 @@ class WeatherCard extends StatelessWidget {
                     ],
                   ),
                 ),
+                  const SizedBox(height: 10),
+
                 if (weatherData!['weather'][0]['main'] != null)
                   Text(
                     translateWeather(weatherData!['weather'][0]['main']),
                     style: const TextStyle(
-                      fontWeight: FontWeight.bold,
+                      fontWeight: FontWeight.w100,
                       fontSize: 30,
                       color: Colors.white,
                     ),
                   ),
               ],
-              const SizedBox(height: 20),
+              const SizedBox(height: 10),
               if (weatherData?['main'] != null &&
                   weatherData!['main']['humidity'] != null)
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(
-                      'Humedad: ${weatherData!['main']['humidity']}%',
-                      style: const TextStyle(
-                        fontWeight: FontWeight.w400,
-                        fontSize: 20,
-                        color: Colors.white,
-                      ),
+                    RichText(
+                      text: TextSpan(children: [
+                        const TextSpan(
+                          text: 'Humedad: ',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20,
+                          ),
+                        ),
+                        TextSpan(
+                          text: '${weatherData!['main']['humidity']}%',
+                          style: const TextStyle(fontSize: 20),
+                        ),
+                      ]),
                     ),
                     const SizedBox(width: 10),
                     const Icon(
@@ -192,19 +210,26 @@ class WeatherCard extends StatelessWidget {
                     )
                   ],
                 ),
-              const SizedBox(height: 20),
+              const SizedBox(height: 10),
               if (weatherData?['main'] != null &&
                   weatherData!['main']['humidity'] != null)
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(
-                      'Viento: ${weatherData!['wind']['speed']} Km/h',
-                      style: const TextStyle(
-                        fontWeight: FontWeight.w400,
-                        fontSize: 20,
-                        color: Colors.white,
-                      ),
+                    RichText(
+                      text: TextSpan(children: [
+                        const TextSpan(
+                          text: 'Viento: ',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20,
+                          ),
+                        ),
+                        TextSpan(
+                          text: '${weatherData!['wind']['speed']} km/h',
+                          style: const TextStyle(fontSize: 20),
+                        ),
+                      ]),
                     ),
                     const SizedBox(width: 10),
                     const Icon(
