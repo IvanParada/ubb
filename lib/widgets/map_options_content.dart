@@ -68,11 +68,12 @@ class MapsOptions extends StatelessWidget {
                   itemBuilder: (BuildContext context, int index) {
                     final campusName = campusNames[index];
                     final campusImage = campusImages[campusName];
+                    final heroTag = '$campusName${index + 1}';
 
                     return GestureDetector(
                       onTap: () => Navigator.pushNamed(context, campusName),
                       child: Hero(
-                        tag: campusName,
+                        tag: heroTag,
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(20),
                           child: FadeInImage(

@@ -9,10 +9,10 @@ class MapViewFM extends StatefulWidget {
   final Set<Marker> markersFM;
 
   const MapViewFM({
-    Key? key,
+    super.key,
     required this.polylinesFM,
     required this.markersFM,
-  }) : super(key: key);
+  });
 
   @override
   MapViewStateFM createState() => MapViewStateFM();

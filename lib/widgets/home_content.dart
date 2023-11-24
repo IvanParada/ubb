@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 class PageTitle extends StatelessWidget {
 
-  const PageTitle({Key? key}) : super(key: key);
+  const PageTitle({super.key});
 
 
 

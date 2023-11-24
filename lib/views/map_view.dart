@@ -9,10 +9,10 @@ class MapView extends StatefulWidget {
   final Set<Marker> markers;
 
   const MapView({
-    Key? key,
+    super.key,
     required this.polylines,
     required this.markers,
-  }) : super(key: key);
+  });
 
   @override
   MapViewState createState() => MapViewState();

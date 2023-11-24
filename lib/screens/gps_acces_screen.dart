@@ -6,7 +6,7 @@ import '../ui/ui.dart';
 import '../widgets/widgets.dart';
 
 class GpsAccessScreen extends StatelessWidget {
-  const GpsAccessScreen({Key? key}) : super(key: key);
+  const GpsAccessScreen({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,9 +34,7 @@ class GpsAccessScreen extends StatelessWidget {
 }
 
 class _AccessButton extends StatelessWidget {
-  const _AccessButton({
-    Key? key,
-  }) : super(key: key);
+  const _AccessButton();
 
   @override
   Widget build(BuildContext context) {
@@ -53,9 +51,7 @@ class _AccessButton extends StatelessWidget {
 }
 
 class _EnableGpsMessage extends StatelessWidget {
-  const _EnableGpsMessage({
-    Key? key,
-  }) : super(key: key);
+  const _EnableGpsMessage();
 
   @override
   Widget build(BuildContext context) {

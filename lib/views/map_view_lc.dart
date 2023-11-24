@@ -9,10 +9,10 @@ class MapViewLC extends StatefulWidget {
   final Set<Marker> markersLC;
 
   const MapViewLC({
-    Key? key,
+    super.key,
     required this.polylinesLC,
     required this.markersLC,
-  }) : super(key: key);
+  });
 
   @override
   MapViewStateLC createState() => MapViewStateLC();

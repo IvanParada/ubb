@@ -3,7 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 
 class AnimatedScreen extends StatefulWidget {
-  const AnimatedScreen({Key? key}) : super(key: key);
+  const AnimatedScreen({super.key});
 
   @override
   State<AnimatedScreen> createState() => _AnimatedScreenState();

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class WeatherCard extends StatelessWidget {
-  WeatherCard({Key? key, this.weatherData}) : super(key: key);
+  WeatherCard({super.key, this.weatherData});
 
   final Map<String, dynamic>? weatherData;
   final Map<String, String> weatherTranslations = {

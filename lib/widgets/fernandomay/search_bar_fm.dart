@@ -10,7 +10,7 @@ import 'package:ubb/models/models.dart';
 import '../widgets.dart';
 
 class SearchBarFM extends StatelessWidget {
-  const SearchBarFM({Key? key}) : super(key: key);
+  const SearchBarFM({super.key});
 
   @override
   Widget build(BuildContext context) {

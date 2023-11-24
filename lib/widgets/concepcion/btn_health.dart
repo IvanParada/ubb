@@ -6,8 +6,8 @@ import '../../blocs/bloc.dart';
 
 class BtnToggleMarker extends StatelessWidget {
   const BtnToggleMarker({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {

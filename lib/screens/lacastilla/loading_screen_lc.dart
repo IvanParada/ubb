@@ -5,7 +5,7 @@ import 'package:ubb/blocs/bloc.dart';
 import 'package:ubb/screens/screens.dart';
 
 class LoadingScreenLC extends StatelessWidget {
-  const LoadingScreenLC({Key? key}) : super(key: key);
+  const LoadingScreenLC({super.key});
 
   @override
   Widget build(BuildContext context) {

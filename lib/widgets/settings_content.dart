@@ -155,7 +155,7 @@ class SettingsTitle extends StatelessWidget {
                       borderRadius: BorderRadius.circular(10)),
                   disabledColor: Colors.grey,
                   elevation: 0,
-                  color: const Color.fromARGB(255, 9, 27, 43),
+                  color: const Color.fromARGB(255, 58, 4, 4),
                   onPressed: () {
                     authService.logout();
                     Navigator.pushReplacementNamed(context, 'login_screen');

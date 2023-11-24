@@ -8,7 +8,7 @@ class MapsOptionsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.grey.shade300,
+      color: const Color(0xFFE0E0E0),
       width: double.infinity,
       height: double.infinity,
       child: const Stack(

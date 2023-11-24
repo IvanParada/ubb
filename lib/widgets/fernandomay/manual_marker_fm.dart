@@ -6,7 +6,7 @@ import 'package:ubb/blocs/bloc.dart';
 import 'package:ubb/helpers/helpers.dart';
 
 class ManualMarkerFM extends StatelessWidget {
-  const ManualMarkerFM({Key? key}) : super(key: key);
+  const ManualMarkerFM({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +21,7 @@ class ManualMarkerFM extends StatelessWidget {
 }
 
 class _ManualMarkerBodyFM extends StatelessWidget {
-  const _ManualMarkerBodyFM({Key? key}) : super(key: key);
+  const _ManualMarkerBodyFM();
 
   @override
   Widget build(BuildContext context) {
@@ -90,9 +90,7 @@ class _ManualMarkerBodyFM extends StatelessWidget {
 }
 
 class _BtnBack extends StatelessWidget {
-  const _BtnBack({
-    Key? key,
-  }) : super(key: key);
+  const _BtnBack();
 
   @override
   Widget build(BuildContext context) {
