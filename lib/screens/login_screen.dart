@@ -96,11 +96,14 @@ class _LoginForm extends StatelessWidget {
               ),
               onChanged: (value) => loginForm.email = value,
               validator: (value) {
-                String pattern =
-                    r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@(alumnos\.ubiobio\.cl|ubiobio\.cl)$';
-                RegExp regExp = RegExp(pattern);
+                RegExp emailUsuario =
+                    RegExp(r'^[a-z0-9.]+@(alumnos\.ubiobio\.cl|ubiobio\.cl)$');
 
-                return regExp.hasMatch(value ?? '')
+                if (value == null || value.length < 14 || value.length > 100) {
+                  return 'El correo debe tener entre 14 y 60 caracteres';
+                }
+
+                return emailUsuario.hasMatch(value)
                     ? null
                     : 'El correo no es válido';
               },

@@ -93,9 +93,9 @@ class _RegisterForm extends StatelessWidget {
                   prefixIcon: FontAwesomeIcons.userLarge),
               onChanged: (value) => registerForm.nombre = value,
               validator: (value) {
-                RegExp nombreRegExp = RegExp(r'^[a-zA-Zá-úÁ-ÚüÜñÑ\s]{3,}$');
+                RegExp nombreUsuario = RegExp(r'^[a-zA-Zá-úÁ-ÚüÜñÑ\s]{2,30}$');
 
-                return nombreRegExp.hasMatch(value ?? '')
+                return nombreUsuario.hasMatch(value ?? '')
                     ? null
                     : 'El nombre no es válido';
               },
@@ -110,9 +110,10 @@ class _RegisterForm extends StatelessWidget {
                   prefixIcon: FontAwesomeIcons.idCard),
               onChanged: (value) => registerForm.apellido = value,
               validator: (value) {
-                RegExp nombreRegExp = RegExp(r'^[a-zA-Zá-úÁ-ÚüÜñÑ\s]{3,}$');
+                RegExp apellidoUsuario =
+                    RegExp(r'^[a-zA-Zá-úÁ-ÚüÜñÑ\s]{2,30}$');
 
-                return nombreRegExp.hasMatch(value ?? '')
+                return apellidoUsuario.hasMatch(value ?? '')
                     ? null
                     : 'El apellido no es válido';
               },
@@ -127,12 +128,14 @@ class _RegisterForm extends StatelessWidget {
                   prefixIcon: FontAwesomeIcons.at),
               onChanged: (value) => registerForm.email = value,
               validator: (value) {
-                String pattern =
-                    r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@(alumnos\.ubiobio\.cl|ubiobio\.cl)$';
+                RegExp emailUsuario =
+                    RegExp(r'^[a-z0-9.]+@(alumnos\.ubiobio\.cl|ubiobio\.cl)$');
 
-                RegExp regExp = RegExp(pattern);
+                if (value == null || value.length < 14 || value.length > 100) {
+                  return 'El correo debe tener entre 14 y 60 caracteres';
+                }
 
-                return regExp.hasMatch(value ?? '')
+                return emailUsuario.hasMatch(value)
                     ? null
                     : 'El correo no es válido';
               },

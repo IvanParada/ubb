@@ -83,23 +83,28 @@ class WeatherCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const SizedBox(height: 20),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Icon(FontAwesomeIcons.locationDot, color: Colors.white),
-                  const SizedBox(width: 10),
-                  Text(
-                    weatherData != null && weatherData!['name'] != null
-                        ? weatherData!['name']
-                        : 'Ubicación Desconocida',
-                    style: const TextStyle(
-                      fontSize: 30,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
-                    ),
-                  ),
-                ],
-              ),
+Center(
+  child: Expanded(
+    child: Row(
+      mainAxisSize: MainAxisSize.min, // Asegura que la fila ocupe el mínimo espacio necesario
+      children: [
+        const Icon(FontAwesomeIcons.locationDot, color: Colors.white),
+        const SizedBox(width: 10),
+        Text(
+          weatherData != null && weatherData!['name'] != null
+              ? weatherData!['name']
+              : 'Cargando',
+          style: const TextStyle(
+            fontSize: 30,
+            fontWeight: FontWeight.bold,
+            color: Colors.white,
+          ),
+        ),
+      ],
+    ),
+  ),
+),
+
               if (weatherData != null && weatherData!['weather'] != null) ...[
                 Stack(
                   alignment: Alignment.center,
