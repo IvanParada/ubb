@@ -8,6 +8,8 @@ import 'package:ubb/ui/input_decorations.dart';
 import 'package:ubb/widgets/widgets.dart';
 import 'package:ubb/ui/ui.dart';
 
+import '../services/services.dart';
+
 class RegisterScreen extends StatelessWidget {
   const RegisterScreen({super.key});
 
@@ -203,10 +205,14 @@ class _RegisterForm extends StatelessWidget {
                                 registerForm.email,
                                 registerForm.password);
                         if (errorMessage == null) {
+                          NotificationsService.showSnackbar(
+                              'Se ha enviado un correo para activar tu cuenta. Por favor, verifica tu bandeja de entrada');
                           // ignore: use_build_context_synchronously
                           Navigator.pushReplacementNamed(
                               context, 'login_screen');
                         } else {
+                          NotificationsService.showSnackbar(
+                              'Ya existe una cuenta registrada con este correo electronico.');
                           registerForm.isLoading = false;
                         }
                       },
