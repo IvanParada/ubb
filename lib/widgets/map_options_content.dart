@@ -16,7 +16,7 @@ final Map<String, String> campusImages = {
 };
 
 class MapsOptions extends StatelessWidget {
-  const MapsOptions({super.key});
+  const MapsOptions({super.key}); // Asegúrate de que el key sea opcional
 
   @override
   Widget build(BuildContext context) {
@@ -68,21 +68,17 @@ class MapsOptions extends StatelessWidget {
                   itemBuilder: (BuildContext context, int index) {
                     final campusName = campusNames[index];
                     final campusImage = campusImages[campusName];
-                    final heroTag = '$campusName${index + 1}';
 
                     return GestureDetector(
                       onTap: () => Navigator.pushNamed(context, campusName),
-                      child: Hero(
-                        tag: heroTag,
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(20),
-                          child: FadeInImage(
-                            placeholder:
-                                const AssetImage('assets/no-image.jpg'),
-                            image: AssetImage(
-                                campusImage ?? 'assets/no-image.jpg'),
-                            fit: BoxFit.cover,
-                          ),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(20),
+                        child: FadeInImage(
+                          placeholder:
+                              const AssetImage('assets/no-image.jpg'),
+                          image: AssetImage(
+                              campusImage ?? 'assets/no-image.jpg'),
+                          fit: BoxFit.cover,
                         ),
                       ),
                     );
