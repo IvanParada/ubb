@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:ubb/providers/providers.dart';
-import 'package:ubb/services/auth_service.dart';
 import 'package:ubb/ui/input_decorations.dart';
 import 'package:ubb/widgets/widgets.dart';
 import 'package:ubb/ui/ui.dart';
@@ -90,16 +89,30 @@ class _RegisterForm extends StatelessWidget {
               autocorrect: false,
               keyboardType: TextInputType.name,
               decoration: InputDecorations.authInputDecoration(
-                  hintText: 'Nombre',
-                  labelText: 'Nombre',
-                  prefixIcon: FontAwesomeIcons.userLarge),
+                hintText: 'Nombre',
+                labelText: 'Nombre',
+                prefixIcon: FontAwesomeIcons.userLarge,
+              ),
               onChanged: (value) => registerForm.nombre = value,
               validator: (value) {
-                RegExp nombreUsuario = RegExp(r'^[a-zA-Zá-úÁ-ÚüÜñÑ\s]{2,30}$');
+                // Verificar si el campo está vacío
+                if (value == null || value.isEmpty) {
+                  return 'Debes rellenar el campo de texto';
+                }
 
-                return nombreUsuario.hasMatch(value ?? '')
-                    ? null
-                    : 'El nombre no es válido';
+                // Verificar si la longitud está entre 2 y 30 caracteres
+                if (value.length < 2 || value.length > 30) {
+                  return 'El nombre debe contener entre 2 a 30 caracteres';
+                }
+
+                // Verificar si hay caracteres no válidos
+                RegExp nombreUsuario = RegExp(r'^[a-zA-Zá-úÁ-ÚüÜñÑ\s]{2,30}$');
+                if (!nombreUsuario.hasMatch(value)) {
+                  return 'Has ingresado un carácter no válido';
+                }
+
+                // Si pasa todas las validaciones, retorna null
+                return null;
               },
             ),
             const SizedBox(height: 30),
@@ -107,17 +120,31 @@ class _RegisterForm extends StatelessWidget {
               autocorrect: false,
               keyboardType: TextInputType.name,
               decoration: InputDecorations.authInputDecoration(
-                  hintText: 'Apellido ',
-                  labelText: 'Apellido',
-                  prefixIcon: FontAwesomeIcons.idCard),
+                hintText: 'Apellido',
+                labelText: 'Apellido',
+                prefixIcon: FontAwesomeIcons.idCard,
+              ),
               onChanged: (value) => registerForm.apellido = value,
               validator: (value) {
+                // Verificar si el campo está vacío
+                if (value == null || value.isEmpty) {
+                  return 'Debes rellenar el campo de texto';
+                }
+
+                // Verificar si la longitud está entre 2 y 30 caracteres
+                if (value.length < 2 || value.length > 30) {
+                  return 'El apellido debe contener entre 2 a 30 caracteres';
+                }
+
+                // Verificar si hay caracteres no válidos
                 RegExp apellidoUsuario =
                     RegExp(r'^[a-zA-Zá-úÁ-ÚüÜñÑ\s]{2,30}$');
+                if (!apellidoUsuario.hasMatch(value)) {
+                  return 'Has ingresado un carácter no válido';
+                }
 
-                return apellidoUsuario.hasMatch(value ?? '')
-                    ? null
-                    : 'El apellido no es válido';
+                // Si pasa todas las validaciones, retorna null
+                return null;
               },
             ),
             const SizedBox(height: 30),
@@ -125,21 +152,31 @@ class _RegisterForm extends StatelessWidget {
               autocorrect: false,
               keyboardType: TextInputType.emailAddress,
               decoration: InputDecorations.authInputDecoration(
-                  hintText: 'nombre.apellido0000@alumnos.ubiobio.cl',
-                  labelText: 'Correo electronico',
-                  prefixIcon: FontAwesomeIcons.at),
+                hintText: 'nombre.apellido0000@alumnos.ubiobio.cl',
+                labelText: 'Correo electrónico',
+                prefixIcon: FontAwesomeIcons.at,
+              ),
               onChanged: (value) => registerForm.email = value,
               validator: (value) {
-                RegExp emailUsuario =
-                    RegExp(r'^[a-z0-9.]+@(alumnos\.ubiobio\.cl|ubiobio\.cl)$');
-
-                if (value == null || value.length < 14 || value.length > 100) {
-                  return 'El correo debe tener entre 14 y 60 caracteres';
+                // Verificar si el campo está vacío
+                if (value == null || value.isEmpty) {
+                  return 'Debes rellenar el campo de texto';
                 }
 
-                return emailUsuario.hasMatch(value)
-                    ? null
-                    : 'El correo no es válido';
+                // Verificar si la longitud está entre 14 y 100 caracteres
+                if (value.length < 14 || value.length > 100) {
+                  return 'El correo debe tener entre 14 y 100 caracteres';
+                }
+
+                // Verificar si el correo tiene el formato correcto
+                RegExp emailUsuario =
+                    RegExp(r'^[a-z0-9.]+@(alumnos\.ubiobio\.cl|ubiobio\.cl)$');
+                if (!emailUsuario.hasMatch(value)) {
+                  return 'El correo no es válido';
+                }
+
+                // Si pasa todas las validaciones, retorna null
+                return null;
               },
             ),
             const SizedBox(height: 30),
@@ -154,14 +191,17 @@ class _RegisterForm extends StatelessWidget {
               ),
               onChanged: (value) => registerForm.password = value,
               validator: (value) {
-                if (value == null) {
-                  return 'Contraseña requerida';
+                // Verificar si el campo está vacío
+                if (value == null || value.isEmpty) {
+                  return 'Debes rellenar el campo de texto';
                 }
 
+                // Verificar la longitud de la contraseña
                 if (value.length < 6) {
                   return 'La contraseña debe contener al menos 6 caracteres';
                 }
 
+                // Verificar si la contraseña contiene al menos una letra mayúscula y una minúscula
                 bool hasUppercase = false;
                 bool hasLowercase = false;
 
@@ -177,6 +217,7 @@ class _RegisterForm extends StatelessWidget {
                   }
                 }
 
+                // Si no cumple con las condiciones anteriores, mostrar mensaje de error
                 return 'La contraseña debe contener al menos una letra mayúscula y una minúscula';
               },
             ),

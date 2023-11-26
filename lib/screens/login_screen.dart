@@ -96,16 +96,25 @@ class _LoginForm extends StatelessWidget {
               ),
               onChanged: (value) => loginForm.email = value,
               validator: (value) {
-                RegExp emailUsuario =
-                    RegExp(r'^[a-z0-9.]+@(alumnos\.ubiobio\.cl|ubiobio\.cl)$');
-
-                if (value == null || value.length < 14 || value.length > 100) {
-                  return 'El correo debe tener entre 14 y 60 caracteres';
+                // Verificar si el campo está vacío
+                if (value == null || value.isEmpty) {
+                  return 'Debes rellenar el campo de texto';
                 }
 
-                return emailUsuario.hasMatch(value)
-                    ? null
-                    : 'El correo no es válido';
+                // Verificar si la longitud está entre 14 y 100 caracteres
+                if (value.length < 14 || value.length > 100) {
+                  return 'El correo debe tener entre 14 y 100 caracteres';
+                }
+
+                // Verificar si el correo tiene el formato correcto
+                RegExp emailUsuario =
+                    RegExp(r'^[a-z0-9.]+@(alumnos\.ubiobio\.cl|ubiobio\.cl)$');
+                if (!emailUsuario.hasMatch(value)) {
+                  return 'El correo no es válido';
+                }
+
+                // Si pasa todas las validaciones, retorna null
+                return null;
               },
             ),
             const SizedBox(height: 30),
@@ -120,9 +129,34 @@ class _LoginForm extends StatelessWidget {
               ),
               onChanged: (value) => loginForm.password = value,
               validator: (value) {
-                return (value != null && value.length >= 6)
-                    ? null
-                    : 'Contraseña incorrecta';
+                // Verificar si el campo está vacío
+                if (value == null || value.isEmpty) {
+                  return 'Debes rellenar el campo de texto';
+                }
+
+                // Verificar la longitud de la contraseña
+                if (value.length < 6) {
+                  return 'La contraseña debe contener al menos 6 caracteres';
+                }
+
+                // Verificar si la contraseña contiene al menos una letra mayúscula y una minúscula
+                bool hasUppercase = false;
+                bool hasLowercase = false;
+
+                for (int i = 0; i < value.length; i++) {
+                  if (value[i].toUpperCase() == value[i]) {
+                    hasUppercase = true;
+                  } else if (value[i].toLowerCase() == value[i]) {
+                    hasLowercase = true;
+                  }
+
+                  if (hasUppercase && hasLowercase) {
+                    return null;
+                  }
+                }
+
+                // Si no cumple con las condiciones anteriores, mostrar mensaje de error
+                return 'La contraseña debe contener al menos una letra mayúscula y una minúscula';
               },
             ),
             const SizedBox(height: 5),

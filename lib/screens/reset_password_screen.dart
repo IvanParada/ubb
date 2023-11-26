@@ -121,16 +121,25 @@ class _ResetPasswordForm extends StatelessWidget {
               ),
               onChanged: (value) => resetPass.email = value,
               validator: (value) {
-                RegExp emailUsuario =
-                    RegExp(r'^[a-z0-9.]+@(alumnos\.ubiobio\.cl|ubiobio\.cl)$');
-
-                if (value == null || value.length < 14 || value.length > 100) {
-                  return 'El correo debe tener entre 14 y 60 caracteres';
+                // Verificar si el campo está vacío
+                if (value == null || value.isEmpty) {
+                  return 'Debes rellenar el campo de texto';
                 }
 
-                return emailUsuario.hasMatch(value)
-                    ? null
-                    : 'El correo no es válido';
+                // Verificar si la longitud está entre 14 y 100 caracteres
+                if (value.length < 14 || value.length > 100) {
+                  return 'El correo debe tener entre 14 y 100 caracteres';
+                }
+
+                // Verificar si el correo tiene el formato correcto
+                RegExp emailUsuario =
+                    RegExp(r'^[a-z0-9.]+@(alumnos\.ubiobio\.cl|ubiobio\.cl)$');
+                if (!emailUsuario.hasMatch(value)) {
+                  return 'El correo no es válido';
+                }
+
+                // Si pasa todas las validaciones, retorna null
+                return null;
               },
             ),
             const SizedBox(height: 30),
