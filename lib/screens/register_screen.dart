@@ -193,12 +193,12 @@ class _RegisterForm extends StatelessWidget {
               validator: (value) {
                 // Verificar si el campo está vacío
                 if (value == null || value.isEmpty) {
-                  return 'Debes rellenar el campo de texto';
+                  return 'Debes rellenar el campo de texto.';
                 }
 
                 // Verificar la longitud de la contraseña
                 if (value.length < 6) {
-                  return 'La contraseña debe contener al menos 6 caracteres';
+                  return 'La contraseña debe contener al menos 6 caracteres.';
                 }
 
                 // Verificar si la contraseña contiene al menos una letra mayúscula y una minúscula
@@ -206,10 +206,12 @@ class _RegisterForm extends StatelessWidget {
                 bool hasLowercase = false;
 
                 for (int i = 0; i < value.length; i++) {
-                  if (value[i].toUpperCase() == value[i]) {
-                    hasUppercase = true;
-                  } else if (value[i].toLowerCase() == value[i]) {
-                    hasLowercase = true;
+                  if (RegExp(r'[a-zA-Z]').hasMatch(value[i])) {
+                    if (value[i].toUpperCase() == value[i]) {
+                      hasUppercase = true;
+                    } else if (value[i].toLowerCase() == value[i]) {
+                      hasLowercase = true;
+                    }
                   }
 
                   if (hasUppercase && hasLowercase) {
@@ -218,7 +220,7 @@ class _RegisterForm extends StatelessWidget {
                 }
 
                 // Si no cumple con las condiciones anteriores, mostrar mensaje de error
-                return 'La contraseña debe contener al menos una letra mayúscula y una minúscula';
+                return 'Se requiere una letra mayúscula y una minúscula.';
               },
             ),
             const SizedBox(height: 30),

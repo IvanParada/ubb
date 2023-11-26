@@ -160,7 +160,7 @@ class _ResetPasswordForm extends StatelessWidget {
 
                       if (result == null) {
                         NotificationsService.showSnackbar(
-                            'Se ha enviado un correo para recuperar tu contraseña. Por favor, verifica tu bandeja de entrada');
+                            'Se ha enviado un correo para recuperar tu contraseña. Por favor, verifica tu bandeja de entrada.');
                       } else {
                         // Error: mostrar un SnackBar con el mensaje de error
                         // ignore: use_build_context_synchronously

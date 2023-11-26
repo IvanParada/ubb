@@ -19,7 +19,7 @@ class LoginScreen extends StatelessWidget {
             child: SingleChildScrollView(
       child: Column(
         children: [
-           const SizedBox(height: 250),
+          const SizedBox(height: 250),
           CardContainer(
             child: Column(
               children: [
@@ -41,7 +41,6 @@ class LoginScreen extends StatelessWidget {
           ),
           const SizedBox(height: 50),
           TextButton(
-            
             onPressed: () =>
                 Navigator.pushReplacementNamed(context, 'register_screen'),
             style: ButtonStyle(
@@ -98,19 +97,19 @@ class _LoginForm extends StatelessWidget {
               validator: (value) {
                 // Verificar si el campo está vacío
                 if (value == null || value.isEmpty) {
-                  return 'Debes rellenar el campo de texto';
+                  return 'Debes rellenar el campo de texto.';
                 }
 
                 // Verificar si la longitud está entre 14 y 100 caracteres
                 if (value.length < 14 || value.length > 100) {
-                  return 'El correo debe tener entre 14 y 100 caracteres';
+                  return 'El correo debe tener entre 14 y 100 caracteres.';
                 }
 
                 // Verificar si el correo tiene el formato correcto
                 RegExp emailUsuario =
                     RegExp(r'^[a-z0-9.]+@(alumnos\.ubiobio\.cl|ubiobio\.cl)$');
                 if (!emailUsuario.hasMatch(value)) {
-                  return 'El correo no es válido';
+                  return 'El correo no es válido.';
                 }
 
                 // Si pasa todas las validaciones, retorna null
@@ -131,12 +130,12 @@ class _LoginForm extends StatelessWidget {
               validator: (value) {
                 // Verificar si el campo está vacío
                 if (value == null || value.isEmpty) {
-                  return 'Debes rellenar el campo de texto';
+                  return 'Debes rellenar el campo de texto.';
                 }
 
                 // Verificar la longitud de la contraseña
                 if (value.length < 6) {
-                  return 'La contraseña debe contener al menos 6 caracteres';
+                  return 'La contraseña debe contener al menos 6 caracteres.';
                 }
 
                 // Verificar si la contraseña contiene al menos una letra mayúscula y una minúscula
@@ -144,10 +143,12 @@ class _LoginForm extends StatelessWidget {
                 bool hasLowercase = false;
 
                 for (int i = 0; i < value.length; i++) {
-                  if (value[i].toUpperCase() == value[i]) {
-                    hasUppercase = true;
-                  } else if (value[i].toLowerCase() == value[i]) {
-                    hasLowercase = true;
+                  if (RegExp(r'[a-zA-Z]').hasMatch(value[i])) {
+                    if (value[i].toUpperCase() == value[i]) {
+                      hasUppercase = true;
+                    } else if (value[i].toLowerCase() == value[i]) {
+                      hasLowercase = true;
+                    }
                   }
 
                   if (hasUppercase && hasLowercase) {
@@ -156,7 +157,7 @@ class _LoginForm extends StatelessWidget {
                 }
 
                 // Si no cumple con las condiciones anteriores, mostrar mensaje de error
-                return 'La contraseña debe contener al menos una letra mayúscula y una minúscula';
+                return 'Se requiere una letra mayúscula y una minúscula.';
               },
             ),
             const SizedBox(height: 5),
@@ -228,5 +229,3 @@ class _LoginForm extends StatelessWidget {
     );
   }
 }
-
-
