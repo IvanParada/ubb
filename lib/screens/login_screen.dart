@@ -134,7 +134,7 @@ class _LoginFormState extends State<_LoginForm> {
                 labelText: 'Contraseña',
                 prefixIcon: FontAwesomeIcons.lock,
                 suffixIcon: IconButton(
-                  
+                  color: Colors.black54,
                   icon: Icon(
                     showPassword 
                       ? FontAwesomeIcons.eyeSlash

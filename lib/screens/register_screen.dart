@@ -73,7 +73,14 @@ class RegisterScreen extends StatelessWidget {
   }
 }
 
-class _RegisterForm extends StatelessWidget {
+class _RegisterForm extends StatefulWidget {
+  @override
+  State<_RegisterForm> createState() => _RegisterFormState();
+}
+
+class _RegisterFormState extends State<_RegisterForm> {
+  bool showPassword = false;
+
   @override
   Widget build(BuildContext context) {
     final registerForm = Provider.of<RegisterFormProvider>(
@@ -182,12 +189,23 @@ class _RegisterForm extends StatelessWidget {
             const SizedBox(height: 30),
             TextFormField(
               autocorrect: false,
-              obscureText: true,
+              obscureText: !showPassword,
               keyboardType: TextInputType.visiblePassword,
               decoration: InputDecorations.authInputDecoration(
                 hintText: '*****',
                 labelText: 'Contraseña',
                 prefixIcon: FontAwesomeIcons.lock,
+                suffixIcon: IconButton(
+                  color: Colors.black54,
+                  icon: Icon(showPassword
+                      ? FontAwesomeIcons.eyeSlash
+                      : FontAwesomeIcons.eye),
+                  onPressed: () {
+                    setState(() {
+                      showPassword = !showPassword;
+                    });
+                  },
+                ),
               ),
               onChanged: (value) => registerForm.password = value,
               validator: (value) {
