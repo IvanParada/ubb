@@ -73,11 +73,19 @@ class LoginScreen extends StatelessWidget {
   }
 }
 
-class _LoginForm extends StatelessWidget {
+class _LoginForm extends StatefulWidget {
+  @override
+  State<_LoginForm> createState() => _LoginFormState();
+}
+
+class _LoginFormState extends State<_LoginForm> {
+  bool showPassword = false;
+  
   @override
   Widget build(BuildContext context) {
     final loginForm = Provider.of<LoginFormProvider>(
-        context); //se obtiene el acceso a todo el LoginFormProvider
+        context); 
+    
 
     return Form(
       key: loginForm.formKey,
@@ -119,12 +127,25 @@ class _LoginForm extends StatelessWidget {
             const SizedBox(height: 30),
             TextFormField(
               autocorrect: false,
-              obscureText: true,
+              obscureText: !showPassword,
               keyboardType: TextInputType.visiblePassword,
               decoration: InputDecorations.authInputDecoration(
                 hintText: '*****',
                 labelText: 'Contraseña',
                 prefixIcon: FontAwesomeIcons.lock,
+                suffixIcon: IconButton(
+                  
+                  icon: Icon(
+                    showPassword 
+                      ? FontAwesomeIcons.eyeSlash
+                      : FontAwesomeIcons.eye
+                  ),
+                  onPressed: (){
+                    setState(() {
+                      showPassword = !showPassword;
+                    });
+                  },
+                ),
               ),
               onChanged: (value) => loginForm.password = value,
               validator: (value) {
