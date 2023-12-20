@@ -35,7 +35,7 @@ class MapBlocLC extends Bloc<MapEventLC, MapStateLC> {
     });
 
     on<AddMedicalMarkerEventLC>((event, emit) async {
-      final customMedicalMarkerLC = await getAssetImageMarker();
+      final customMedicalMarkerLC = await getAssetImageMarker('assets/kit_medical.png');
       final newMarkerLC = Marker(
           markerId: MarkerId(event.medicalMarkerLC.position.toString()),
           position: event.medicalMarkerLC.position,
@@ -137,10 +137,8 @@ Future<void> loadMedicalMarkersFromJson() async {
     polylinesLC.add(backgroundRoute);
     polylinesLC.add(foregroundRoute);
 
-    final startMarkerPin = await getNetworkImageMarker(
-        'http://icon-park.com/imagefiles/location_map_pin_navy_blue7.png');
-    final endMarkerPin = await getNetworkImageMarker(
-        'http://icon-park.com/imagefiles/location_map_pin_red7.png');
+    final startMarkerPin = await getAssetImageMarker('assets/pin.png');
+    final endMarkerPin = await getAssetImageMarker('assets/pin.png');
 
     final startMarker = Marker(
       markerId: const MarkerId('start'),

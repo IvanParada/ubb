@@ -3,12 +3,12 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
-Future<BitmapDescriptor> getAssetImageMarker() async {
+Future<BitmapDescriptor> getAssetImageMarker(String imgPath) async {
   return BitmapDescriptor.fromAssetImage(
     const ImageConfiguration(
       devicePixelRatio: 2,
     ),
-    'assets/kit_medical.png',
+    imgPath,
   );
 }
 
@@ -32,7 +32,7 @@ Future<BitmapDescriptor> getNetworkImageMarker(url) async {
   final data = await frame.image.toByteData(format: ui.ImageByteFormat.png);
 
   if (data == null) {
-    return await getAssetImageMarker();
+    return await getAssetImageMarker('assets/pin.png');
   }
   return BitmapDescriptor.fromBytes(data.buffer.asUint8List());
 }
