@@ -17,9 +17,6 @@ class _MainScreenState extends State<MainScreen> {
   Widget build(BuildContext context) {
     final screens = [
       const HomeScreen(),
-      // const LoadingScreen(),
-      // const LoadingScreenFM(),
-      // const LoadingScreenLC(),
       const MapsOptionsScreen(),
       const SettingsScreen(),
     ];
