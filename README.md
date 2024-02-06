@@ -1,7 +1,7 @@
 <h1 align="center"> UBBMap🚶 </h1>
 
 
-**Índice**   
+**Tabla de contenido**   
 * [Descripción](#descripcion)
 * [Tecnologías utilizadas](#tec-util)
 * [Caracteristicas](#caract)
@@ -35,3 +35,9 @@
   * Mapbox SDK
   * Google Maps SDK
   * OpenWeatherMap API
+
+## 👦🍳 Caracteristicas<a name="caract"></a>
+## 📚 Aprendizaje<a name="aprendizaje"></a>
+## ✨ Mejoras<a name="mejora"></a>
+## 🚦 Dirigiendo el proyecto<a name="instrucciones"></a>
+## 📱 Demostración<a name="img"></a>
