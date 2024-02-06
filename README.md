@@ -40,9 +40,38 @@
 ## 📚 Aprendizaje<a name="aprendizaje"></a>
 ## ✨ Mejoras<a name="mejora"></a>
 ## 🚦 Dirigiendo el proyecto<a name="instrucciones"></a>
+
+### Requisitos previos
+
+Antes de comenzar con la instalación y ejecución del proyecto, asegúrate de tener los siguientes requisitos previos:
+
+1. **Flutter SDK:** Es necesario tener Flutter SDK instalado en tu sistema. Puedes seguir las instrucciones de instalación en la [documentación oficial de Flutter](https://flutter.dev/docs/get-started/install).
+
+2. **Editor de código:** Se recomienda tener un editor de código instalado y configurado para trabajar con Flutter. Algunas opciones populares incluyen:
+   - [Visual Studio Code](https://code.visualstudio.com/)
+   - [Android Studio](https://developer.android.com/studio) (con el complemento Flutter)
+   - [IntelliJ IDEA](https://www.jetbrains.com/idea/) (con el complemento Flutter)
+
+3. **Dispositivo móvil o Emulador:** Necesitarás un dispositivo móvil con modo de depuración USB activado o un emulador Android configurado y funcionando en tu sistema. Puedes seguir las instrucciones para configurar un emulador en la [documentación de Flutter](https://flutter.dev/docs/get-started/install/windows#set-up-the-android-emulator).
+
+4. **Conexión a Internet:** Asegúrate de tener una conexión a Internet activa para descargar las dependencias del proyecto y cualquier actualización necesaria durante el proceso de instalación.
+
+5. **Clonar el repositorio:** Clona el repositorio de GitHub del proyecto utilizando Git. Puedes ejecutar el siguiente comando en tu terminal:
+git clone https://github.com/usuario/nombre_del_proyecto.git
+
+6. **Instalar dependencias:** Después de clonar el repositorio, instala las dependencias del proyecto utilizando el administrador de paquetes de Dart, `pub`. Puedes ejecutar el siguiente comando en el directorio raíz del proyecto:
+flutter pub get
+
+7. **Ejecutar el proyecto:** Una vez instaladas las dependencias, puedes ejecutar el proyecto en un emulador o dispositivo físico utilizando el siguiente comando:
+flutter run
+
+
+Asegúrate de cumplir con todos estos requisitos previos antes de proceder con la instalación y ejecución del proyecto. Si encuentras algún problema durante el proceso, consulta la documentación oficial de Flutter o busca ayuda en la comunidad de desarrollo de Flutter.
+
+
 ## 📱 Demostración<a name="img"></a>
 
-*🔒 <b>Autenticación de usuario</b>
+🔒 <b>Autenticación de usuario</b>
 
 <div style="display:flex;">
     <img src="https://github.com/IvanParada/ubb/assets/118088453/1a797394-7451-4c4d-b176-6f4bac09aafa" alt="Iniciar Sesión" style="width:200px; margin-right:10px;">
@@ -51,7 +80,7 @@
 </div>
 
 
-*📱<b>Screens App</b>
+📱<b>Screens App</b>
 
 <div style="display:flex;">
     <img src="https://github.com/IvanParada/ubb/assets/118088453/b5c3cca3-ecff-4a74-a91b-88d02c460e20" alt="Inicio" style="width:200px; margin-right:10px;">
@@ -60,7 +89,7 @@
 </div>
 
 
-*🗺️ <b>Mapa</b>
+🗺️ <b>Mapa</b>
 
 <div style="display:flex;">
     <img src="https://github.com/IvanParada/ubb/assets/118088453/1d6c07ca-fe95-4de1-af7d-788f279efc18" alt="Inicio" style="width:200px; margin-right:10px;">
