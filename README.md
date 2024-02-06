@@ -14,24 +14,24 @@
 
 ## ✔️ Tecnologías usadas<a name="tec-util"></a>
 
-* Lenguaje de programación:
+<b>* Lenguaje de programación:</b>
   * Dart
 
-* Frameworks y bibliotecas:
+<b>* Frameworks y bibliotecas:</b>
   * Flutter
     
-* Bases de datos:
+<b>* Bases de datos:</b>
   * Firebase Realtime Database
   * Firebase Authentication
     
-* Control de versiones:
+<b>* Control de versiones:</b>
   * Git
     
-* Herramientas de desarrollo:
+<b>* Herramientas de desarrollo:</b>
   * Visual Studio Code
   * Android Studio
     
-* APIs y servicios de terceros:
+<b>* APIs y servicios de terceros:</b>
   * Mapbox SDK
   * Google Maps SDK
   * OpenWeatherMap API
