@@ -1,3 +1,5 @@
 <h1 align="center"> UBBMap </h1>
 
-##:hammer: Funcionalidades
+<h4 align="center">
+🔨: Funcionalidades del proyecto 
+</h4>
