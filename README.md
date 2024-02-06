@@ -2,13 +2,9 @@
 
 
 **Índice**   
-1. [Primer apartado](#descripcion)
-2. [Segundo apartado](#tec-usadas)
-## Primer apartado<a name="descripcion"></a>
+* [Descripción](#descripcion)
+* [Tecnologías utilizadas](#tec-util)
+## 📋: Descripción<a name="descripcion"></a>
 Texto del primer apartado
-## Segundo apartado<a name="tec-usadas"></a>
+## ✔️: Tecnologías usadas<a name="tec-util"></a>
 Texto del segundo apartado
-
-<h4>
-✔️ Tecnologías utilizadas 
-</h4>
