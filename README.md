@@ -42,7 +42,8 @@
 ## 🚦 Dirigiendo el proyecto<a name="instrucciones"></a>
 ## 📱 Demostración<a name="img"></a>
 
-🔒 <b>Autenticación de usuario</b>
+*🔒 <b>Autenticación de usuario</b>
+
 <div style="display:flex;">
     <img src="https://github.com/IvanParada/ubb/assets/118088453/1a797394-7451-4c4d-b176-6f4bac09aafa" alt="Iniciar Sesión" style="width:200px; margin-right:10px;">
     <img src="https://github.com/IvanParada/ubb/assets/118088453/52b8c0a4-d308-45ca-855c-a7c9d7d48c45" alt="Registrarse" style="width:200px; margin-right:10px;">
@@ -50,7 +51,8 @@
 </div>
 
 
-📱<b>Screens App</b>
+*📱<b>Screens App</b>
+
 <div style="display:flex;">
     <img src="https://github.com/IvanParada/ubb/assets/118088453/b5c3cca3-ecff-4a74-a91b-88d02c460e20" alt="Inicio" style="width:200px; margin-right:10px;">
     <img src="https://github.com/IvanParada/ubb/assets/118088453/da812494-288b-4033-8218-4f173bda2270" alt="Mapas" style="width:200px; margin-right:10px;">
@@ -58,7 +60,8 @@
 </div>
 
 
-🗺️ <b>Mapa</b>
+*🗺️ <b>Mapa</b>
+
 <div style="display:flex;">
     <img src="https://github.com/IvanParada/ubb/assets/118088453/1d6c07ca-fe95-4de1-af7d-788f279efc18" alt="Inicio" style="width:200px; margin-right:10px;">
     <img src="https://github.com/IvanParada/ubb/assets/118088453/54e04245-c6b5-4491-b8dd-cc565b70e3a1" alt="Mapas" style="width:200px; margin-right:10px;">
