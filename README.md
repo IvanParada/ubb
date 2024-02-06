@@ -44,17 +44,12 @@
 
 *Autenticación de usuario
 
-<ul style="list-style-type:none; padding:0;">
-    <li style="display:inline-block; margin-right:10px;">
-        <img src="https://github.com/IvanParada/ubb/assets/118088453/1a797394-7451-4c4d-b176-6f4bac09aafa" alt="Iniciar Sesión" style="width:100px;">
-    </li>
-    <li style="display:inline-block; margin-right:10px;">
-        <img src="https://github.com/IvanParada/ubb/assets/118088453/52b8c0a4-d308-45ca-855c-a7c9d7d48c45" alt="Registrarse" style="width:100px;">
-    </li>
-    <li style="display:inline-block;">
-        <img src="https://github.com/IvanParada/ubb/assets/118088453/836abc24-944d-4d39-8d96-8057b81c4479" alt="Recuperar cuenta" style="width:100px;">
-    </li>
-</ul>
+<div style="display:flex;">
+    <img src="https://github.com/IvanParada/ubb/assets/118088453/1a797394-7451-4c4d-b176-6f4bac09aafa" alt="Iniciar Sesión" style="width:150px; margin-right:10px;">
+    <img src="https://github.com/IvanParada/ubb/assets/118088453/52b8c0a4-d308-45ca-855c-a7c9d7d48c45" alt="Registrarse" style="width:150px; margin-right:10px;">
+    <img src="https://github.com/IvanParada/ubb/assets/118088453/836abc24-944d-4d39-8d96-8057b81c4479" alt="Recuperar cuenta" style="width:150px;">
+</div>
+
 
 ![Iniciar Sesión](https://github.com/IvanParada/ubb/assets/118088453/1a797394-7451-4c4d-b176-6f4bac09aafa)
 ![Registrarse](https://github.com/IvanParada/ubb/assets/118088453/52b8c0a4-d308-45ca-855c-a7c9d7d48c45)
