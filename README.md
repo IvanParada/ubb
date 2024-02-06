@@ -57,13 +57,13 @@ Antes de comenzar con la instalación y ejecución del proyecto, asegúrate de t
 4. **Conexión a Internet:** Asegúrate de tener una conexión a Internet activa para descargar las dependencias del proyecto y cualquier actualización necesaria durante el proceso de instalación.
 
 5. **Clonar el repositorio:** Clona el repositorio de GitHub del proyecto utilizando Git. Puedes ejecutar el siguiente comando en tu terminal:
-git clone https://github.com/usuario/nombre_del_proyecto.git
+`git clone https://github.com/IvanParada/ubb.git`
 
 6. **Instalar dependencias:** Después de clonar el repositorio, instala las dependencias del proyecto utilizando el administrador de paquetes de Dart, `pub`. Puedes ejecutar el siguiente comando en el directorio raíz del proyecto:
-flutter pub get
+`flutter pub get`
 
 7. **Ejecutar el proyecto:** Una vez instaladas las dependencias, puedes ejecutar el proyecto en un emulador o dispositivo físico utilizando el siguiente comando:
-flutter run
+`flutter run`
 
 
 Asegúrate de cumplir con todos estos requisitos previos antes de proceder con la instalación y ejecución del proyecto. Si encuentras algún problema durante el proceso, consulta la documentación oficial de Flutter o busca ayuda en la comunidad de desarrollo de Flutter.
