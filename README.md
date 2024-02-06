@@ -42,7 +42,7 @@
 ## 🚦 Dirigiendo el proyecto<a name="instrucciones"></a>
 ## 📱 Demostración<a name="img"></a>
 
-###Autenticación de usuario
+<h2>Autenticación de usuario</h2>
 <div style="display:flex;">
     <img src="https://github.com/IvanParada/ubb/assets/118088453/1a797394-7451-4c4d-b176-6f4bac09aafa" alt="Iniciar Sesión" style="width:200px; margin-right:10px;">
     <img src="https://github.com/IvanParada/ubb/assets/118088453/52b8c0a4-d308-45ca-855c-a7c9d7d48c45" alt="Registrarse" style="width:200px; margin-right:10px;">
