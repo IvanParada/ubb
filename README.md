@@ -54,7 +54,7 @@
 <div style="display:flex;">
     <img src="https://github.com/IvanParada/ubb/assets/118088453/b5c3cca3-ecff-4a74-a91b-88d02c460e20" alt="Inicio" style="width:200px; margin-right:10px;">
     <img src="https://github.com/IvanParada/ubb/assets/118088453/da812494-288b-4033-8218-4f173bda2270" alt="Mapas" style="width:200px; margin-right:10px;">
-    <img src="https://github.com/IvanParada/ubb/assets/118088453/836abc24-944d-4d39-8d96-8057b81c4479" alt="Ajustes" style="width:200px;">
+    <img src="https://github.com/IvanParada/ubb/assets/118088453/e6210685-f55e-4575-912b-8a4b5f48f05b" alt="Ajustes" style="width:200px;">
 </div>
 
 
