@@ -31,9 +31,9 @@
   * ![Android Studio](https://img.shields.io/badge/Android%20Studio-3DDC84.svg?style=for-the-badge&logo=android-studio&logoColor=white)
     
 * <b>APIs y servicios de terceros:</b>
-  * <img src="https://cdn.icon-icons.com/icons2/2699/PNG/512/mapbox_logo_icon_169975.png" alt="MapboxSDK" width="300">
-  * <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bd/Google_Maps_Logo_2020.svg/2275px-Google_Maps_Logo_2020.svg.png" alt="GoogleMapsSDK" width="300">
-  * <img src="https://openweathermap.org/themes/openweathermap/assets/img/logo_white_cropped.png" alt="OpenWeatherMap" width="300">
+  * <img src="https://cdn.icon-icons.com/icons2/2699/PNG/512/mapbox_logo_icon_169975.png" alt="MapboxSDK" width="100">
+  * <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bd/Google_Maps_Logo_2020.svg/2275px-Google_Maps_Logo_2020.svg.png" alt="GoogleMapsSDK" width="100">
+  * <img src="https://openweathermap.org/themes/openweathermap/assets/img/logo_white_cropped.png" alt="OpenWeatherMap" width="100">
 
 ## 💻 Características<a name="caract"></a>
 
