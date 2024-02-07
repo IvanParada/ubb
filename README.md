@@ -6,7 +6,7 @@
 * [Tecnologías utilizadas](#tec-util)
 * [Caracteristicas](#caract)
 * [Aprendizaje](#aprendizaje)
-* [Mejoras](#mejora)
+* [Posibles Mejoras](#mejora)
 * [Dirigiendo el proyecto](#instrucciones)
 * [Demostración](#img)
 ## 📋 Descripción<a name="descripcion"></a>
@@ -64,6 +64,21 @@
 
 
 ## 📚 Aprendizaje<a name="aprendizaje"></a>
+
+
+Durante el desarrollo de este proyecto, he aprendido varias lecciones y adquirido nuevas habilidades. Algunos de los aspectos más destacados incluyen:
+
+- **Aprendizaje de Flutter y Dart:** Este proyecto me brindó la oportunidad de sumergirme en el desarrollo de aplicaciones móviles utilizando Flutter y el lenguaje de programación Dart. Aprendí sobre widgets, state management, y cómo construir interfaces de usuario interactivas y receptivas.
+
+- **Integración con Firebase:** Aprendí a integrar Firebase en mi aplicación para manejar la autenticación de usuarios y la base de datos en tiempo real. Esto me permitió implementar características como el inicio de sesión seguro y la recuperación de contraseñas, además proporcionar las ubicaciones registradas a lo usuarios para que pudiesen acceder a su destino.
+
+- **Uso de APIs externas:** Integré APIs externas, como OpenWeatherMap, para obtener datos meteorológicos en tiempo real, Mapbox y Google Maps SDK para mostrar mapas interactivos. Aprendí a trabajar con estas APIs y a manejar las respuestas de manera efectiva.
+
+- **Diseño de Experiencia de Usuario:** Me esforcé por crear una experiencia de usuario intuitiva y atractiva. Aprendí sobre principios de diseño de UX/UI y cómo aplicarlos para mejorar la usabilidad y la satisfacción del usuario.
+
+En resumen, el desarrollo de este proyecto me proporcionó una valiosa experiencia práctica y me permitió mejorar mis habilidades en desarrollo de aplicaciones móviles, integración de APIs, gestión de proyectos y diseño de experiencia de usuario.
+
+
 ## ✨ Posibles Mejoras<a name="mejora"></a>
 
 1. **Ubicación del Botón de Emergencia:** Agregar un botón específico para mostrar la ubicación del botón de emergencia dentro de la universidad, proporcionando información vital en caso de emergencias.
