@@ -37,8 +37,42 @@
   * OpenWeatherMap API
 
 ## 👦🍳 Caracteristicas<a name="caract"></a>
+
+### 1. Autenticación de Usuario
+- Permite a los usuarios iniciar sesión de manera segura utilizando Firebase Authentication.
+
+### 2. Registro de Usuario
+- Permite a los usuarios crear nuevas cuentas en la aplicación.
+
+### 3. Recuperación de Cuenta
+- Proporciona a los usuarios la opción de restablecer su contraseña en caso de olvido.
+
+### 4. Visualización de Mapas
+- Utiliza Mapbox y Google Maps SDK para mostrar mapas interactivos en la aplicación.
+
+### 5. Búsqueda de Destinos
+- Permite a los usuarios buscar destinos a través de una barra de búsqueda.
+
+### 6. Selección de Destinos con Marcador Manual
+- Los usuarios pueden seleccionar destinos manualmente utilizando un marcador en el mapa.
+
+### 7. Visualización de Clima
+- Muestra información meteorológica actualizada utilizando la API de OpenWeatherMap.
+
+### 8. Botones de Uso Específico
+- Incluye botones específicos para acciones como mostrar/ocultar marcadores de desfibriladores, conocer la ubicación del usuario y activar el seguimiento de usuario.
+
+
 ## 📚 Aprendizaje<a name="aprendizaje"></a>
-## ✨ Mejoras<a name="mejora"></a>
+## ✨ Posibles Mejoras<a name="mejora"></a>
+
+1. **Ubicación del Botón de Emergencia:** Agregar un botón específico para mostrar la ubicación del botón de emergencia dentro de la universidad, proporcionando información vital en caso de emergencias.
+
+2. **Pronóstico del Tiempo Detallado:** Integrar un pronóstico del tiempo detallado que incluya información sobre las próximas horas, ayudando a los usuarios a planificar sus actividades con mayor precisión.
+   
+3.  **Integración con Otras Plataformas:** Explorar la posibilidad de expandir la aplicación a otras plataformas, como iOS, para llegar a una audiencia más amplia de usuarios.
+
+
 ## 🚦 Dirigiendo el proyecto<a name="instrucciones"></a>
 
 ### Requisitos previos
