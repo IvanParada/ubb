@@ -36,7 +36,7 @@
   * Google Maps SDK
   * OpenWeatherMap API
 
-## 💻 Caracteristicas<a name="caract"></a>
+## 💻 Características<a name="caract"></a>
 
 ### 1. Autenticación de Usuario
 - Permite a los usuarios iniciar sesión de manera segura utilizando Firebase Authentication.
