@@ -270,6 +270,7 @@ class _RegisterFormState extends State<_RegisterForm> {
                               'Se ha enviado un correo para activar tu cuenta. Por favor, verifica tu bandeja de entrada');
                           // ignore: use_build_context_synchronously
                           Navigator.pushReplacementNamed(
+                              // ignore: use_build_context_synchronously
                               context, 'login_screen');
                         } else {
                           NotificationsService.showSnackbar(
