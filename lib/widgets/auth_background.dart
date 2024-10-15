@@ -37,15 +37,24 @@ class _HeaderIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+
     return SafeArea(
       child: Container(
         width: double.infinity,
-        margin: EdgeInsets.only(top: 30, left: (size.width * 0.5) - 45),
-        child: FadeInDown(
-          child: const FaIcon(
-            FontAwesomeIcons.userGraduate,
-            color: Colors.white,
-            size: 100,
+        margin: const EdgeInsets.only(top: 30),
+        child: Padding(
+          padding: EdgeInsets.only(
+            top: size.height * 0.07,
+            left: size.width * 0.4,
+            right: size.width * 0.4,
+          ),
+          child: FadeInDown(
+            child: const FaIcon(
+              FontAwesomeIcons.userGraduate,
+              color: Colors.white,
+              size: 100,
+            ),
           ),
         ),
       ),
@@ -61,22 +70,7 @@ class _BlueBox extends StatelessWidget {
     return Container(
       width: double.infinity,
       height: size.height * 0.4,
-      decoration: _blueBackground(),
-      child: const Stack(
-        children: [
-          Positioned(top: 90, left: 30, child: Bubble()),
-          Positioned(top: -40, left: -30, child: Bubble()),
-          Positioned(top: -50, right: -20, child: Bubble()),
-          Positioned(bottom: -50, left: 10, child: Bubble()),
-          Positioned(bottom: 120, right: 30, child: Bubble()),
-        ],
-      ),
+      decoration: const BoxDecoration(color: Color(0xFF1A3253)),
     );
   }
-
-  BoxDecoration _blueBackground() => const BoxDecoration(
-          gradient: LinearGradient(colors: [
-        Color.fromARGB(255, 9, 27, 43),
-        Color.fromARGB(255, 9, 27, 43),
-      ]));
 }

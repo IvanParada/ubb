@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:ubb/themes/colors_theme.dart';
 
 class InputDecorations {
   static InputDecoration authInputDecoration({
@@ -9,24 +10,40 @@ class InputDecorations {
     Widget? suffixIcon,
   }) {
     return InputDecoration(
-        enabledBorder: const UnderlineInputBorder(
-            borderSide: BorderSide(
-          color: Color.fromARGB(255, 9, 27, 43),
-        )),
-        focusedBorder: const UnderlineInputBorder(
-            borderSide:
-                BorderSide(color: Color.fromARGB(255, 9, 27, 43), width: 2)),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(40),
+          borderSide: const BorderSide(
+            color: AppColors.textPrimary,
+            width: 1,
+          ),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(40),
+          borderSide: const BorderSide(
+            color: AppColors.textPrimary,
+            width: 1,
+          ),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(40),
+          borderSide: const BorderSide(
+            color: AppColors.textPrimary,
+            width: 1,
+          ),
+        ),
         hintText: hintText,
         labelText: labelText,
         labelStyle: const TextStyle(color: Colors.grey),
+        contentPadding: const EdgeInsets.symmetric(
+          vertical: 0,
+          horizontal: 20,
+        ),
         prefixIcon: prefixIcon != null
             ? FaIcon(
                 prefixIcon,
                 color: const Color.fromARGB(255, 9, 27, 43),
               )
             : null,
-        suffixIcon: suffixIcon 
-            );
-        
+        suffixIcon: suffixIcon);
   }
 }

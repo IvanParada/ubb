@@ -30,6 +30,8 @@ dependencies:
   firebase_database: ^10.3.2
   curved_navigation_bar: ^1.0.3
   firebase_core: ^2.27.1
+  flutter_svg: ^2.0.10+1
+  google_fonts: ^6.2.1
 
 
 dev_dependencies:
@@ -44,3 +46,5 @@ flutter:
 
   assets:
     - assets/
+    - assets/icons/
+    - assets/weather_img/
