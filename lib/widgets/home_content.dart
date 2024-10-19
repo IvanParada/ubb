@@ -1,59 +1,113 @@
-import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:ubb/themes/colors_theme.dart';
+import '../models/weather_data.dart';
+import 'weather_card.dart';
 
 class PageTitle extends StatelessWidget {
+  final List<WeatherData> weatherDataList;
+  final PageController _pageController = PageController(initialPage: 0);
 
-  const PageTitle({super.key});
-
-
+  PageTitle({super.key, required this.weatherDataList});
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
 
     return SafeArea(
       child: Container(
-        margin: const EdgeInsets.symmetric(horizontal: 20),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+        height: size.height * 0.7,
+        decoration: const BoxDecoration(
+          color: AppColors.primary,
+          borderRadius: BorderRadius.only(
+            bottomLeft: Radius.circular(30),
+            bottomRight: Radius.circular(30),
+          ),
+        ),
+        child: Stack(
           children: [
-            const SizedBox(height: 30),
-            FadeInDown(
-              child: const Center(
-                child: Text(
-                  '¡Bienvenid@!',
-                  style: TextStyle(
-                      fontSize: 25,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white),
-                ),
-              ),
-            ),
-            const SizedBox(height: 10),
-            FadeInLeft(
-              child: const Center(
-                child: Text(
-                  'Explora nuestro campus con el mapa interactivo.',
-                  style: TextStyle(
-                    fontSize: 16,
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                const SizedBox(height: 16),
+                Text(
+                  'Inicio',
+                  style: GoogleFonts.roboto(
                     color: Colors.white,
+                    fontSize: 26,
+                    fontWeight: FontWeight.w800,
                   ),
-                  textAlign: TextAlign.center,
                 ),
+                const SizedBox(height: 8),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: size.width * 0.1),
+                  child: const Center(
+                    child: Text(
+                      'Hola, explora el campus con el mapa y mantente atento al clima!',
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: Colors.white,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 16),
+                Expanded(
+                  child: PageView.builder(
+                    controller: _pageController,
+                    itemCount: weatherDataList.length,
+                    onPageChanged: (index) => _pageController.jumpToPage(index),
+                    itemBuilder: (context, index) {
+                      final weatherData = weatherDataList[index];
+                      return Padding(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: size.width * 0.1,
+                        ),
+                        child: SizedBox(
+                          width: size.width * 0.8,
+                          child: WeatherCardWidget(weatherData: weatherData),
+                        ),
+                      );
+                    },
+                  ),
+                ),
+              ],
+            ),
+            Positioned(
+              bottom: 16,
+              left: 0,
+              right: 0,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: List.generate(weatherDataList.length, (index) {
+                  return AnimatedBuilder(
+                    animation: _pageController,
+                    builder: (context, child) {
+                      double selectedness =
+                          (_pageController.page ?? 0.0) == index ? 1.0 : 0.0;
+                      return _buildStepCircle(selectedness);
+                    },
+                  );
+                }),
               ),
             ),
-            const SizedBox(height: 30),
-            Center(
-              child: FadeInUp(
-                child: Image.asset(
-                  'assets/logo.png',
-                  height: 100,
-                  width: 190,
-                ),
-              ),
-            ),
-            const SizedBox(height: 10),
-            
           ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildStepCircle(double selectedness) {
+    final double size = 8.0 + (12.0 * selectedness);
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 4.0),
+      child: Container(
+        width: size,
+        height: size,
+        decoration: BoxDecoration(
+          color: selectedness == 1.0 ? Colors.white : Colors.grey,
+          shape: BoxShape.circle,
         ),
       ),
     );

@@ -1,10 +1,12 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:ubb/providers/providers.dart';
+import 'package:ubb/themes/colors_theme.dart';
 import 'package:ubb/ui/input_decorations.dart';
-import 'package:ubb/widgets/widgets.dart';
 import 'package:ubb/ui/ui.dart';
 
 import '../services/services.dart';
@@ -14,62 +16,106 @@ class RegisterScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+    final isKeyboardVisible = MediaQuery.of(context).viewInsets.bottom > 0;
+
     return Scaffold(
-        body: AuthBackground(
-            child: SingleChildScrollView(
-      child: Column(
-        children: [
-          const SizedBox(height: 250),
-          CardContainer(
-            child: Column(
+        resizeToAvoidBottomInset: false,
+        body: Stack(
+          children: [
+            Column(
               children: [
-                const SizedBox(height: 10),
-                const Text(
-                  'Registrar',
-                  style: TextStyle(
-                      color: Color.fromARGB(255, 9, 27, 43),
-                      fontSize: 35,
-                      fontWeight: FontWeight.w500),
+                AnimatedContainer(
+                  duration: const Duration(milliseconds: 300),
+                  curve: Curves.easeInOut,
+                  height: isKeyboardVisible
+                      ? size.height * 0.15
+                      : size.height * 0.35,
+                  decoration: const BoxDecoration(
+                    color: AppColors.primary,
+                    borderRadius: BorderRadius.only(
+                      bottomLeft: Radius.circular(30),
+                      bottomRight: Radius.circular(30),
+                    ),
+                  ),
+                  child: Center(
+                    child: AnimatedSize(
+                      duration: const Duration(milliseconds: 300),
+                      curve: Curves.easeInOut,
+                      child: SvgPicture.asset(
+                        'assets/icons/signin_icon.svg',
+                        height: isKeyboardVisible
+                            ? size.height * 0.07
+                            : size.height * 0.15,
+                      ),
+                    ),
+                  ),
                 ),
-                const SizedBox(height: 30),
-                ChangeNotifierProvider(
-                  create: (_) => RegisterFormProvider(),
-                  child: _RegisterForm(),
-                )
+                Container(
+                  padding: EdgeInsets.only(
+                    left: size.width * 0.1,
+                    right: size.width * 0.1,
+                  ),
+                  child: Column(
+                    children: [
+                      const SizedBox(height: 10),
+                      const Text(
+                        'Registrar',
+                        style: TextStyle(
+                            color: Color.fromARGB(255, 9, 27, 43),
+                            fontSize: 35,
+                            fontWeight: FontWeight.w500),
+                      ),
+                      const SizedBox(height: 30),
+                      ChangeNotifierProvider(
+                        create: (_) => RegisterFormProvider(),
+                        child: _RegisterForm(),
+                      )
+                    ],
+                  ),
+                ),
               ],
             ),
-          ),
-          const SizedBox(height: 50),
-          TextButton(
-            onPressed: () =>
-                Navigator.pushReplacementNamed(context, 'login_screen'),
-            style: ButtonStyle(
-                overlayColor: MaterialStateProperty.all(
-                    const Color.fromARGB(255, 9, 27, 43).withOpacity(0.1)),
-                shape: MaterialStateProperty.all(const StadiumBorder())),
-            child: RichText(
-              text: TextSpan(
-                style: TextStyle(
-                  fontSize: 18,
-                  color: const Color.fromARGB(255, 9, 27, 43).withOpacity(0.8),
+            Positioned(
+              bottom: 20,
+              left: 0,
+              right: 0,
+              child: TextButton(
+                onPressed: () =>
+                    Navigator.pushReplacementNamed(context, 'login_screen'),
+                style: ButtonStyle(
+                    overlayColor: WidgetStateProperty.all(
+                        AppColors.primary.withOpacity(0.1)),
+                    shape: WidgetStateProperty.all(const StadiumBorder())),
+                child: RichText(
+                  text: TextSpan(
+                    style: TextStyle(
+                      fontSize: 18,
+                      color: AppColors.primary.withOpacity(0.8),
+                    ),
+                    children: [
+                      TextSpan(
+                        text: '¿Ya tienes cuenta? ',
+                        style: GoogleFonts.roboto(
+                          fontSize: 16,
+                          color: AppColors.textPrimary,
+                        ),
+                      ),
+                      TextSpan(
+                        text: 'Inicia sesión',
+                        style: GoogleFonts.roboto(
+                          fontSize: 16,
+                          color: AppColors.textPrimary,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
-                children: const [
-                  TextSpan(
-                    text: '¿Ya tienes cuenta? ',
-                    style: TextStyle(fontWeight: FontWeight.w300),
-                  ),
-                  TextSpan(
-                    text: 'Inicia sesión',
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                ],
               ),
             ),
-          ),
-          const SizedBox(height: 50),
-        ],
-      ),
-    )));
+          ],
+        ));
   }
 }
 
@@ -98,7 +144,6 @@ class _RegisterFormState extends State<_RegisterForm> {
               decoration: InputDecorations.authInputDecoration(
                 hintText: 'Nombre',
                 labelText: 'Nombre',
-                prefixIcon: FontAwesomeIcons.userLarge,
               ),
               onChanged: (value) => registerForm.nombre = value,
               validator: (value) {
@@ -129,7 +174,6 @@ class _RegisterFormState extends State<_RegisterForm> {
               decoration: InputDecorations.authInputDecoration(
                 hintText: 'Apellido',
                 labelText: 'Apellido',
-                prefixIcon: FontAwesomeIcons.idCard,
               ),
               onChanged: (value) => registerForm.apellido = value,
               validator: (value) {
@@ -161,7 +205,6 @@ class _RegisterFormState extends State<_RegisterForm> {
               decoration: InputDecorations.authInputDecoration(
                 hintText: 'nombre.apellido0000@alumnos.ubiobio.cl',
                 labelText: 'Correo electrónico',
-                prefixIcon: FontAwesomeIcons.at,
               ),
               onChanged: (value) => registerForm.email = value,
               validator: (value) {
@@ -194,7 +237,6 @@ class _RegisterFormState extends State<_RegisterForm> {
               decoration: InputDecorations.authInputDecoration(
                 hintText: '*****',
                 labelText: 'Contraseña',
-                prefixIcon: FontAwesomeIcons.lock,
                 suffixIcon: IconButton(
                   color: Colors.black54,
                   icon: Icon(showPassword
@@ -244,10 +286,10 @@ class _RegisterFormState extends State<_RegisterForm> {
             const SizedBox(height: 30),
             MaterialButton(
                 shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10)),
+                    borderRadius: BorderRadius.circular(30)),
                 disabledColor: Colors.grey,
                 elevation: 0,
-                color: const Color.fromARGB(255, 9, 27, 43),
+                color: AppColors.primary,
                 onPressed: registerForm.isLoading
                     ? null
                     : () async {
@@ -268,13 +310,13 @@ class _RegisterFormState extends State<_RegisterForm> {
                         if (errorMessage == null) {
                           NotificationsService.showSnackbar(
                               'Se ha enviado un correo para activar tu cuenta. Por favor, verifica tu bandeja de entrada');
-                          // ignore: use_build_context_synchronously
                           Navigator.pushReplacementNamed(
                               // ignore: use_build_context_synchronously
-                              context, 'login_screen');
+                              context,
+                              'login_screen');
                         } else {
                           NotificationsService.showSnackbar(
-                              'Ya existe una cuenta registrada con este correo electronico.');
+                              'Ya existe una cuenta registrada con este correo electrónico.');
                           registerForm.isLoading = false;
                         }
                       },
@@ -288,14 +330,6 @@ class _RegisterFormState extends State<_RegisterForm> {
                       Text(
                         registerForm.isLoading ? 'Espere...' : 'Registrar',
                         style: const TextStyle(color: Colors.white),
-                      ),
-                      const Padding(
-                        padding: EdgeInsets.only(left: 20),
-                        child: FaIcon(
-                          FontAwesomeIcons.userAstronaut,
-                          color: Colors.white,
-                          size: 16,
-                        ),
                       ),
                     ],
                   ),

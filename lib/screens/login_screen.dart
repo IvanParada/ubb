@@ -17,24 +17,39 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+    final isKeyboardVisible = MediaQuery.of(context).viewInsets.bottom > 0;
+
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: Stack(
         children: [
           Column(
             children: [
-              Container(
-                height: size.height * 0.35,
-                decoration: const BoxDecoration(
-                  color: AppColors.primary,
-                  borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(30),
-                    bottomRight: Radius.circular(30),
+              AnimatedContainer(
+                duration: const Duration(milliseconds: 300),
+                curve: Curves.easeInOut,
+                height:
+                    isKeyboardVisible ? size.height * 0.15 : size.height * 0.35,
+                child: Container(
+                  height: size.height * 0.35,
+                  decoration: const BoxDecoration(
+                    color: AppColors.primary,
+                    borderRadius: BorderRadius.only(
+                      bottomLeft: Radius.circular(30),
+                      bottomRight: Radius.circular(30),
+                    ),
                   ),
-                ),
-                child: Center(
-                  child: SvgPicture.asset(
-                    'assets/icons/login_icon.svg',
+                  child: Center(
+                    child: AnimatedSize(
+                      duration: const Duration(milliseconds: 300),
+                      curve: Curves.easeInOut,
+                      child: SvgPicture.asset(
+                        'assets/icons/login_icon.svg',
+                        height: isKeyboardVisible
+                            ? size.height * 0.07
+                            : size.height * 0.15,
+                      ),
+                    ),
                   ),
                 ),
               ),
@@ -65,48 +80,47 @@ class LoginScreen extends StatelessWidget {
                   ],
                 ),
               ),
-              
             ],
           ),
           Positioned(
-                bottom: 20,
-                left: 0,
-                right: 0,
-                child: TextButton(
-                  onPressed: () => Navigator.pushReplacementNamed(
-                      context, 'register_screen'),
-                  style: ButtonStyle(
-                    overlayColor: WidgetStateProperty.all(
-                      AppColors.textPrimary,
-                    ),
-                  ),
-                  child: RichText(
-                    text: TextSpan(
-                      style: GoogleFonts.roboto(
-                        fontSize: 18,
-                        color: AppColors.textPrimary.withOpacity(0.8),
-                      ),
-                      children: [
-                        TextSpan(
-                          text: '¿Aún no tienes cuenta? ',
-                          style: GoogleFonts.roboto(
-                            fontSize: 16,
-                            color: AppColors.textPrimary,
-                          ),
-                        ),
-                        TextSpan(
-                          text: 'Regístrarse',
-                          style: GoogleFonts.roboto(
-                            fontSize: 16,
-                            color: AppColors.textPrimary,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
+            bottom: 20,
+            left: 0,
+            right: 0,
+            child: TextButton(
+              onPressed: () =>
+                  Navigator.pushReplacementNamed(context, 'register_screen'),
+              style: ButtonStyle(
+                overlayColor: WidgetStateProperty.all(
+                  AppColors.textPrimary.withOpacity(0.1),
                 ),
               ),
+              child: RichText(
+                text: TextSpan(
+                  style: GoogleFonts.roboto(
+                    fontSize: 18,
+                    color: AppColors.textPrimary.withOpacity(0.8),
+                  ),
+                  children: [
+                    TextSpan(
+                      text: '¿Aún no tienes cuenta? ',
+                      style: GoogleFonts.roboto(
+                        fontSize: 16,
+                        color: AppColors.textPrimary,
+                      ),
+                    ),
+                    TextSpan(
+                      text: 'Registrarse',
+                      style: GoogleFonts.roboto(
+                        fontSize: 16,
+                        color: AppColors.textPrimary,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
         ],
       ),
     );
@@ -137,7 +151,7 @@ class _LoginFormState extends State<_LoginForm> {
               keyboardType: TextInputType.emailAddress,
               decoration: InputDecorations.authInputDecoration(
                 hintText: 'nombre.apellido0000@alumnos.ubiobio.cl',
-                labelText: 'Correo electronico',
+                labelText: 'Correo electrónico',
               ),
               onChanged: (value) => loginForm.email = value,
               validator: (value) {
@@ -214,7 +228,7 @@ class _LoginFormState extends State<_LoginForm> {
                   context, 'reset_password_screen'),
               style: ButtonStyle(
                   overlayColor: WidgetStateProperty.all(
-                      const Color.fromARGB(255, 9, 27, 43).withOpacity(0.1)),
+                      AppColors.primary.withOpacity(0.1)),
                   shape: WidgetStateProperty.all(const StadiumBorder())),
               child: RichText(
                 textAlign: TextAlign.right,
