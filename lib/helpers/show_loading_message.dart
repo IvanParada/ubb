@@ -1,3 +1,4 @@
+import 'dart:ui'; // Necesario para BackdropFilter
 import 'dart:io';
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/cupertino.dart';
@@ -5,51 +6,42 @@ import 'package:flutter/material.dart';
 import 'package:ubb/themes/colors_theme.dart';
 
 void showLoadingMessage(BuildContext context) {
-  if (Platform.isAndroid) {
-    showDialog(
-      context: context,
-      barrierDismissible: false,
-      builder: (context) => BounceInDown(
-        child: AlertDialog(
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-          backgroundColor: AppColors.primary,
-          title:  const Text(
-            'Espere porfavor...',
-            style: TextStyle(color: AppColors.white),
-          ),
-          content: Container(
-            width: 100,
-            height: 80,
-            margin: const EdgeInsets.only(top: 10),
+  showDialog(
+    context: context,
+    barrierDismissible: false,
+    builder: (context) => BounceInDown(
+      child: AlertDialog(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20),
+        ),
+        backgroundColor: Colors.transparent,
+        content: BackdropFilter(
+          filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
+          child: Container(
+            decoration: BoxDecoration(
+              color: AppColors.primary.withOpacity(0.7),
+              borderRadius: BorderRadius.circular(20),
+            ),
+            padding: const EdgeInsets.all(16),
             child: const Column(
+              mainAxisSize: MainAxisSize.min,
               children: [
                 Text(
-                  'Calculando ruta...',
-                  style: TextStyle(color: AppColors.white),
+                  'Calculando ruta',
+                  style: TextStyle(color: AppColors.white, fontSize: 18),
                 ),
                 SizedBox(height: 15),
-                CircularProgressIndicator(
-                  strokeWidth: 5,
-                  color: AppColors.white,
-                )
+                Text(
+                  'Un momento por favor ...',
+                  style: TextStyle(color: AppColors.white),
+                ),
+                SizedBox(height: 5),
               ],
             ),
           ),
         ),
       ),
-    );
-    return;
-  }
-
-  showCupertinoDialog(
-    context: context,
-    builder: (context) => const CupertinoAlertDialog(
-      title: Text('Espere porfavor...'),
-      content: CupertinoActivityIndicator(),
     ),
   );
-}
-
-class AppAppColors {
+  return;
 }
