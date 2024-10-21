@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import '../ui/ui.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:ubb/themes/colors_theme.dart';
 import '../widgets/widgets.dart';
 
 class SettingsScreen extends StatelessWidget {
@@ -7,17 +8,52 @@ class SettingsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.grey.shade300,
-      width: double.infinity,
-      height: double.infinity,
-      child: const Stack(
+    final size = MediaQuery.of(context).size;
+    return Scaffold(
+       backgroundColor: Colors.grey.shade100,
+      body: Column(
         children: [
-          HeaderCurvo(),
-          Positioned(top: 200, left: 300, child: Bubble()),
-          Positioned(top: -40, left: -30, child: Bubble()),
-          Positioned(top: -50, right: -20, child: Bubble()),
-          SettingsTitle(),
+          Container(
+            height: size.height * 0.15,
+            width: size.width,
+            decoration: const BoxDecoration(
+              color: AppColors.primary,
+              borderRadius: BorderRadius.only(
+                bottomLeft: Radius.circular(20),
+                bottomRight: Radius.circular(20),
+              ),
+            ),
+            child: Center(
+              child: Padding(
+                padding: EdgeInsets.only(top: size.height * 0.03),
+                child: Text(
+                  'Perfil',
+                  style: GoogleFonts.roboto(
+                    color: AppColors.white,
+                    fontSize: 26,
+                    fontWeight: FontWeight.w800,
+                  ),
+                ),
+              ),
+            ),
+          ),
+          Align(
+            alignment: Alignment.centerLeft,
+            child: Padding(
+              padding: EdgeInsets.only(
+                top: size.height * 0.02,
+                left: size.width * 0.1,
+              ),
+              child: Text(
+                'Mis datos',
+                style: GoogleFonts.roboto(
+                    color: AppColors.textPrimary,
+                    fontSize: 26,
+                    fontWeight: FontWeight.w700),
+              ),
+            ),
+          ),
+          const SettingsTitle(),
         ],
       ),
     );

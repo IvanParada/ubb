@@ -1,8 +1,8 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:ubb/themes/colors_theme.dart';
 
-import '../ui/ui.dart';
 
 class AuthBackground extends StatelessWidget {
   final Widget child;
@@ -14,7 +14,7 @@ class AuthBackground extends StatelessWidget {
     final size = MediaQuery.of(context).size;
 
     return Container(
-      color: Colors.grey.shade300,
+      color: Colors.grey.shade100,
       width: double.infinity,
       height: double.infinity,
       child: Stack(
@@ -52,7 +52,7 @@ class _HeaderIcon extends StatelessWidget {
           child: FadeInDown(
             child: const FaIcon(
               FontAwesomeIcons.userGraduate,
-              color: Colors.white,
+              color: AppColors.white,
               size: 100,
             ),
           ),

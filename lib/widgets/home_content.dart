@@ -14,86 +14,84 @@ class PageTitle extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
 
-    return SafeArea(
-      child: Container(
-        height: size.height * 0.7,
-        decoration: const BoxDecoration(
-          color: AppColors.primary,
-          borderRadius: BorderRadius.only(
-            bottomLeft: Radius.circular(30),
-            bottomRight: Radius.circular(30),
-          ),
+    return Container(
+      height: size.height * 0.7,
+      decoration: const BoxDecoration(
+        color: AppColors.primary,
+        borderRadius: BorderRadius.only(
+          bottomLeft: Radius.circular(30),
+          bottomRight: Radius.circular(30),
         ),
-        child: Stack(
-          children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                const SizedBox(height: 16),
-                Text(
-                  'Inicio',
-                  style: GoogleFonts.roboto(
-                    color: Colors.white,
-                    fontSize: 26,
-                    fontWeight: FontWeight.w800,
-                  ),
+      ),
+      child: Stack(
+        children: [
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              SizedBox(height: size.height * 0.06),
+              Text(
+                'Inicio',
+                style: GoogleFonts.roboto(
+                  color: AppColors.white,
+                  fontSize: 26,
+                  fontWeight: FontWeight.w800,
                 ),
-                const SizedBox(height: 8),
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: size.width * 0.1),
-                  child: const Center(
-                    child: Text(
-                      'Hola, explora el campus con el mapa y mantente atento al clima!',
-                      style: TextStyle(
-                        fontSize: 16,
-                        color: Colors.white,
-                      ),
-                      textAlign: TextAlign.center,
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 16),
-                Expanded(
-                  child: PageView.builder(
-                    controller: _pageController,
-                    itemCount: weatherDataList.length,
-                    onPageChanged: (index) => _pageController.jumpToPage(index),
-                    itemBuilder: (context, index) {
-                      final weatherData = weatherDataList[index];
-                      return Padding(
-                        padding: EdgeInsets.symmetric(
-                          horizontal: size.width * 0.1,
-                        ),
-                        child: SizedBox(
-                          width: size.width * 0.8,
-                          child: WeatherCardWidget(weatherData: weatherData),
-                        ),
-                      );
-                    },
-                  ),
-                ),
-              ],
-            ),
-            Positioned(
-              bottom: 16,
-              left: 0,
-              right: 0,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: List.generate(weatherDataList.length, (index) {
-                  return AnimatedBuilder(
-                    animation: _pageController,
-                    builder: (context, child) {
-                      double selectedness =
-                          (_pageController.page ?? 0.0) == index ? 1.0 : 0.0;
-                      return _buildStepCircle(selectedness);
-                    },
-                  );
-                }),
               ),
+              const SizedBox(height: 8),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: size.width * 0.1),
+                child: const Center(
+                  child: Text(
+                    'Hola, explora el campus con el mapa y mantente atento al clima!',
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: AppColors.white,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+              ),
+              const SizedBox(height: 16),
+              Expanded(
+                child: PageView.builder(
+                  controller: _pageController,
+                  itemCount: weatherDataList.length,
+                  onPageChanged: (index) => _pageController.jumpToPage(index),
+                  itemBuilder: (context, index) {
+                    final weatherData = weatherDataList[index];
+                    return Padding(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: size.width * 0.1,
+                      ),
+                      child: SizedBox(
+                        width: size.width * 0.8,
+                        child: WeatherCardWidget(weatherData: weatherData),
+                      ),
+                    );
+                  },
+                ),
+              ),
+            ],
+          ),
+          Positioned(
+            bottom: 16,
+            left: 0,
+            right: 0,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: List.generate(weatherDataList.length, (index) {
+                return AnimatedBuilder(
+                  animation: _pageController,
+                  builder: (context, child) {
+                    double selectedness =
+                        (_pageController.page ?? 0.0) == index ? 1.0 : 0.0;
+                    return _buildStepCircle(selectedness);
+                  },
+                );
+              }),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
@@ -106,7 +104,7 @@ class PageTitle extends StatelessWidget {
         width: size,
         height: size,
         decoration: BoxDecoration(
-          color: selectedness == 1.0 ? Colors.white : Colors.grey,
+          color: selectedness == 1.0 ? AppColors.white : Colors.grey,
           shape: BoxShape.circle,
         ),
       ),

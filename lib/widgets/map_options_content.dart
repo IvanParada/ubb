@@ -1,94 +1,117 @@
-import 'package:animate_do/animate_do.dart';
-import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:go_router/go_router.dart';
+import 'package:ubb/themes/colors_theme.dart';
+import 'package:google_fonts/google_fonts.dart';
 
-final List<String> campusNames = [
-  'map_screen',
-  'map_screen_fm',
-  'map_screen_lc',
+final List<Map<String, String>> campusData = [
+  {'name': 'Concepción', 'route': '/map_screen'},
+  {'name': 'Fernando May', 'route': '/map_screen_fm'},
+  {'name': 'La Castilla', 'route': '/map_screen_lc'},
 ];
 
-final Map<String, String> campusImages = {
-  'map_screen': 'assets/Concepcion.jpg',
-  'map_screen_fm': 'assets/Fernando_May.jpg',
-  'map_screen_lc': 'assets/La_Castilla.jpg',
-};
-
 class MapsOptions extends StatelessWidget {
-  const MapsOptions({super.key}); // Asegúrate de que el key sea opcional
+  const MapsOptions({super.key});
 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
 
-    return SafeArea(
-      child: Container(
-        margin: const EdgeInsets.symmetric(horizontal: 20),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const SizedBox(height: 40),
-            FadeInDown(
-              child: const Center(),
+    return Column(
+      children: [
+        Container(
+          height: size.height * 0.15,
+          width: size.width,
+          decoration: const BoxDecoration(
+            color: AppColors.primary,
+            borderRadius: BorderRadius.only(
+              bottomLeft: Radius.circular(20),
+              bottomRight: Radius.circular(20),
             ),
-            Center(
-              child: FadeInDown(
-                child: const Center(
-                    child: FaIcon(
-                  FontAwesomeIcons.mapLocationDot,
-                  color: Colors.white,
-                  size: 80,
-                )),
-              ),
-            ),
-            const SizedBox(height: 50),
-            FadeInLeft(
-              child: const Center(
-                child: Text(
-                  'Mapas disponibles.',
-                  style: TextStyle(
-                    fontSize: 16,
-                    color: Colors.white,
-                    decoration: TextDecoration.none,
-                  ),
-                  textAlign: TextAlign.center,
+          ),
+          child: Center(
+            child: Padding(
+              padding: EdgeInsets.only(top: size.height * 0.03),
+              child: Text(
+                'Mapas',
+                style: GoogleFonts.roboto(
+                  color: AppColors.white,
+                  fontSize: 26,
+                  fontWeight: FontWeight.w800,
                 ),
               ),
             ),
-            const SizedBox(height: 80),
-            Center(
-              child: BounceInUp(
-                child: Swiper(
-                  autoplay: false,
-                  itemCount: campusNames.length,
-                  layout: SwiperLayout.STACK,
-                  itemWidth: size.width * 0.7,
-                  itemHeight: size.height * 0.5,
-                  itemBuilder: (BuildContext context, int index) {
-                    final campusName = campusNames[index];
-                    final campusImage = campusImages[campusName];
-
-                    return GestureDetector(
-                      onTap: () => Navigator.pushNamed(context, campusName),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(20),
-                        child: FadeInImage(
-                          placeholder:
-                              const AssetImage('assets/no-image.jpg'),
-                          image: AssetImage(
-                              campusImage ?? 'assets/no-image.jpg'),
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                    );
-                  },
-                ),
-              ),
-            ),
-          ],
+          ),
         ),
-      ),
+        Padding(
+          padding: const EdgeInsets.only(
+            top: 30,
+            left: 30,
+            right: 30,
+          ),
+          child: Text(
+            'Selecciona tu campus para acceder al mapa correspondiente y explorar sus ubicaciones.',
+            style: GoogleFonts.roboto(
+              color: AppColors.textPrimary,
+              fontSize: 16,
+              fontWeight: FontWeight.w400,
+            ),
+            textAlign: TextAlign.center,
+          ),
+        ),
+        Expanded(
+          child: Padding(
+            padding: const EdgeInsets.only(
+              left: 20,
+              right: 20,
+            ),
+            child: ListView.builder(
+              itemCount: campusData.length,
+              itemBuilder: (BuildContext context, int index) {
+                final campus = campusData[index];
+                return Card(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(40),
+                  ),
+                  color:
+                      const Color.fromARGB(255, 54, 102, 168).withOpacity(0.2),
+                  elevation: 0,
+                  margin: const EdgeInsets.symmetric(vertical: 15),
+                  child: ListTile(
+                    contentPadding: const EdgeInsets.symmetric(
+                      horizontal: 30,
+                      vertical: 5,
+                    ),
+                    leading: SvgPicture.asset(
+                      'assets/icons/map_icon.svg',
+                      width: 22,
+                      height: 22,
+                      color: AppColors.primary,
+                    ),
+                    title: Text(
+                      campus['name']!,
+                      style: const TextStyle(
+                        color: AppColors.primary,
+                        fontSize: 20,
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
+                    trailing: SvgPicture.asset(
+                      'assets/icons/arrow_right_icon.svg',
+                      width: 20,
+                      height: 20,
+                      color: AppColors.primary,
+                    ),
+                    onTap: () {
+                      context.push(campus['route']!);
+                    },
+                  ),
+                );
+              },
+            ),
+          ),
+        ),
+      ],
     );
   }
 }

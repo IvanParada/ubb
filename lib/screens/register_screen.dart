@@ -2,12 +2,14 @@ import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:ubb/providers/providers.dart';
 import 'package:ubb/themes/colors_theme.dart';
 import 'package:ubb/ui/input_decorations.dart';
 import 'package:ubb/ui/ui.dart';
+import 'package:ubb/widgets/dialog_widget.dart';
 
 import '../services/services.dart';
 
@@ -81,8 +83,7 @@ class RegisterScreen extends StatelessWidget {
               left: 0,
               right: 0,
               child: TextButton(
-                onPressed: () =>
-                    Navigator.pushReplacementNamed(context, 'login_screen'),
+                onPressed: () => context.replace('/login'),
                 style: ButtonStyle(
                     overlayColor: WidgetStateProperty.all(
                         AppColors.primary.withOpacity(0.1)),
@@ -308,15 +309,25 @@ class _RegisterFormState extends State<_RegisterForm> {
                                 registerForm.email,
                                 registerForm.password);
                         if (errorMessage == null) {
-                          NotificationsService.showSnackbar(
-                              'Se ha enviado un correo para activar tu cuenta. Por favor, verifica tu bandeja de entrada');
-                          Navigator.pushReplacementNamed(
-                              // ignore: use_build_context_synchronously
-                              context,
-                              'login_screen');
+                          showDialog(
+                              context: context,
+                              barrierDismissible: false,
+                              builder: (context) => DialogWidget(
+                                    iconPath: 'email_icon',
+                                    text:
+                                        'Se ha enviado un correo para activar tu cuenta. Por favor, verifica tu bandeja de entrada',
+                                    onPressed: () => context.replace('/login'),
+                                  ));
+                          ;
                         } else {
-                          NotificationsService.showSnackbar(
-                              'Ya existe una cuenta registrada con este correo electrónico.');
+                          showDialog(
+                              context: context,
+                              barrierDismissible: false,
+                              builder: (context) => const DialogWidget(
+                                    iconPath: 'warning_icon',
+                                    text:
+                                        'Ya existe una cuenta registrada con este correo electrónico.',
+                                  ));
                           registerForm.isLoading = false;
                         }
                       },
@@ -329,7 +340,7 @@ class _RegisterFormState extends State<_RegisterForm> {
                     children: [
                       Text(
                         registerForm.isLoading ? 'Espere...' : 'Registrar',
-                        style: const TextStyle(color: Colors.white),
+                        style: const TextStyle(color: AppColors.white),
                       ),
                     ],
                   ),

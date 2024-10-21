@@ -1,4 +1,4 @@
-package com.example.ubb
+package cl.nsqws.ubbmap
 
 import io.flutter.embedding.android.FlutterActivity
 

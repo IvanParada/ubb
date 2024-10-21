@@ -41,7 +41,7 @@ class InputDecorations {
         prefixIcon: prefixIcon != null
             ? FaIcon(
                 prefixIcon,
-                color: const Color.fromARGB(255, 9, 27, 43),
+                color: AppColors.primary,
               )
             : null,
         suffixIcon: suffixIcon);

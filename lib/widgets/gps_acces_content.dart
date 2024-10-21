@@ -1,158 +1,148 @@
-import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-
+import 'package:flutter_svg/svg.dart';
+import 'package:go_router/go_router.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:ubb/themes/colors_theme.dart';
 import '../blocs/bloc.dart';
 
-class GpsAccesTitle extends StatelessWidget {
-  const GpsAccesTitle({super.key});
+class GpsAccessContent extends StatelessWidget {
+  const GpsAccessContent({super.key});
 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
 
-    return SafeArea(
-      child: Container(
-        margin: const EdgeInsets.symmetric(horizontal: 30),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const SizedBox(height: 30),
-            FadeInDown(
-              child: const Center(
-                  child: FaIcon(
-                FontAwesomeIcons.mapLocationDot,
-                color: Colors.white,
-                size: 80,
-              )),
+    return Column(
+      children: [
+        Container(
+          height: size.height * 0.15,
+          width: size.width,
+          decoration: const BoxDecoration(
+            color: AppColors.primary,
+            borderRadius: BorderRadius.only(
+              bottomLeft: Radius.circular(20),
+              bottomRight: Radius.circular(20),
             ),
-            const SizedBox(height: 20),
-            // const Center(child: Text('Ajustes', style: TextStyle(color: Colors.white, fontSize: 30, fontWeight: FontWeight.w500),)),
-            const SizedBox(height: 30),
-            Center(
-              child: Container(
-                width: size.width * 0.8,
-                height: size.width * 0.5,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(30),
-                  boxShadow: const [
-                    BoxShadow(
-                      color: Colors.black12,
-                      blurRadius: 15,
-                      offset: Offset(0, 5),
+          ),
+          child: Padding(
+            padding: EdgeInsets.only(
+              top: size.height * 0.03,
+              left: 16,
+              right: 16,
+            ),
+            child: Stack(
+              alignment: Alignment.center,
+              children: [
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: IconButton(
+                    icon: SvgPicture.asset(
+                      'assets/icons/back_arrow.svg',
+                      width: 24,
+                      height: 24,
+                      colorFilter: const ColorFilter.mode(
+                        AppColors.white,
+                        BlendMode.srcIn,
+                      ),
                     ),
-                  ],
+                    onPressed: () {
+                      context.pop();
+                    },
+                  ),
                 ),
-                child: Center(
-                  child: FadeInDown(
-                    child: const Text(
-                      'Es necesario el acceso a GPS',
-                      style: TextStyle(
-                        fontSize: 16,
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold,
+                Center(
+                  child: Text(
+                    'Mapas',
+                    style: GoogleFonts.roboto(
+                      color: AppColors.white,
+                      fontSize: 26,
+                      fontWeight: FontWeight.w800,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+        Expanded(
+          child: Container(
+            margin: const EdgeInsets.symmetric(horizontal: 30),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const SizedBox(height: 30),
+                Center(
+                  child: SizedBox(
+                    width: size.width * 0.8,
+                    child: RichText(
+                      textAlign: TextAlign.center,
+                      text: const TextSpan(
+                        style: TextStyle(
+                          fontSize: 16,
+                          color: Colors.black,
+                          fontWeight: FontWeight.normal,
+                        ),
+                        children: [
+                          TextSpan(text: 'Es necesario '),
+                          TextSpan(
+                            text: 'activar su GPS',
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                          TextSpan(
+                            text:
+                                ' y posteriormente otorgar los permisos de GPS presionando el botón ‘Solicitar acceso’ para utilizar el mapa.',
+                          ),
+                        ],
                       ),
                     ),
                   ),
                 ),
-              ),
-            ),
-            const SizedBox(height: 40),
-            FadeInUp(
-              child: Center(
-                child: MaterialButton(
-                  color: const Color.fromARGB(255, 9, 27, 43),
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10)),
-                  elevation: 0,
-                  splashColor: Colors.transparent,
-                  onPressed: () {
-                    final gpsBloc = BlocProvider.of<GpsBloc>(context);
-                    gpsBloc.askGpsAccess();
+                const SizedBox(height: 40),
+                BlocBuilder<GpsBloc, GpsState>(
+                  builder: (context, state) {
+                    if (state.isGpsEnabled) {
+                      return Center(
+                        child: MaterialButton(
+                          color: AppColors.primary,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(60),
+                          ),
+                          elevation: 0,
+                          splashColor: Colors.transparent,
+                          onPressed: () {
+                            final gpsBloc = BlocProvider.of<GpsBloc>(context);
+                            gpsBloc.askGpsAccess();
+                          },
+                          child: Container(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 40, vertical: 15),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  'Solicitar acceso',
+                                  style: GoogleFonts.roboto(
+                                    fontSize: 14,
+                                    color: AppColors.white,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      );
+                    } else {
+                      return const SizedBox.shrink();
+                    }
                   },
-                  child: Container(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 40, vertical: 15),
-                      child: const Row(
-                        mainAxisSize: MainAxisSize.min,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            'Solicitar acceso',
-                            style: TextStyle(color: Colors.white),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.only(left: 20),
-                            child: FaIcon(FontAwesomeIcons.locationDot,
-                                color: Colors.white, size: 16),
-                          ),
-                        ],
-                      )),
                 ),
-              ),
+              ],
             ),
-          ],
+          ),
         ),
-      ),
-    );
-  }
-}
-
-class GpsDisabled extends StatelessWidget {
-  const GpsDisabled({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
-
-    return SafeArea(
-      child: Container(
-        margin: const EdgeInsets.symmetric(horizontal: 30),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const SizedBox(height: 30),
-            FadeInDown(
-              child: const Center(
-                  child: FaIcon(
-                FontAwesomeIcons.mapLocationDot,
-                color: Colors.white,
-                size: 80,
-              )),
-            ),
-            const SizedBox(height: 50),
-            Center(
-              child: Container(
-                width: size.width * 0.8,
-                height: size.width * 0.5,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(30),
-                  boxShadow: const [
-                    BoxShadow(
-                      color: Colors.black12,
-                      blurRadius: 15,
-                      offset: Offset(0, 5),
-                    ),
-                  ],
-                ),
-                child: const Center(
-                  child: Text(
-                    'Debe habilitar el GPS',
-                    style: TextStyle(
-                      fontSize: 16,
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
+      ],
     );
   }
 }

@@ -8,20 +8,25 @@ class WeatherCubit extends Cubit<WeatherState> {
 
   WeatherCubit(this.weatherService) : super(const WeatherState());
 
-  Future<void> fetchAllWeatherData() async {
-    emit(state.copyWith(status: Status.loading));
+Future<void> fetchWeatherDataAndForecast() async {
+  emit(state.copyWith(status: Status.loading));
 
-    try {
-      final weatherDataList = await weatherService.fetchAllWeatherData();
-      emit(state.copyWith(
-        status: Status.success,
-        weatherDataList: weatherDataList,
-      ));
-    } catch (e) {
-      emit(state.copyWith(
-        status: Status.error,
-        errorMessage: 'Error al obtener los datos del clima: $e',
-      ));
-    }
+  try {
+    final weatherDataList = await weatherService.fetchAllWeatherData();
+    final forecastCCP = await weatherService.fetchHourlyForecastCCP();
+    final forecastChillan = await weatherService.fetchHourlyForecastChillan();
+
+    emit(state.copyWith(
+      status: Status.success,
+      weatherDataList: weatherDataList,
+      forecastList: [forecastCCP, forecastChillan], // Lista de listas
+    ));
+  } catch (e) {
+    emit(state.copyWith(
+      status: Status.error,
+      errorMessage: 'Error al obtener los datos: $e',
+    ));
   }
+}
+
 }

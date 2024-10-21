@@ -6,7 +6,6 @@ export 'package:ubb/widgets/background.dart';
 export 'package:ubb/widgets/btn_toggle_user_route.dart';
 export 'package:ubb/widgets/card_container.dart';
 export 'package:ubb/widgets/gps_acces_content.dart';
-export 'package:ubb/widgets/headers.dart';
 export 'package:ubb/widgets/home_content.dart';
 export 'package:ubb/widgets/settings_content.dart';
 export 'package:ubb/widgets/map_options_content.dart';

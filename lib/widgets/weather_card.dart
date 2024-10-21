@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:ubb/helpers/weather_translations.dart';
 import 'package:ubb/themes/colors_theme.dart';
 import '../models/weather_data.dart';
 
@@ -14,8 +15,8 @@ class WeatherCardWidget extends StatelessWidget {
     final size = MediaQuery.of(context).size;
 
     return SizedBox(
-      width: size.width * 0.8, // Establecemos un ancho fijo
-      child: SingleChildScrollView( // Permitir scroll si el contenido es grande
+      width: size.width * 0.8,
+      child: SingleChildScrollView(
         child: Column(
           children: [
             RichText(
@@ -40,22 +41,22 @@ class WeatherCardWidget extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 10),
-            //TODO: LLAMAR IMAGENES (HACER DICCIONARIO)
             Image.asset(
-              'assets/weather_img/Cloud.png',
+              'assets/weather_img/${weatherData.icon}.png',
               height: size.height * 0.16,
             ),
             Text(
               '${weatherData.temperature.toStringAsFixed(1)}°',
               style: GoogleFonts.poppins(
                 color: AppColors.white,
-                fontSize: size.height * 0.15,
+                fontSize: 90,
                 fontWeight: FontWeight.w600,
                 height: 1,
               ),
             ),
             Text(
-              weatherData.mainWeather,
+              weatherTranslations[weatherData.mainWeather] ??
+                  weatherData.mainWeather,
               style: GoogleFonts.poppins(
                 color: AppColors.white,
                 fontSize: 24,
@@ -68,14 +69,14 @@ class WeatherCardWidget extends StatelessWidget {
             ),
             Padding(
               padding: EdgeInsets.symmetric(
-                horizontal: size.width * 0.22,
+                horizontal: size.width * 0.1,
                 vertical: size.height * 0.01,
               ),
               child: Row(
                 children: [
                   Column(
                     children: [
-                      SvgPicture.asset('assets/icons/location_icon.svg'),
+                      SvgPicture.asset('assets/icons/wind_icon.svg'),
                       Text(
                         '${weatherData.windSpeed.toStringAsFixed(1)} km/h',
                         style: GoogleFonts.poppins(
@@ -97,7 +98,7 @@ class WeatherCardWidget extends StatelessWidget {
                   const Spacer(),
                   Column(
                     children: [
-                      SvgPicture.asset('assets/icons/location_icon.svg'),
+                      SvgPicture.asset('assets/icons/raind_drop_icon.svg'),
                       Text(
                         '${weatherData.humidity}%',
                         style: GoogleFonts.poppins(

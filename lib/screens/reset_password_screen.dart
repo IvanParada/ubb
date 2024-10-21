@@ -1,12 +1,15 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:ubb/helpers/routes.dart';
 import 'package:ubb/providers/login_form_provider.dart';
 import 'package:ubb/themes/colors_theme.dart';
 import 'package:ubb/ui/input_decorations.dart';
 import 'package:ubb/ui/ui.dart';
+import 'package:ubb/widgets/dialog_widget.dart';
 
 import '../services/services.dart';
 
@@ -71,8 +74,7 @@ class PasswordResetScreen extends StatelessWidget {
               left: 0,
               right: 0,
               child: TextButton(
-                onPressed: () =>
-                    Navigator.pushReplacementNamed(context, 'login_screen'),
+                onPressed: () => context.replace('/login'),
                 style: ButtonStyle(
                     overlayColor: WidgetStateProperty.all(
                         AppColors.primary.withOpacity(0.1)),
@@ -155,13 +157,23 @@ class _ResetPasswordForm extends StatelessWidget {
                           await authService.resetPassword(resetPass.email);
 
                       if (result == null) {
-                        NotificationsService.showSnackbar(
-                            'Se ha enviado un correo para recuperar tu contraseña. Por favor, verifica tu bandeja de entrada.');
+                        showDialog(
+                            context: context,
+                            barrierDismissible: false,
+                            builder: (context) => DialogWidget(
+                                  iconPath: 'email_icon',
+                                  text:
+                                      'Se ha enviado un correo para recuperar tu contraseña. Por favor, verifica tu bandeja de entrada.',
+                                  onPressed: () => context.replace('/login'),
+                                ));
                       } else {
-                        // Error: mostrar un SnackBar con el mensaje de error
-                        // ignore: use_build_context_synchronously
-                        NotificationsService.showSnackbar(
-                            'El correo electrónico ingresado no está registrado. Verifica que hayas ingresado la dirección correcta.');
+                        showDialog(
+                            context: context,
+                            builder: (context) => const DialogWidget(
+                                  iconPath: 'warning_icon',
+                                  text:
+                                      'El correo electrónico ingresado no está registrado. Verifica que hayas ingresado la dirección correcta.',
+                                ));
                       }
                     },
               child: Container(
@@ -173,7 +185,7 @@ class _ResetPasswordForm extends StatelessWidget {
                   children: [
                     Text(
                       resetPass.isLoading ? 'Espere...' : 'Solicitar',
-                      style: const TextStyle(color: Colors.white),
+                      style: const TextStyle(color: AppColors.white),
                     ),
                   ],
                 ),

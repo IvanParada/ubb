@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:ubb/themes/colors_theme.dart';
 
 void showLoadingMessage(BuildContext context) {
   if (Platform.isAndroid) {
@@ -12,10 +13,10 @@ void showLoadingMessage(BuildContext context) {
         child: AlertDialog(
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-          backgroundColor: const Color.fromARGB(255, 9, 27, 43),
-          title: const Text(
+          backgroundColor: AppColors.primary,
+          title:  const Text(
             'Espere porfavor...',
-            style: TextStyle(color: Colors.white),
+            style: TextStyle(color: AppColors.white),
           ),
           content: Container(
             width: 100,
@@ -25,12 +26,12 @@ void showLoadingMessage(BuildContext context) {
               children: [
                 Text(
                   'Calculando ruta...',
-                  style: TextStyle(color: Colors.white),
+                  style: TextStyle(color: AppColors.white),
                 ),
                 SizedBox(height: 15),
                 CircularProgressIndicator(
                   strokeWidth: 5,
-                  color: Colors.white,
+                  color: AppColors.white,
                 )
               ],
             ),
@@ -48,4 +49,7 @@ void showLoadingMessage(BuildContext context) {
       content: CupertinoActivityIndicator(),
     ),
   );
+}
+
+class AppAppColors {
 }

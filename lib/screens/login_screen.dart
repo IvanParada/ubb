@@ -2,12 +2,14 @@ import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:ubb/providers/login_form_provider.dart';
 import 'package:ubb/themes/colors_theme.dart';
 import 'package:ubb/ui/input_decorations.dart';
 import 'package:ubb/ui/ui.dart';
+import 'package:ubb/widgets/dialog_widget.dart';
 
 import '../services/services.dart';
 
@@ -87,8 +89,7 @@ class LoginScreen extends StatelessWidget {
             left: 0,
             right: 0,
             child: TextButton(
-              onPressed: () =>
-                  Navigator.pushReplacementNamed(context, 'register_screen'),
+              onPressed: () => context.replace('/register'),
               style: ButtonStyle(
                 overlayColor: WidgetStateProperty.all(
                   AppColors.textPrimary.withOpacity(0.1),
@@ -224,8 +225,7 @@ class _LoginFormState extends State<_LoginForm> {
             ),
             const SizedBox(height: 5),
             TextButton(
-              onPressed: () => Navigator.pushReplacementNamed(
-                  context, 'reset_password_screen'),
+              onPressed: () => context.replace('/reset_password'),
               style: ButtonStyle(
                   overlayColor: WidgetStateProperty.all(
                       AppColors.primary.withOpacity(0.1)),
@@ -274,11 +274,15 @@ class _LoginFormState extends State<_LoginForm> {
                       final String? errorMessage = await authService.login(
                           loginForm.email, loginForm.password);
                       if (errorMessage == null) {
-                        // ignore: use_build_context_synchronously
-                        Navigator.pushReplacementNamed(context, 'home_screen');
+                        context.replace('/home');
                       } else {
-                        NotificationsService.showSnackbar(
-                            'El correo electrónico o la contraseña son incorrectos. Verifica tus credenciales e intenta nuevamente.');
+                        showDialog<void>(
+                          builder: (context) => const DialogWidget(
+                            text: 'El correo electrónico o la contraseña son incorrectos. Verifica tus credenciales e intenta nuevamente.',
+                            iconPath: 'warning_icon',
+                          ),
+                          context: context,
+                        );
 
                         loginForm.isLoading = false;
                       }
@@ -292,7 +296,7 @@ class _LoginFormState extends State<_LoginForm> {
                     children: [
                       Text(
                         loginForm.isLoading ? 'Espere...' : 'Ingresar',
-                        style: const TextStyle(color: Colors.white),
+                        style: const TextStyle(color: AppColors.white),
                       ),
                     ],
                   )),

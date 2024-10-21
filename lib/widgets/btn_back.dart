@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-
+import 'package:flutter_svg/svg.dart';
+import 'package:go_router/go_router.dart';
+import 'package:ubb/themes/colors_theme.dart';
 
 class BtnBack extends StatelessWidget {
   const BtnBack({
@@ -10,14 +12,15 @@ class BtnBack extends StatelessWidget {
   Widget build(BuildContext context) {
     return CircleAvatar(
       maxRadius: 30,
-      backgroundColor: const Color.fromARGB(255, 9, 27, 43),
+      backgroundColor: AppColors.primary,
       child: IconButton(
-        icon: const Icon(
-          Icons.arrow_back_ios_new,
-          color: Colors.white,
+        icon: SvgPicture.asset(
+          'assets/icons/back_arrow.svg',
+          width: 20,
+          height: 20,
         ),
         onPressed: () {
-          Navigator.of(context).pop();
+          context.pop();
         },
       ),
     );

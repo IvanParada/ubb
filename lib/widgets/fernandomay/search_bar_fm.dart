@@ -1,11 +1,13 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:ubb/blocs/bloc.dart';
 import 'package:ubb/delegates/delegates.dart';
 import 'package:ubb/helpers/helpers.dart';
 import 'package:ubb/models/models.dart';
+import 'package:ubb/themes/colors_theme.dart';
 
 import '../widgets.dart';
 
@@ -55,8 +57,7 @@ class _SearchBarBodyFM extends StatelessWidget {
       final newLocationFM = newCameraPositionFM.target;
       mapBlocFM.moveCamera(newLocationFM);
 
-      // ignore: use_build_context_synchronously
-      Navigator.pop(context);
+      context.pop();
     }
   }
 
@@ -70,9 +71,8 @@ class _SearchBarBodyFM extends StatelessWidget {
         height: 50,
         child: Row(
           children: [
-            const BtnBack(), 
-            const SizedBox(
-                width: 10),
+            const BtnBack(),
+            const SizedBox(width: 10),
             Expanded(
               child: GestureDetector(
                 onTap: () async {
@@ -90,7 +90,7 @@ class _SearchBarBodyFM extends StatelessWidget {
                     vertical: 13,
                   ),
                   decoration: BoxDecoration(
-                    color: Colors.white.withOpacity(0.9),
+                    color: AppColors.white.withOpacity(0.9),
                     borderRadius: BorderRadius.circular(100),
                     boxShadow: const [
                       BoxShadow(

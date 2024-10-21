@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 import 'package:ubb/blocs/bloc.dart';
 import 'package:ubb/helpers/helpers.dart';
+import 'package:ubb/themes/colors_theme.dart';
 
 class ManualMarkerFM extends StatelessWidget {
   const ManualMarkerFM({super.key});
@@ -55,7 +57,7 @@ class _ManualMarkerBodyFM extends StatelessWidget {
               duration: const Duration(milliseconds: 300),
               child: MaterialButton(
                 minWidth: size.width - 120,
-                color: const Color.fromARGB(255, 9, 27, 43),
+                color: AppColors.primary,
                 elevation: 0,
                 height: 50,
                 shape: const StadiumBorder(),
@@ -74,12 +76,11 @@ class _ManualMarkerBodyFM extends StatelessWidget {
 
                   searchBlocFM.add(OnDeactivateManualMarkerEventFM());
 
-                  // ignore: use_build_context_synchronously
-                  Navigator.pop(context);
+                  context.pop();
                 },
                 child: const Text('Confimar destino',
                     style: TextStyle(
-                        color: Colors.white, fontWeight: FontWeight.w400)),
+                        color: AppColors.white, fontWeight: FontWeight.w400)),
               ),
             ),
           ),
@@ -98,11 +99,11 @@ class _BtnBack extends StatelessWidget {
       duration: const Duration(milliseconds: 300),
       child: CircleAvatar(
         maxRadius: 30,
-        backgroundColor: const Color.fromARGB(255, 9, 27, 43),
+        backgroundColor: AppColors.primary,
         child: IconButton(
           icon: const Icon(
             Icons.arrow_back_ios_new,
-            color: Colors.white,
+            color: AppColors.white,
           ),
           onPressed: () {
             BlocProvider.of<SearchBlocFM>(context)

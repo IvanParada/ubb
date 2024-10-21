@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:ubb/themes/colors_theme.dart';
 
 import '../../blocs/bloc.dart';
 
@@ -16,14 +17,15 @@ class BtnToggleMarker extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.only(bottom: 10),
       child: CircleAvatar(
-        backgroundColor: const Color.fromARGB(255, 9, 27, 43),
+        backgroundColor: AppColors.primary,
         maxRadius: 25,
         child: BlocBuilder<MapBloc, MapState>(
           builder: (context, state) {
             return IconButton(
-              icon: const FaIcon(
-                FontAwesomeIcons.kitMedical,
-                color: Colors.white,
+              icon: SvgPicture.asset(
+                'assets/icons/health_icon.svg',
+                width: 20,
+                height: 20,
               ),
               onPressed: () {
                 mapBloc.add(ToggleMedicalMarkersVisibilityEvent());
