@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:ubb/blocs/bloc.dart';
 import 'package:ubb/themes/colors_theme.dart';
 
@@ -18,11 +19,13 @@ class BtnFollowUserLC extends StatelessWidget {
         child: BlocBuilder<MapBlocLC, MapStateLC>(
           builder: (context, state) {
             return IconButton(
-              icon: Icon(
-                state.isFollowingUserLC
-                    ? Icons.directions_run_rounded
-                    : Icons.hail_rounded,
+                 icon: SvgPicture.asset(
                 color: AppColors.white,
+                state.isFollowingUserLC
+                    ? 'assets/icons/directions_run.svg'
+                    : 'assets/icons/hail_icon.svg',
+                width: 24,
+                height: 24,
               ),
               onPressed: () {
                 mapBlocLC.add(OnStartFollowingUserEventLC());
