@@ -81,7 +81,6 @@ class _SearchBarBody extends StatelessWidget {
                     delegate: SearchDestinationDelegate(),
                   );
                   if (result == null) return;
-                  // ignore: use_build_context_synchronously
                   onSearchResults(context, result);
                 },
                 child: Container(

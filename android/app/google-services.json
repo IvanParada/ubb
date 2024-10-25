@@ -8,9 +8,38 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1076359304083:android:e38757e2e388bacf1cce66",
+        "mobilesdk_app_id": "1:1076359304083:android:976a3c96f0dc8e921cce66",
         "android_client_info": {
           "package_name": "cl.nsqws.ubbmap"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1076359304083-6ohkhmeeitg6qbm7i2nc3lnd3h7jbpr6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCv4OgXUSzbK0_CFSLep4W5fhQfIjvjzgg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1076359304083-6ohkhmeeitg6qbm7i2nc3lnd3h7jbpr6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1076359304083:android:e38757e2e388bacf1cce66",
+        "android_client_info": {
+          "package_name": "com.example.ubb"
         }
       },
       "oauth_client": [

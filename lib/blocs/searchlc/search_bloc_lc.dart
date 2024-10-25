@@ -8,9 +8,6 @@ import 'package:google_polyline_algorithm/google_polyline_algorithm.dart';
 import 'package:ubb/models/models.dart';
 import 'package:ubb/services/services.dart';
 
-// import 'dart:convert';
-// import 'package:http/http.dart' as http;
-
 part 'search_event_lc.dart';
 part 'search_state_lc.dart';
 
@@ -55,67 +52,76 @@ class SearchBlocLC extends Bloc<SearchEventLC, SearchStateLC> {
     );
   }
 
-  // Future<List<Feature>> loadPlacesFromJsonLC() async {
-  //   // Cambia la URL al enlace en línea.
-  //   final response = await http.get(Uri.parse(
-  //       'https://ubbmap-81adc-default-rtdb.firebaseio.com/registros_lc.json'));
+  Future<List<Feature>> loadPlacesFromJsonLC() async {
+    final FirebaseDatabase database = FirebaseDatabase.instance;
+    DatabaseReference reference = database.ref().child('registros_lc');
 
-  //   if (response.statusCode == 200) {
-  //     // Decodifica la respuesta JSON.
-  //     final jsonList = json.decode(response.body) as List;
+    List<Feature> places = [];
 
-  //     final places = jsonList.map((json) => Feature.fromMap(json)).toList();
-  //     return places;
-  //   } else {
-  //     // Maneja el error de la solicitud HTTP aquí si es necesario.
-  //     throw Exception('Error al cargar datos desde la URL');
-  //   }
-  // }
+    try {
+      DataSnapshot snapshot = await reference.get();
 
-
-Future<List<Feature>> loadPlacesFromJsonLC() async {
-  final FirebaseDatabase database = FirebaseDatabase.instance;
-  DatabaseReference reference = database.ref().child('registros_lc');
-
-  List<Feature> places = [];
-
-  try {
-    DataSnapshot snapshot = await reference.get();
-
-    if (snapshot.value != null) {
-      if (snapshot.value is Map<dynamic, dynamic>) {
-        Map<dynamic, dynamic> values = snapshot.value as Map<dynamic, dynamic>;
-        values.forEach((key, value) {
-          Feature place = Feature.fromMap(Map<String, dynamic>.from(value));
-          places.add(place);
-        });
-      } else if (snapshot.value is List<dynamic>) {
-        List<dynamic> values = snapshot.value as List<dynamic>;
-        for (var value in values) {
-          Feature place = Feature.fromMap(Map<String, dynamic>.from(value));
-          places.add(place);
+      if (snapshot.value != null) {
+        if (snapshot.value is Map<dynamic, dynamic>) {
+          Map<dynamic, dynamic> values =
+              snapshot.value as Map<dynamic, dynamic>;
+          values.forEach((key, value) {
+            Feature place = Feature.fromMap(Map<String, dynamic>.from(value));
+            places.add(place);
+          });
+        } else if (snapshot.value is List<dynamic>) {
+          List<dynamic> values = snapshot.value as List<dynamic>;
+          for (var value in values) {
+            Feature place = Feature.fromMap(Map<String, dynamic>.from(value));
+            places.add(place);
+          }
         }
       }
+
+      return places;
+    } catch (error) {
+      throw Exception('Error al cargar datos desde Firebase');
     }
-
-    return places;
-  } catch (error) {
-    throw Exception('Error al cargar datos desde Firebase');
   }
-}
 
-  Future getPlacesByQuery(LatLng proximity, String query) async {
+  String normalizeText(String text) {
+    const accentsMap = {
+      'á': 'a',
+      'é': 'e',
+      'í': 'i',
+      'ó': 'o',
+      'ú': 'u',
+      'Á': 'A',
+      'É': 'E',
+      'Í': 'I',
+      'Ó': 'O',
+      'Ú': 'U',
+      'ñ': 'n',
+      'Ñ': 'N'
+    };
+
+    return text
+        .split('')
+        .map((char) => accentsMap[char] ?? char)
+        .join()
+        .toLowerCase();
+  }
+
+  Future<List<Feature>> getPlacesByQuery(LatLng proximity, String query) async {
     final newPlaces = <Feature>[];
+
+    final normalizedQuery = normalizeText(query);
 
     final places = await loadPlacesFromJsonLC();
 
     final match = RegExp(r'\d+([a-zA-Z]+)').firstMatch(query);
+
     if (match != null) {
-      final queryLetters = match.group(1)?.toLowerCase() ?? '';
+      final queryLetters = normalizeText(match.group(1) ?? '');
 
       final filteredPlaces = places
           .where((place) => place.placeName.any((name) =>
-              name.replaceAll(RegExp('[^a-zA-Z]+'), "").toLowerCase() ==
+              normalizeText(name.replaceAll(RegExp('[^a-zA-Z]+'), '')) ==
               queryLetters))
           .toList();
 
@@ -123,12 +129,13 @@ Future<List<Feature>> loadPlacesFromJsonLC() async {
       add(OnNewPlacesFoundEventLC(filteredPlaces));
     } else {
       final filteredPlaces = places
-          .where(
-              (place) => place.text.toLowerCase().contains(query.toLowerCase()))
+          .where((place) => normalizeText(place.text).contains(normalizedQuery))
           .toList();
 
       newPlaces.addAll(filteredPlaces);
       add(OnNewPlacesFoundEventLC(filteredPlaces));
     }
+
+    return newPlaces;
   }
 }
