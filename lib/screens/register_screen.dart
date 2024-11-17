@@ -32,7 +32,7 @@ class RegisterScreen extends StatelessWidget {
                   curve: Curves.easeInOut,
                   height: isKeyboardVisible
                       ? size.height * 0.15
-                      : size.height * 0.35,
+                      : size.height * 0.25,
                   decoration: const BoxDecoration(
                     color: AppColors.primary,
                     borderRadius: BorderRadius.only(
@@ -68,7 +68,8 @@ class RegisterScreen extends StatelessWidget {
                             fontSize: 35,
                             fontWeight: FontWeight.w500),
                       ),
-                      const SizedBox(height: 30),
+                      SizedBox(height: size.height * 0.03),
+                      // SizedBox(height: 30),
                       ChangeNotifierProvider(
                         create: (_) => RegisterFormProvider(),
                         child: _RegisterForm(),

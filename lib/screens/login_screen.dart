@@ -31,7 +31,7 @@ class LoginScreen extends StatelessWidget {
                 duration: const Duration(milliseconds: 300),
                 curve: Curves.easeInOut,
                 height:
-                    isKeyboardVisible ? size.height * 0.15 : size.height * 0.35,
+                    isKeyboardVisible ? size.height * 0.15 : size.height * 0.25,
                 child: Container(
                   height: size.height * 0.35,
                   decoration: const BoxDecoration(
