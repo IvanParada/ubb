@@ -9,7 +9,7 @@ class TrafficInterceptor extends Interceptor {
       'alternatives': true,
       'continue_straight': true,
       'geometries': 'polyline6',
-      'overview': 'simplified',
+      'overview': 'full',
       'steps': false,
       'access_token': accesToken
     });
