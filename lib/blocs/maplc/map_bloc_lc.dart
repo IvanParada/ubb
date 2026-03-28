@@ -9,7 +9,6 @@ import 'package:ubb/themes/themes.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
-
 part 'map_event_lc.dart';
 part 'map_state_lc.dart';
 
@@ -35,7 +34,8 @@ class MapBlocLC extends Bloc<MapEventLC, MapStateLC> {
     });
 
     on<AddMedicalMarkerEventLC>((event, emit) async {
-      final customMedicalMarkerLC = await getAssetImageMarker('assets/kit_medical.png');
+      final customMedicalMarkerLC =
+          await getAssetImageMarker('assets/kit_medical.png');
       final newMarkerLC = Marker(
           markerId: MarkerId(event.medicalMarkerLC.position.toString()),
           position: event.medicalMarkerLC.position,
@@ -63,23 +63,25 @@ class MapBlocLC extends Bloc<MapEventLC, MapStateLC> {
     });
   }
 
-Future<void> loadMedicalMarkersFromJson() async {
-  final response = await http.get(Uri.parse('https://ubbmap-81adc-default-rtdb.firebaseio.com/registros_kitmarker_lc.json'));
+  Future<void> loadMedicalMarkersFromJson() async {
+    final response = await http.get(Uri.parse(
+        'https://ubbmap-app-default-rtdb.firebaseio.com/registros_kitmarker_lc.json'));
 
-  if (response.statusCode == 200) {
-    // Decodifica la respuesta JSON.
-    final jsonList = json.decode(response.body) as List;
+    if (response.statusCode == 200) {
+      // Decodifica la respuesta JSON.
+      final jsonList = json.decode(response.body) as List;
 
-    final medicalMarkers = jsonList.map((json) => MedicalMarker.fromJson(json)).toList();
+      final medicalMarkers =
+          jsonList.map((json) => MedicalMarker.fromJson(json)).toList();
 
-    for (final marker in medicalMarkers) {
-      add(AddMedicalMarkerEventLC(marker));
+      for (final marker in medicalMarkers) {
+        add(AddMedicalMarkerEventLC(marker));
+      }
+    } else {
+      // Maneja el error de la solicitud HTTP aquí si es necesario.
+      throw Exception('Error al cargar datos desde la URL');
     }
-  } else {
-    // Maneja el error de la solicitud HTTP aquí si es necesario.
-    throw Exception('Error al cargar datos desde la URL');
   }
-}
 
   void _onInitMapLC(OnMapInitializedEventLC event, Emitter<MapStateLC> emit) {
     _mapControllerLC = event.controllerLC;

@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:google_polyline_algorithm/google_polyline_algorithm.dart';
 import 'package:ubb/models/models.dart';
@@ -55,33 +56,43 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
   }
 
   Future<List<Feature>> loadPlacesFromJsonCCP() async {
-    final FirebaseDatabase database = FirebaseDatabase.instance;
-    DatabaseReference reference = database.ref().child('registros_ccp');
+    final database = FirebaseDatabase.instanceFor(
+      app: Firebase.app(),
+      databaseURL: "https://ubbmap-app-default-rtdb.firebaseio.com",
+    );
+
+    final reference = database.ref().child('registros_ccp');
 
     List<Feature> places = [];
 
     try {
       DataSnapshot snapshot = await reference.get();
 
+      print('SNAPSHOT: ${snapshot.value}'); // 👈 DEBUG útil
+
       if (snapshot.value != null) {
-        if (snapshot.value is Map<dynamic, dynamic>) {
-          Map<dynamic, dynamic> values =
-              snapshot.value as Map<dynamic, dynamic>;
+        if (snapshot.value is Map) {
+          final values = Map<String, dynamic>.from(snapshot.value as Map);
+
           values.forEach((key, value) {
-            Feature place = Feature.fromMap(Map<String, dynamic>.from(value));
+            final place = Feature.fromMap(Map<String, dynamic>.from(value));
             places.add(place);
           });
-        } else if (snapshot.value is List<dynamic>) {
-          List<dynamic> values = snapshot.value as List<dynamic>;
+        } else if (snapshot.value is List) {
+          final values = snapshot.value as List;
+
           for (var value in values) {
-            Feature place = Feature.fromMap(Map<String, dynamic>.from(value));
-            places.add(place);
+            if (value != null) {
+              final place = Feature.fromMap(Map<String, dynamic>.from(value));
+              places.add(place);
+            }
           }
         }
       }
 
       return places;
     } catch (error) {
+      print('ERROR FIREBASE: $error'); // 👈 DEBUG clave
       throw Exception('Error al cargar datos desde Firebase');
     }
   }
