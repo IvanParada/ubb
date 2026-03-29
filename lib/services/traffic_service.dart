@@ -25,8 +25,6 @@ class TrafficService {
 
     final resp = await _dioTraffic.get(url);
 
-    print(resp.data);
-
     final data = TrafficResponse.fromMap(resp.data);
 
     return data;

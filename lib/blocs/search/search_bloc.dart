@@ -68,8 +68,6 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
     try {
       DataSnapshot snapshot = await reference.get();
 
-      print('SNAPSHOT: ${snapshot.value}'); // 👈 DEBUG útil
-
       if (snapshot.value != null) {
         if (snapshot.value is Map) {
           final values = Map<String, dynamic>.from(snapshot.value as Map);
@@ -92,7 +90,6 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
 
       return places;
     } catch (error) {
-      print('ERROR FIREBASE: $error'); // 👈 DEBUG clave
       throw Exception('Error al cargar datos desde Firebase');
     }
   }
