@@ -2,10 +2,11 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:http/http.dart' as http;
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class AuthService extends ChangeNotifier {
   final String _baseUrl = 'identitytoolkit.googleapis.com';
-  final String _firebaseToken = 'AIzaSyCeYg1cvqUXCMTeI2WrtDFVjju-Uorh5yY';
+  final String _firebaseToken = dotenv.env['FIREBASE_TOKEN'] ?? '';
 
   final storage = const FlutterSecureStorage();
 
