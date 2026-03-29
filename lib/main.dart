@@ -8,18 +8,12 @@ import 'package:ubb/helpers/routes.dart';
 import 'package:ubb/services/services.dart';
 
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-    name: 'ubbmap',
-    options: const FirebaseOptions(
-      apiKey: "AIzaSyAZs_EqCGSCaM822d3HZCiRrKwVdC8jYaA",
-      appId: "1:1076359304083:android:e38757e2e388bacf1cce66",
-      messagingSenderId: "1076359304083",
-      projectId: "ubbmap-81adc",
-    ),
-  );
+  await dotenv.load(fileName: "environments/.env");
+  await Firebase.initializeApp();
 
   runApp(MultiBlocProvider(
     providers: [

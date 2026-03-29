@@ -2,10 +2,11 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:http/http.dart' as http;
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class AuthService extends ChangeNotifier {
   final String _baseUrl = 'identitytoolkit.googleapis.com';
-  final String _firebaseToken = 'AIzaSyAZs_EqCGSCaM822d3HZCiRrKwVdC8jYaA';
+  final String _firebaseToken = dotenv.env['FIREBASE_TOKEN'] ?? '';
 
   final storage = const FlutterSecureStorage();
 
@@ -70,39 +71,39 @@ class AuthService extends ChangeNotifier {
     }
   }
 
-Future<Map<String, dynamic>?> getUserData() async {
-  try {
-    final token = await readToken();
-    if (token.isEmpty) {
-      return null;
-    }
+  Future<Map<String, dynamic>?> getUserData() async {
+    try {
+      final token = await readToken();
+      if (token.isEmpty) {
+        return null;
+      }
 
-    final url = Uri.https(_baseUrl, '/v1/accounts:lookup', {
-      'key': _firebaseToken,
-    });
+      final url = Uri.https(_baseUrl, '/v1/accounts:lookup', {
+        'key': _firebaseToken,
+      });
 
-    final payload = {
-      'idToken': token,
-    };
+      final payload = {
+        'idToken': token,
+      };
 
-    final resp = await http.post(url, body: json.encode(payload));
-    
-    if (resp.statusCode == 200) {
-      final Map<String, dynamic> decodedResp = json.decode(resp.body);
+      final resp = await http.post(url, body: json.encode(payload));
 
-      if (decodedResp.containsKey('users')) {
-        final userData = decodedResp['users'][0];
-        return userData;
+      if (resp.statusCode == 200) {
+        final Map<String, dynamic> decodedResp = json.decode(resp.body);
+
+        if (decodedResp.containsKey('users')) {
+          final userData = decodedResp['users'][0];
+          return userData;
+        } else {
+          return null;
+        }
       } else {
         return null;
       }
-    } else {
+    } catch (e) {
       return null;
     }
-  } catch (e) {
-    return null;
   }
-}
 
   Future logout() async {
     await storage.delete(key: 'token');

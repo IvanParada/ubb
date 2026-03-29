@@ -40,7 +40,8 @@ class MapStateLC extends Equatable {
           isFollowingUserLC: isFollowingUserLC ?? this.isFollowingUserLC,
           showMyRouteLC: showMyRouteLC ?? this.showMyRouteLC,
           polylinesLC: polylinesLC ?? this.polylinesLC,
-          showMedicalMarkersLC: showMedicalMarkersLC ?? this.showMedicalMarkersLC,
+          showMedicalMarkersLC:
+              showMedicalMarkersLC ?? this.showMedicalMarkersLC,
           markersLC: markersLC ?? this.markersLC,
           customMedicalMarkerIconLC:
               customMedicalMarkerIconLC ?? this.customMedicalMarkerIconLC,

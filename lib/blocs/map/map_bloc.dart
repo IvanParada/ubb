@@ -34,7 +34,8 @@ class MapBloc extends Bloc<MapEvent, MapState> {
     });
 
     on<AddMedicalMarkerEvent>((event, emit) async {
-      final customMedicalMarker = await getAssetImageMarker('assets/kit_medical.png');
+      final customMedicalMarker =
+          await getAssetImageMarker('assets/kit_medical.png');
       final newMarker = Marker(
           markerId: MarkerId(event.medicalMarker.position.toString()),
           position: event.medicalMarker.position,
@@ -62,25 +63,25 @@ class MapBloc extends Bloc<MapEvent, MapState> {
     });
   }
 
+  Future<void> loadMedicalMarkersFromJson() async {
+    final response = await http.get(Uri.parse(
+        'https://ubbmap-app-default-rtdb.firebaseio.com/registros_kitmarker_ccp.json'));
 
-Future<void> loadMedicalMarkersFromJson() async {
-  final response = await http.get(Uri.parse('https://ubbmap-81adc-default-rtdb.firebaseio.com/registros_kitmarker_ccp.json'));
+    if (response.statusCode == 200) {
+      // Decodifica la respuesta JSON.
+      final jsonList = json.decode(response.body) as List;
 
-  if (response.statusCode == 200) {
-    // Decodifica la respuesta JSON.
-    final jsonList = json.decode(response.body) as List;
+      final medicalMarkers =
+          jsonList.map((json) => MedicalMarker.fromJson(json)).toList();
 
-    final medicalMarkers = jsonList.map((json) => MedicalMarker.fromJson(json)).toList();
-
-    for (final marker in medicalMarkers) {
-      add(AddMedicalMarkerEvent(marker));
+      for (final marker in medicalMarkers) {
+        add(AddMedicalMarkerEvent(marker));
+      }
+    } else {
+      // Maneja el error de la solicitud HTTP aquí si es necesario.
+      throw Exception('Error al cargar datos desde la URL');
     }
-  } else {
-    // Maneja el error de la solicitud HTTP aquí si es necesario.
-    throw Exception('Error al cargar datos desde la URL');
   }
-}
-
 
   void _onInitMap(OnMapInitializedEvent event, Emitter<MapState> emit) {
     _mapController = event.controller;
