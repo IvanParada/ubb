@@ -1,6 +1,3 @@
-
-
-
 export 'package:ubb/widgets/auth_background.dart';
 export 'package:ubb/widgets/background.dart';
 export 'package:ubb/widgets/btn_toggle_user_route.dart';
@@ -11,7 +8,6 @@ export 'package:ubb/widgets/settings_content.dart';
 export 'package:ubb/widgets/map_options_content.dart';
 export 'package:ubb/widgets/btn_back.dart';
 export 'package:ubb/widgets/weather_card.dart';
-
 
 export 'package:ubb/widgets/concepcion/search_bar.dart';
 export 'package:ubb/widgets/concepcion/manual_marker.dart';
@@ -30,5 +26,3 @@ export 'package:ubb/widgets/lacastilla/manual_marker_lc.dart';
 export 'package:ubb/widgets/lacastilla/btn_follow_user_lc.dart';
 export 'package:ubb/widgets/lacastilla/btn_health_lc.dart';
 export 'package:ubb/widgets/lacastilla/btn_location_lc.dart';
-
-

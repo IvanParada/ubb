@@ -40,7 +40,8 @@ class MapStateFM extends Equatable {
           isFollowingUserFM: isFollowingUserFM ?? this.isFollowingUserFM,
           showMyRouteFM: showMyRouteFM ?? this.showMyRouteFM,
           polylinesFM: polylinesFM ?? this.polylinesFM,
-          showMedicalMarkersFM: showMedicalMarkersFM ?? this.showMedicalMarkersFM,
+          showMedicalMarkersFM:
+              showMedicalMarkersFM ?? this.showMedicalMarkersFM,
           markersFM: markersFM ?? this.markersFM,
           customMedicalMarkerIconFM:
               customMedicalMarkerIconFM ?? this.customMedicalMarkerIconFM,

@@ -2,8 +2,9 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import '../models/weather_data.dart';
 import '../models/weather_forecast.dart'; 
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
-String apiKey = 'ecd1ed319961044c42aaf01424b0e21c';
+String apiKey = dotenv.env['WEATHER_API_KEY'] ?? '';
 
 class WeatherService {
   Future<WeatherData> fetchWeatherDataCCP() async {
