@@ -14,21 +14,21 @@ class BtnCurrentLocation extends StatelessWidget {
 
     return Container(
       margin: const EdgeInsets.only(bottom: 10),
-      child: CircleAvatar(
-        backgroundColor: AppColors.primary,
-        maxRadius: 25,
-        child: IconButton(
-          icon: SvgPicture.asset(
-            'assets/icons/cross_ubication.svg',
-            width: 20,
-            height: 20,
-          ),
-          onPressed: () {
-            final userLocation = locationBloc.state.lastKnowLocation;
-            if (userLocation == null) return;
-            mapBloc.moveCamera(userLocation);
-          },
+      decoration: BoxDecoration(
+        color: AppColors.primary,
+        borderRadius: BorderRadius.circular(15),
+      ),
+      child: IconButton(
+        icon: SvgPicture.asset(
+          'assets/icons/cross_ubication.svg',
+          width: 20,
+          height: 20,
         ),
+        onPressed: () {
+          final userLocation = locationBloc.state.lastKnowLocation;
+          if (userLocation == null) return;
+          mapBloc.moveCamera(userLocation);
+        },
       ),
     );
   }

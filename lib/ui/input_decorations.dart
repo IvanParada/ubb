@@ -11,21 +11,21 @@ class InputDecorations {
   }) {
     return InputDecoration(
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(40),
+          borderRadius: BorderRadius.circular(10),
           borderSide: const BorderSide(
             color: AppColors.textPrimary,
             width: 1,
           ),
         ),
         enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(40),
+          borderRadius: BorderRadius.circular(10),
           borderSide: const BorderSide(
             color: AppColors.textPrimary,
             width: 1,
           ),
         ),
         focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(40),
+          borderRadius: BorderRadius.circular(10),
           borderSide: const BorderSide(
             color: AppColors.textPrimary,
             width: 1,

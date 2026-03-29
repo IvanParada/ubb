@@ -5,9 +5,9 @@ import 'package:ubb/themes/colors_theme.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 final List<Map<String, String>> campusData = [
-  {'name': 'Concepción', 'route': '/map_screen'},
-  {'name': 'Fernando May', 'route': '/map_screen_fm'},
-  {'name': 'La Castilla', 'route': '/map_screen_lc'},
+  {'name': 'Concepción', 'info': 'Concepción', 'route': '/map_screen'},
+  {'name': 'Fernando May', 'info': 'Chillán', 'route': '/map_screen_fm'},
+  {'name': 'La Castilla', 'info': 'Chillán', 'route': '/map_screen_lc'},
 ];
 
 class MapsOptions extends StatelessWidget {
@@ -69,44 +69,126 @@ class MapsOptions extends StatelessWidget {
               itemCount: campusData.length,
               itemBuilder: (BuildContext context, int index) {
                 final campus = campusData[index];
-                return Card(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(40),
-                  ),
-                  color:
-                      const Color.fromARGB(255, 54, 102, 168).withOpacity(0.2),
-                  elevation: 0,
-                  margin: const EdgeInsets.symmetric(vertical: 15),
-                  child: ListTile(
-                    contentPadding: const EdgeInsets.symmetric(
-                      horizontal: 30,
-                      vertical: 5,
+                return GestureDetector(
+                  onTap: () => context.push(campus['route']!),
+                  child: Container(
+                    margin: const EdgeInsets.symmetric(vertical: 10),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 16, vertical: 14),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(20),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.05),
+                          blurRadius: 10,
+                          offset: const Offset(0, 4),
+                        ),
+                      ],
                     ),
-                    leading: SvgPicture.asset(
-                      'assets/icons/map_icon.svg',
-                      width: 22,
-                      height: 22,
-                      color: AppColors.primary,
+                    child: Row(
+                      children: [
+                        // 🔹 Thumbnail (lado izquierdo)
+                        Container(
+                          width: 55,
+                          height: 55,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(12),
+                            color: Colors.grey.shade300,
+                          ),
+                          child: Center(
+                            child: SvgPicture.asset(
+                              'assets/icons/map_icon.svg',
+                              width: 22,
+                              color: AppColors.primary,
+                            ),
+                          ),
+                        ),
+
+                        const SizedBox(width: 16),
+
+                        // 🔹 Texto (expandido)
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                campus['name']!,
+                                style: const TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w600,
+                                  color: AppColors.primary,
+                                ),
+                              ),
+                              const SizedBox(height: 6),
+                              Row(
+                                children: [
+                                  const Icon(
+                                    Icons.location_on,
+                                    size: 14,
+                                    color: Colors.grey,
+                                  ),
+                                  const SizedBox(width: 4),
+                                  Text(
+                                    campus['info'] ?? 'Main Hub',
+                                    style: const TextStyle(
+                                      fontSize: 14,
+                                      color: Colors.grey,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+
+                        // 🔹 Flecha derecha
+                        const Icon(
+                          Icons.chevron_right,
+                          color: Colors.grey,
+                          size: 20,
+                        ),
+                      ],
                     ),
-                    title: Text(
-                      campus['name']!,
-                      style: const TextStyle(
-                        color: AppColors.primary,
-                        fontSize: 20,
-                        fontWeight: FontWeight.w400,
-                      ),
-                    ),
-                    trailing: SvgPicture.asset(
-                      'assets/icons/arrow_right_icon.svg',
-                      width: 20,
-                      height: 20,
-                      color: AppColors.primary,
-                    ),
-                    onTap: () {
-                      context.push(campus['route']!);
-                    },
                   ),
                 );
+                // return Card(
+
+                //   shape: RoundedRectangleBorder(
+                //     borderRadius: BorderRadius.circular(15),
+                //   ),
+                //   shadowColor: AppColors.textPrimary,
+                //   color: const Color(0xFFFFFFFF),
+                //   elevation: 1,
+                //   margin: const EdgeInsets.symmetric(vertical: 15),
+                //   child: ListTile(
+                //     contentPadding: const EdgeInsets.symmetric(
+                //       horizontal: 30,
+                //       vertical: 5,
+                //     ),
+                //     leading: SvgPicture.asset(
+                //       'assets/icons/map_icon.svg',
+                //       width: 15,
+                //       color: AppColors.primary,
+                //     ),
+                //     title: Text(
+                //       campus['name']!,
+                //       style: const TextStyle(
+                //         color: AppColors.primary,
+                //         fontSize: 20,
+                //         fontWeight: FontWeight.w400,
+                //       ),
+                //     ),
+                //     trailing: SvgPicture.asset(
+                //       'assets/icons/arrow_right_icon.svg',
+                //       width: 8,
+                //       color: AppColors.primary,
+                //     ),
+                //     onTap: () {
+                //       context.push(campus['route']!);
+                //     },
+                //   ),
+                // );
               },
             ),
           ),

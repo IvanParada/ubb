@@ -239,16 +239,20 @@ class _RegisterFormState extends State<_RegisterForm> {
               decoration: InputDecorations.authInputDecoration(
                 hintText: '*****',
                 labelText: 'Contraseña',
-                suffixIcon: IconButton(
-                  color: Colors.black54,
-                  icon: Icon(showPassword
-                      ? FontAwesomeIcons.eyeSlash
-                      : FontAwesomeIcons.eye),
-                  onPressed: () {
+                suffixIcon: GestureDetector(
+                  onTap: () {
                     setState(() {
                       showPassword = !showPassword;
                     });
                   },
+                  child: Padding(
+                    padding: const EdgeInsets.all(12),
+                    child: SvgPicture.asset(
+                      showPassword
+                          ? 'assets/icons/visibility.svg'
+                          : 'assets/icons/visibility_off.svg',
+                    ),
+                  ),
                 ),
               ),
               onChanged: (value) => registerForm.password = value,
@@ -288,7 +292,7 @@ class _RegisterFormState extends State<_RegisterForm> {
             const SizedBox(height: 30),
             MaterialButton(
                 shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(30)),
+                    borderRadius: BorderRadius.circular(15)),
                 disabledColor: Colors.grey,
                 elevation: 0,
                 color: AppColors.primary,
@@ -336,7 +340,6 @@ class _RegisterFormState extends State<_RegisterForm> {
                   padding:
                       const EdgeInsets.symmetric(horizontal: 40, vertical: 15),
                   child: Row(
-                    mainAxisSize: MainAxisSize.min,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(

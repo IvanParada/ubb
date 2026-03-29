@@ -91,7 +91,7 @@ class _SearchBarBodyLC extends StatelessWidget {
                   ),
                   decoration: BoxDecoration(
                     color: AppColors.white.withOpacity(0.9),
-                    borderRadius: BorderRadius.circular(100),
+                    borderRadius: BorderRadius.circular(15),
                     boxShadow: const [
                       BoxShadow(
                         color: Colors.black12,

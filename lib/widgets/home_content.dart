@@ -15,7 +15,7 @@ class PageTitle extends StatelessWidget {
     final size = MediaQuery.of(context).size;
 
     return Container(
-      height: size.height * 0.7,
+      height: size.height * 0.65,
       decoration: const BoxDecoration(
         color: AppColors.primary,
         borderRadius: BorderRadius.only(
@@ -35,20 +35,6 @@ class PageTitle extends StatelessWidget {
                   color: AppColors.white,
                   fontSize: 26,
                   fontWeight: FontWeight.w800,
-                ),
-              ),
-              const SizedBox(height: 8),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: size.width * 0.1),
-                child: const Center(
-                  child: Text(
-                    'Hola, explora el campus con el mapa y mantente atento al clima!',
-                    style: TextStyle(
-                      fontSize: 16,
-                      color: AppColors.white,
-                    ),
-                    textAlign: TextAlign.center,
-                  ),
                 ),
               ),
               const SizedBox(height: 16),

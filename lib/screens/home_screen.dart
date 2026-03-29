@@ -8,6 +8,7 @@ import 'package:ubb/services/weather_service.dart';
 import 'package:ubb/themes/colors_theme.dart';
 import 'package:ubb/widgets/forecast_weather_widget.dart';
 import 'package:ubb/widgets/home_content.dart';
+import 'package:ubb/widgets/home_skeleton.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -29,22 +30,13 @@ class _HomeScreenState extends State<HomeScreen> {
         body: BlocBuilder<WeatherCubit, WeatherState>(
           builder: (context, state) {
             if (state.status == Status.loading) {
-              return const Padding(
-                padding: EdgeInsets.all(50),
-                child: Center(
-                  child: LinearProgressIndicator(
-                    borderRadius: BorderRadius.all(Radius.circular(20)),
-                    minHeight: 10,
-                    color: AppColors.primary,
-                  ),
-                ),
-              );
+              return const WeatherSkeleton();
             } else if (state.status == Status.success) {
               return Column(
                 children: [
                   PageTitle(weatherDataList: state.weatherDataList!),
                   Padding(
-                    padding: const EdgeInsets.only(left: 30),
+                    padding: const EdgeInsets.only(left: 30, top: 20),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
@@ -59,7 +51,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         ChoiceChip(
                           showCheckmark: false,
                           shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(30),
+                            borderRadius: BorderRadius.circular(10),
                             side: BorderSide(
                                 width: 0,
                                 color: AppColors.white.withOpacity(1)),
@@ -88,7 +80,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         ChoiceChip(
                           showCheckmark: false,
                           shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(30),
+                            borderRadius: BorderRadius.circular(10),
                             side: BorderSide(
                                 width: 0,
                                 color: AppColors.white.withOpacity(1)),

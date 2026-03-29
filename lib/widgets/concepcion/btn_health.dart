@@ -16,23 +16,23 @@ class BtnToggleMarker extends StatelessWidget {
 
     return Container(
       margin: const EdgeInsets.only(bottom: 10),
-      child: CircleAvatar(
-        backgroundColor: AppColors.primary,
-        maxRadius: 25,
-        child: BlocBuilder<MapBloc, MapState>(
-          builder: (context, state) {
-            return IconButton(
-              icon: SvgPicture.asset(
-                'assets/icons/health_icon.svg',
-                width: 20,
-                height: 20,
-              ),
-              onPressed: () {
-                mapBloc.add(ToggleMedicalMarkersVisibilityEvent());
-              },
-            );
-          },
-        ),
+      decoration: BoxDecoration(
+        color: AppColors.primary,
+        borderRadius: BorderRadius.circular(15),
+      ),
+      child: BlocBuilder<MapBloc, MapState>(
+        builder: (context, state) {
+          return IconButton(
+            icon: SvgPicture.asset(
+              'assets/icons/health_icon.svg',
+              width: 20,
+              height: 20,
+            ),
+            onPressed: () {
+              mapBloc.add(ToggleMedicalMarkersVisibilityEvent());
+            },
+          );
+        },
       ),
     );
   }

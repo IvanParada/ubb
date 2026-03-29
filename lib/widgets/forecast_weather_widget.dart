@@ -7,7 +7,7 @@ import 'package:ubb/helpers/status_enum.dart';
 import 'package:ubb/themes/colors_theme.dart';
 
 class ForecastWeatherWidget extends StatelessWidget {
-  final int index; 
+  final int index;
 
   const ForecastWeatherWidget({super.key, required this.index});
 
@@ -31,7 +31,8 @@ class ForecastWeatherWidget extends StatelessWidget {
               ),
             ),
           );
-        } else if (state.forecastList != null && state.forecastList!.isNotEmpty) {
+        } else if (state.forecastList != null &&
+            state.forecastList!.isNotEmpty) {
           final selectedForecastList = state.forecastList![index];
 
           return SizedBox(
@@ -47,7 +48,7 @@ class ForecastWeatherWidget extends StatelessWidget {
                   child: Container(
                     width: size.width * 0.18,
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(40),
+                      borderRadius: BorderRadius.circular(15),
                       border: Border.all(
                         width: 1.5,
                         color: AppColors.primary.withOpacity(0.3),

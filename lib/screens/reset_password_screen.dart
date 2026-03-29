@@ -108,6 +108,7 @@ class _ResetPasswordForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final resetPass = Provider.of<LoginFormProvider>(context);
+    final size = MediaQuery.of(context).size;
 
     return Form(
       key: resetPass.formKey,
@@ -144,7 +145,7 @@ class _ResetPasswordForm extends StatelessWidget {
             const SizedBox(height: 30),
             MaterialButton(
               shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(30)),
+                  borderRadius: BorderRadius.circular(15)),
               disabledColor: Colors.grey,
               elevation: 0,
               color: AppColors.primary,
@@ -180,7 +181,6 @@ class _ResetPasswordForm extends StatelessWidget {
                 padding:
                     const EdgeInsets.symmetric(horizontal: 40, vertical: 15),
                 child: Row(
-                  mainAxisSize: MainAxisSize.min,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(

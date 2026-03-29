@@ -10,9 +10,11 @@ class BtnBack extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CircleAvatar(
-      maxRadius: 30,
-      backgroundColor: AppColors.primary,
+    return Container(
+      decoration: BoxDecoration(
+        color: AppColors.primary,
+        borderRadius: BorderRadius.circular(10),
+      ),
       child: IconButton(
         icon: SvgPicture.asset(
           'assets/icons/back_arrow.svg',

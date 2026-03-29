@@ -87,12 +87,13 @@ class SettingsTitle extends StatelessWidget {
           FadeInUp(
             child: Center(
               child: MaterialButton(
+                minWidth: size.width * 0.8,
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(60),
+                  borderRadius: BorderRadius.circular(15),
                 ),
                 disabledColor: Colors.grey,
                 elevation: 0,
-                color: AppColors.red,
+                color: const Color.fromARGB(255, 90, 2, 2),
                 onPressed: () {
                   authService.logout();
                   context.replace('/login');

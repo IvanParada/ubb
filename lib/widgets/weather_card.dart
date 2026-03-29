@@ -54,6 +54,7 @@ class WeatherCardWidget extends StatelessWidget {
                 height: 1,
               ),
             ),
+            const SizedBox(height: 5),
             Text(
               weatherTranslations[weatherData.mainWeather] ??
                   weatherData.mainWeather,

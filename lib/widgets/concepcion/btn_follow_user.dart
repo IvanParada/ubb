@@ -13,26 +13,26 @@ class BtnFollowUser extends StatelessWidget {
 
     return Container(
       margin: const EdgeInsets.only(bottom: 10),
-      child: CircleAvatar(
-        backgroundColor: AppColors.primary,
-        maxRadius: 25,
-        child: BlocBuilder<MapBloc, MapState>(
-          builder: (context, state) {
-            return IconButton(
-              icon: SvgPicture.asset(
-                color: AppColors.white,
-                state.isFollowingUser
-                    ? 'assets/icons/directions_run.svg'
-                    : 'assets/icons/hail_icon.svg',
-                width: 24,
-                height: 24,
-              ),
-              onPressed: () {
-                mapBloc.add(OnStartFollowingUserEvent());
-              },
-            );
-          },
-        ),
+      decoration: BoxDecoration(
+        color: AppColors.primary,
+        borderRadius: BorderRadius.circular(15),
+      ),
+      child: BlocBuilder<MapBloc, MapState>(
+        builder: (context, state) {
+          return IconButton(
+            icon: SvgPicture.asset(
+              color: AppColors.white,
+              state.isFollowingUser
+                  ? 'assets/icons/directions_run.svg'
+                  : 'assets/icons/hail_icon.svg',
+              width: 24,
+              height: 24,
+            ),
+            onPressed: () {
+              mapBloc.add(OnStartFollowingUserEvent());
+            },
+          );
+        },
       ),
     );
   }

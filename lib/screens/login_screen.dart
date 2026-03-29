@@ -140,7 +140,6 @@ class _LoginFormState extends State<_LoginForm> {
   Widget build(BuildContext context) {
     final loginForm = Provider.of<LoginFormProvider>(context);
     final size = MediaQuery.of(context).size;
-
     return Form(
       key: loginForm.formKey,
       autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -181,16 +180,20 @@ class _LoginFormState extends State<_LoginForm> {
               decoration: InputDecorations.authInputDecoration(
                 hintText: '*****',
                 labelText: 'Contraseña',
-                suffixIcon: IconButton(
-                  color: Colors.black54,
-                  icon: Icon(showPassword
-                      ? FontAwesomeIcons.eyeSlash
-                      : FontAwesomeIcons.eye),
-                  onPressed: () {
+                suffixIcon: GestureDetector(
+                  onTap: () {
                     setState(() {
                       showPassword = !showPassword;
                     });
                   },
+                  child: Padding(
+                    padding: const EdgeInsets.all(12),
+                    child: SvgPicture.asset(
+                      showPassword
+                          ? 'assets/icons/visibility.svg'
+                          : 'assets/icons/visibility_off.svg',
+                    ),
+                  ),
                 ),
               ),
               onChanged: (value) => loginForm.password = value,
@@ -256,7 +259,7 @@ class _LoginFormState extends State<_LoginForm> {
             ),
             MaterialButton(
               shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(30)),
+                  borderRadius: BorderRadius.circular(15)),
               disabledColor: Colors.grey,
               elevation: 0,
               color: AppColors.primary,
@@ -278,7 +281,8 @@ class _LoginFormState extends State<_LoginForm> {
                       } else {
                         showDialog<void>(
                           builder: (context) => const DialogWidget(
-                            text: 'El correo electrónico o la contraseña son incorrectos. Verifica tus credenciales e intenta nuevamente.',
+                            text:
+                                'El correo electrónico o la contraseña son incorrectos. Verifica tus credenciales e intenta nuevamente.',
                             iconPath: 'warning_icon',
                           ),
                           context: context,
@@ -289,9 +293,8 @@ class _LoginFormState extends State<_LoginForm> {
                     },
               child: Container(
                   padding:
-                      const EdgeInsets.symmetric(horizontal: 40, vertical: 12),
+                      const EdgeInsets.symmetric(horizontal: 40, vertical: 15),
                   child: Row(
-                    mainAxisSize: MainAxisSize.min,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
@@ -300,7 +303,7 @@ class _LoginFormState extends State<_LoginForm> {
                       ),
                     ],
                   )),
-            )
+            ),
           ],
         ),
       ),
